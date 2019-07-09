@@ -1,0 +1,17 @@
+{
+  "name": "cypress-automation101",
+  "version": "1.0.0",
+  "description": "Framework for DB SFT Automation 101 lecture",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "3.3.2",
+    "eslint-plugin-cypress": "2.2.1"
+  },
+  "scripts": {
+    "setup": "npm install && echo module.exports = {'user':'','password':''} > ./cypress/helpers/credentials.js",
+    "cypress:open": "cypress open"
+  },
+  "author": "Devbridge",
+  "license": "ISC"
+}
