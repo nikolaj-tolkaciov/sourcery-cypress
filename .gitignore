@@ -1,4 +1,3 @@
 cypress/helpers/credentials.js
 cypress/fixtures/
-cypress/plugins/
 node_modules/
