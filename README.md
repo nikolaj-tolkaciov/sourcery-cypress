@@ -10,8 +10,8 @@
 
 ### 2. Install
 
-1. (Prerequisites) Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK</a> and <a href="https://nodejs.org/en/download/">NodeJS</a> 
-2. Navigate to your local repository directory that you selected in _part 1_, click on the address/navigation bar, type 'cmd' and click Enter (or just open your command line/terminal by clicking [Windows] keyboard key, typing "cmd" and then navigate to your local repository directory through the terminal: write ***cd C:/Users/....*** (insert your local repository directory))
+1. (Prerequisites) Install <a href="https://nodejs.org/en/download/">NodeJS</a> 
+2. Navigate to your local repository directory that you selected in _part 1_, click on the address/navigation bar, type 'cmd' and click Enter (or just open your command line/terminal by clicking [Windows] keyboard key, typing "cmd" and then navigate to your local repository directory through the terminal: write ***cd*** and insert the full (or relative) path of your local repository directory
 3. Run the ***npm run setup*** command
 
 ### 3. Run tests
