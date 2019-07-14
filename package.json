@@ -9,7 +9,7 @@
     "eslint-plugin-cypress": "2.2.1"
   },
   "scripts": {
-    "setup": "npm install && echo module.exports = {'user':'','password':''} > ./cypress/helpers/credentials.js",
+    "setup": "npm install",
     "cypress:open": "cypress open"
   },
   "author": "Devbridge",
