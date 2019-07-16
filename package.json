@@ -9,7 +9,7 @@
     "eslint-plugin-cypress": "2.2.1"
   },
   "scripts": {
-    "setup": "npm install",
+    "setup": "npm install && setup.bat",
     "cypress:open": "cypress open"
   },
   "author": "Devbridge",
