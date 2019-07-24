@@ -102,9 +102,4 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar--today').contains(new Date().getDate());
         cy.get('.main-nav__link--active').contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
     })
-    
-
-
-
-
 })
