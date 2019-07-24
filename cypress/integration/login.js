@@ -23,6 +23,6 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Benediktas Gilis');
         cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.calendar').find('.calendar--selected').contains('24');
+        cy.get('.calendar--today').contains(new Date().getDate());
     })
 })
