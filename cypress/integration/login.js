@@ -22,9 +22,6 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar--today').contains(new Date().getDate());
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Ugne Lekstutiene');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        
-    })   
-
-    
+        cy.get('.main-nav').find('li').should('have.length', 1);        
+    })  
 })
