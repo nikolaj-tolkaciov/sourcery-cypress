@@ -9,22 +9,22 @@ describe('Sourcebooks login', function() {
     })
 
     const roles = [
-        ['User', 1],
-        ["Team Lead", 2],
-        ['Manager', 5],
-        ['Accountant', 5],
-        ['Admin', 6]
+        {name:'User', numberOfTabs: 1},
+        {name:"Team Lead", numberOfTabs: 2},
+        {name:'Manager', numberOfTabs: 5},
+        {name:'Accountant', numberOfTabs: 5},
+        {name:'Admin', numberOfTabs: 6}
     ]
 
-    for(let i=0; i<roles.length; i++){
+    for(let role of roles){
 
-        it(`Should be able to login with role ${roles[i][0]}`, function () {
+        it(`Should be able to login with role ${role.name}`, function () {
 
             cy.visit('/');
             cy.get('[id="loginForm.userId"]').click({force:true});
             cy.get('[aria-label="Miglė Budrytė"]').click();
             cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get(`[aria-label="${roles[i][0]}"]`).click();
+            cy.get(`[aria-label="${role.name}"]`).click();
             cy.get('[type="submit"]').click();
     
             cy.url().should('include', '/time-logging');
@@ -32,7 +32,7 @@ describe('Sourcebooks login', function() {
             cy.get('.calendar').should('be.visible');
             cy.get('.tile.form').should('be.visible');
             cy.get('.user-info__title').contains('Migle Budryte');
-            cy.get('.main-nav').find('li').should('have.length', roles[i][1]);
+            cy.get('.main-nav').find('li').should('have.length', role.numberOfTabs);
     
             cy.get('.calendar--today').contains(new Date().getDate());
 
@@ -40,7 +40,6 @@ describe('Sourcebooks login', function() {
     
             cy.get('.user-info__title').click({force:true});
             cy.get('[id="logout-button"]').click({force:true});
-    
         })
     }  
 })
