@@ -8,7 +8,7 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with role User and should see today date', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
