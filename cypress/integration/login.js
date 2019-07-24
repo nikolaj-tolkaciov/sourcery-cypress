@@ -23,15 +23,7 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Raminta Urbonaviciute');
         cy.get('.main-nav').find('li').should('have.length', 1);
-    })
 
-    it('Should be able to check if today date is selected', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
         var currentDate = new Date();
         cy.get('[class="calendar__day calendar--today calendar--selected"]').contains(currentDate.getDate())
     })
