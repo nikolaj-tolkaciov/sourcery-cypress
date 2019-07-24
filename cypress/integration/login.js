@@ -12,7 +12,7 @@ describe('Sourcebooks login', function() {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
@@ -21,9 +21,20 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
+        cy.get('.user-info__title').contains('Raminta Urbonaviciute');
         cy.get('.main-nav').find('li').should('have.length', 1);
         
+        var currentDate = new Date();
+        cy.get('[class="calendar__day calendar--today calendar--selected"]').contains(currentDate.getDate())
+    })
+
+    it('Should be able to check if today date is selected', function() {
+        cy.visit('/');
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get('[aria-label="User"]').click();
+        cy.get('[type="submit"]').click();
         var currentDate = new Date();
         cy.get('[class="calendar__day calendar--today calendar--selected"]').contains(currentDate.getDate())
     })
