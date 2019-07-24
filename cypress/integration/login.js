@@ -22,7 +22,7 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
+        cy.get('.user-info__title').contains('Laurynas Kochas');
         cy.get('.main-nav').find('li').should('have.length', 1);
     })
 })
