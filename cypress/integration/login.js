@@ -9,7 +9,7 @@ describe('Sourcebooks login', function() {
     })
     const roles = [['User', 1], ['Team Lead', 2], ['Manager', 5], ['Accountant',5], ['Admin',6]];
     for(let x = 0; x < 5; x++){
-        it('All user roles can log in', function () {
+        it(roles[x][0] + ' can log in', function () {
             cy.visit('/');
             cy.get('[id="loginForm.userId"]').click({force:true});               
             cy.get('[aria-label="Berta Rėja Butvilaitė"]').click();
