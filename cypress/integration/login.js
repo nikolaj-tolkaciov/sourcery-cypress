@@ -24,5 +24,6 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible');
         cy.get('.user-info__title').contains('Laurynas Kochas');
         cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
     })
 })
