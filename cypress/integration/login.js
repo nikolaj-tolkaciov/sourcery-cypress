@@ -23,6 +23,7 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Dovile Martinkute');
         cy.get('.main-nav').find('li').should('have.length', 1);
+        
         cy.get('.calendar__date').contains(new Date().getDate());
     })
 })
