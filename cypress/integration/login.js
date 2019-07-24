@@ -8,7 +8,7 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to see today\'s date marked on calendar', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -23,8 +23,6 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Berta Reja Butvilaite');
         cy.get('.main-nav').find('li').should('have.length', 1);
-    })
-    it('Should be able to see today\'s date marked on calendar', function () {
         cy.get('.calendar--today').contains(new Date().getDate());
     })
 })
