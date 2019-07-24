@@ -23,6 +23,6 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Ieva Stakneviciute');
         cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.calendar__day.calendar--today.calendar--selected').contains('24');
+        cy.get('.calendar--today').contains('24');
     })
 })
