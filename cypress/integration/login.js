@@ -8,7 +8,7 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with User account', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -19,7 +19,11 @@ describe('Sourcebooks login', function() {
 
         cy.url().should('include', '/time-logging');
         cy.get('.page__title').contains('Timesheets')
-
+        cy.get('.calendar').should('be.visible')
+        cy.get('.tile.form').should('be.visible')
+        cy.get('.user-info__title').contains('Justina Burmistrovaite');
+        cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.calendar').find('.calendar--selected').contains(new Date().getDate());
         cy.get('.main-nav').find('.main-nav__link--active').contains('Time Logging');
         cy.get('.main-nav').find('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
 
