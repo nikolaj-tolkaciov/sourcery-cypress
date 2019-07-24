@@ -40,7 +40,8 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible');
         cy.get('.user-info__title').contains('Vitalij Janukevic');
         cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.calendar__date').contains('24');
+        let currentDate = new Date();
+        cy.get('.calendar__date').contains(currentDate.getDate());
     })
 
 })
