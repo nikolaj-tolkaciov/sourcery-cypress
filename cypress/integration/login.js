@@ -11,7 +11,7 @@ describe('Sourcebooks login', function() {
     const roles = [["User", 1], ["Team Lead", 2], ["Manager", 5], ["Accountant", 5], ["Admin", 6]];
 
     for (let role of roles) {
-        it('Should be able to login with role User', function () {
+        it(`Should be able to login with role ${role[0]}`, function () {
 
                 cy.visit('/');
                 cy.get('[id="loginForm.userId"]').click({force:true});
