@@ -12,7 +12,7 @@ describe('Sourcebooks login', function() {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Olga Pikul"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
@@ -21,7 +21,8 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
+        cy.get('.user-info__title').contains('Olga Pikul');
         cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.calendar__day.calendar--today.calendar--selected').contains("24");
     })
 })
