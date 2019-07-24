@@ -8,20 +8,30 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    for(let i = 0; i < 5; i++) {
+        it('Should be able to login with role User', function () {
+            var roles = [["User", 1], ["Team Lead", 2], ["Manager", 5], ["Accountant", 5], ["Admin", 6]];
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+                cy.visit('/');
+                cy.get('[id="loginForm.userId"]').click({force:true});
+                cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
+                cy.get('[id="loginForm.role"]').click({force:true});
+                cy.get(`[aria-label="${roles[i][0]}"]`).click();
+                cy.get('[type="submit"]').click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-    })
+                cy.url().should('include', '/time-logging');
+                cy.get('.page__title').contains('Timesheets');
+                cy.get('.calendar').should('be.visible');
+                cy.get('.tile.form').should('be.visible');
+                cy.get('.user-info__title').contains('Raminta Urbonaviciute');
+                cy.get('.main-nav').find('li').should('have.length', roles[i][1]);
+
+                var currentDate = new Date();
+                cy.get('[aria-current=true]').contains("Time Logging");
+                cy.get('[aria-current=true]').should('have.css', 'color', 'rgb(64, 76, 237)');
+
+                cy.get('[title="Raminta Urbonaviciute"]').click();
+                cy.get('[id="logout-button"]').click();
+         })
+    }
 })
