@@ -23,8 +23,7 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Vitalij Janukevic');
         cy.get('.main-nav').find('li').should('have.length', 1);
-        let currentDate = new Date();
-        cy.get('.calendar--today').contains(currentDate.getDate());
+        cy.get('.calendar--today').contains(new Date.getDate());
     })
 
 })
