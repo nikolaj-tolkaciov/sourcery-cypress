@@ -4,20 +4,34 @@ describe('Sourcebooks login', function() {
     it('Should create new task', function () {
         
         cy.visit('/');
-        cy.get('TASKS locator').should('be.visible');
-        cy.get('TASKS locator').click({force:true});
-        cy.get('Create task locator').should('be.visible');
-        cy.get('Task Name input field locator').type('Name');
-        cy.get('Task Name input field locator').type('Description');
-        cy.get('Dropdown locator').click({force:true});
-        cy.get(' Yes locator').click({force:true});
-        cy.get('hourly rate locator').check('disabled: false');
-        cy.get('Hourly rate locator').type(`${Math.random()*3}`);
-        cy.get('save locator').check('disabled: false');
-        cy.get(' Yes locator').click({force:true});
-        cy.url().contains('tasks/create');
-        cy.get('TASKS locator').click({force:true});
-        cy.get('filter by name input locator').type('Name');
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Vitalij Janukevič"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get(`[aria-label="Admin"]`).click();
+        cy.get('[type="submit"]').click();
+
+        cy.get('.main-nav__link' + '[href="/tasks"]').should('be.visible');
+        cy.get('.main-nav__link' + '[href="/tasks"]').click({force:true});
+        cy.get('.btn').should('be.visible');
+        cy.get('.btn').click({force:true});
+        cy.get('[id="taskDetailsForm.name"]').type('Name');
+        cy.get('[id="taskDetailsForm.description"]').type('Description');
+        cy.get('.Select-value').click({force:true});
+        cy.get('[role="option"]').contains("Yes").click({force:true});
+        cy.get('[id="taskDetailsForm.rate"]').should('not.be.disabled');
+        cy.get('[id="taskDetailsForm.rate"]').clear();
+        cy.get('[id="taskDetailsForm.rate"]').type(`${Math.random()*10}`);
+        cy.get(' .btn' + '[type=submit]').click({force:true});
+        cy.url().should('include', 'tasks/create');
+        cy.get('.main-nav__link' + '[href="/tasks"]').click({force:true});
+        
+        //cy.get('[col-id="name"]').trigger('mouseover', {force:true}).get('.ag-header-cell ag-column-hover').within(() => {
+            cy.get('.field__text field__text--small' + '[type=text').type("name");
+       // })
+       
+        
+      
+        
         cy.get('your task locator').should('be.visible')
 
     })
