@@ -12,7 +12,7 @@ describe('Sourcebooks login', function() {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Laurynas Kochas"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
