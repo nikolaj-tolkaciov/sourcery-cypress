@@ -25,6 +25,6 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 1);
 
         var currentDate = new Date();
-        cy.get('[class="calendar__day calendar--today calendar--selected"]').contains(currentDate.getDate())
+        cy.get('.calendar--today').contains(currentDate.getDate())
     })
 })
