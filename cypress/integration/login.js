@@ -24,6 +24,5 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Algimantas Vizgirda');
         cy.get('.main-nav').find('li').should('have.length', 1);
         cy.get('.calendar--today').contains(new Date().getDate());
-
     })
 })
