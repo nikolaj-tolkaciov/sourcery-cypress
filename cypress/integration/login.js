@@ -26,7 +26,7 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar--today').contains(new Date().getDate());
     })
 
-    it('Verify all user roles can log in and should see appropriate tabs', function () {
+    it('Color check in user role', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
