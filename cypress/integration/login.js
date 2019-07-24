@@ -8,11 +8,11 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to see today\'s date marked on calendar', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Berta Rėja Butvilaitė"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
@@ -21,7 +21,8 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
+        cy.get('.user-info__title').contains('Berta Reja Butvilaite');
         cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.calendar--today').contains(new Date().getDate());
     })
 })
