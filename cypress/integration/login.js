@@ -16,6 +16,7 @@ describe('Sourcebooks login', function() {
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
+        cy.get('.calendar').find('.calendar--selected').contains('24');
 
         cy.url().should('include', '/time-logging');
         cy.get('.page__title').contains('Timesheets');
