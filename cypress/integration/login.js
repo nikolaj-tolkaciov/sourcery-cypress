@@ -26,7 +26,7 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
     })
 
-it('Should be able to login with role Team Lead', function () {
+    it('Should be able to login with role Team Lead', function () {
 
     cy.visit('/');
     cy.get('[id="loginForm.userId"]').click({force:true});
@@ -42,9 +42,9 @@ it('Should be able to login with role Team Lead', function () {
     cy.get('.user-info__title').contains('Algirdas Viltrakis');
     cy.get('.main-nav').find('li').should('have.length', 2);
     cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-})
+    })
 
-it('Should be able to login with role Manager', function () {
+    it('Should be able to login with role Manager', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
