@@ -8,15 +8,16 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    for(let i = 0; i < 5; i++) {
+    const roles = [["User", 1], ["Team Lead", 2], ["Manager", 5], ["Accountant", 5], ["Admin", 6]];
+
+    for (let role of roles) {
         it('Should be able to login with role User', function () {
-            var roles = [["User", 1], ["Team Lead", 2], ["Manager", 5], ["Accountant", 5], ["Admin", 6]];
 
                 cy.visit('/');
                 cy.get('[id="loginForm.userId"]').click({force:true});
                 cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
                 cy.get('[id="loginForm.role"]').click({force:true});
-                cy.get(`[aria-label="${roles[i][0]}"]`).click();
+                cy.get(`[aria-label="${role[0]}"]`).click();
                 cy.get('[type="submit"]').click();
 
                 cy.url().should('include', '/time-logging');
@@ -24,9 +25,8 @@ describe('Sourcebooks login', function() {
                 cy.get('.calendar').should('be.visible');
                 cy.get('.tile.form').should('be.visible');
                 cy.get('.user-info__title').contains('Raminta Urbonaviciute');
-                cy.get('.main-nav').find('li').should('have.length', roles[i][1]);
+                cy.get('.main-nav').find('li').should('have.length', role[1]);
 
-                var currentDate = new Date();
                 cy.get('[aria-current=true]').contains("Time Logging");
                 cy.get('[aria-current=true]').should('have.css', 'color', 'rgb(64, 76, 237)');
 
