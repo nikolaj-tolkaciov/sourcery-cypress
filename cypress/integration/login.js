@@ -24,7 +24,7 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Vitalij Janukevic');
         cy.get('.main-nav').find('li').should('have.length', 1);
         let currentDate = new Date();
-        cy.get('.calendar__date').contains(currentDate.getDate());
+        cy.get('.calendar--today').contains(currentDate.getDate());
     })
 
 })
