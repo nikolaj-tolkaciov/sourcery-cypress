@@ -7,10 +7,6 @@ class LoginPage {
         return cy.get('.Select.not-valid');
     }
 
-    getUserId() {
-        return cy.get('[id="loginForm.userId"]');
-    }
-
     getUserDropdown(name) {
         cy.get('[id="loginForm.userId"]').click({force:true});
         return cy.get(`[aria-label="${name}"]`);

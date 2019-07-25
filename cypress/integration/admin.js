@@ -5,13 +5,13 @@ const login = new LoginPage();
 const check = new Checks();
 
 describe('Sourcebooks admin', function() {
+    beforeEach(() => {
+        cy.loginAs("Admin");
+        login.visit();
+    })
+
     it('Admin creates a task', function() {
         var task = [Math.random().toString(36).substring(2, 15), Math.random().toString(36).substring(2, 15)] 
-
-        login.visit();
-        login.getUserDropdown("Raminta Urbonavičiūtė").click();
-        login.getRoleDropdown("Admin").click();
-        login.submit().click();
 
         check.click('[href="/tasks"]');
         check.click('.btn');
