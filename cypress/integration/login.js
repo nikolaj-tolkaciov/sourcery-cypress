@@ -1,27 +1,42 @@
+import LoginPage from '../objects/loginPage'
+
+
+var Namer = "Dmitrij Kovner";
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
+        const loginPage = new LoginPage()
+
+        loginPage.visit()
+
+        loginPage.getValidationError().should('not.visible')
         cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.getValidationError().should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    //T-2
+    var Roles = ["User", "Team Lead", "Manager", "Accountant", "Admin"];
+    for(let i = 0; i < Roles.length; i++)
+    {
+        it(`Should be able to login with role ${Roles[i]}`, function () {
+            var RoleTabNumber = [1, 2, 5, 5, 6];
+            const loginPage = new LoginPage()
+            loginPage.visit();
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+            cy.get('[id="loginForm.userId"]').click({force:true});
+            cy.get(`[aria-label="${Namer}"]`).click();
+            cy.get('[id="loginForm.role"]').click({force:true});
+            cy.get(`[aria-label="${Roles[i]}"]`).click();
+            cy.get('[type="submit"]').click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-    })
+            cy.get('.user-info__title').contains(Namer);
+
+            cy.get('.main-nav').find('li').should('have.length', RoleTabNumber[i]);
+            cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+            
+        })
+    }
+
+
 })
