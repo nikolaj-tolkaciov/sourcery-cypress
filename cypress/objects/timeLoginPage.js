@@ -4,23 +4,23 @@ class TimeLoginPage {
     }
 
     getURL() {
-        return cy.url().should('include', '/time-logging')
+        return cy.url()
     }
 
     getPageTitle() {
-        return cy.get('.page__title').contains('Timesheets')
+        return cy.get(".page__title").contains('Timesheets')
     }
 
     getCalendarVisable() {
-        return cy.get('.calendar').should('be.visible')
+        return cy.get('.calendar')
     }
 
     getCalendarToday() {
-        return cy.get('.calendar--today').contains(new Date().getDate())
+        return cy.get('.calendar--today')
     }
 
-    getFileForm() {
-        return cy.get('.tile.form').should('be.visible')
+    getTimeEntryForm() {
+        return cy.get('.tile.form')
     }
 
     getUserInfoTitle() {
