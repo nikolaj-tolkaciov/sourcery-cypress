@@ -1,11 +1,17 @@
+import LoginPage from '../objects/loginPage'
+import TimeLoggingPage from '../objects/timeLoggingPage'
+
 describe('Sourcebooks login', function() {
 
+    const loginPage = new LoginPage()
+    const timeLoggingPage = new TimeLoggingPage()
+
     it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+       
+        loginPage.visit()
+        loginPage.getUserValidationError().should('not.visible')
+        loginPage.getLoginButton().click();
+        loginPage.getUserValidationError().should('be.visible')
     })
 
     const roles = [
@@ -19,24 +25,25 @@ describe('Sourcebooks login', function() {
     for(let role of roles){
 
         it(`Should be able to login with role ${role.name}`, function () {
-
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});
-            cy.get('[aria-label="Miglė Budrytė"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get(`[aria-label="${role.name}"]`).click();
-            cy.get('[type="submit"]').click();
+            
+            loginPage.visit()
+            loginPage.getLoginFormUserId().click({force:true})
+            loginPage.getOption("Miglė Budrytė").click()
+            loginPage.getLoginFormRole().click({force:true})
+            loginPage.getOption(role.name).click()
+            loginPage.getLoginButton().click()
     
-            cy.url().should('include', '/time-logging');
-            cy.get('.page__title').contains('Timesheets');
-            cy.get('.calendar').should('be.visible');
-            cy.get('.tile.form').should('be.visible');
-            cy.get('.user-info__title').contains('Migle Budryte');
-            cy.get('.main-nav').find('li').should('have.length', role.numberOfTabs);
-            cy.get('.calendar--today').contains(new Date().getDate());
-            cy.get('.main-nav__link--active').contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
-            cy.get('.user-info__title').click({force:true});
-            cy.get('[id="logout-button"]').click({force:true});
+            timeLoggingPage.getUrl().should('include', '/time-logging')
+            timeLoggingPage.getPageTitle().contains('Timesheets')
+            timeLoggingPage.getCalendar().should('be.visible')
+            timeLoggingPage.getCalendarToday().contains(new Date().getDate());
+            timeLoggingPage.getLogHoursForm().should('be.visible')
+            timeLoggingPage.getUserInfoTitle().contains('Migle Budryte')
+            timeLoggingPage.findMainNavTabs().should('have.length', role.numberOfTabs)
+            timeLoggingPage.getMainNavActiveLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+            
+            timeLoggingPage.getUserInfoTitle().click({force:true})
+            timeLoggingPage.getLogoutButton().click({force:true})
         })
     }  
 })
