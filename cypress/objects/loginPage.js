@@ -3,7 +3,7 @@ class LoginPage {
       cy.visit('/')
 }
 getvalidationerror(){
-    return cy.get('Select.not-valid');
+return cy.get('Select.not-valid');
 
 }
 submitlogin(){
@@ -27,12 +27,25 @@ getRole(){
 return cy.get('[id="loginForm.role"]');
 }
 
-roleLabel(){
+roleLabeluser(){
 return cy.get('[aria-label="User"]');
 }
+roleLabelteam(){
+return cy.get('[aria-label="Team Lead"]');
+}
+roleLabelmanager(){
+return cy.get('[aria-label="Manager"]');
+ }
+roleLabelaccountant(){
+return cy.get('[aria-label="Accountant"]');
+}
+roleLabeladmin(){
+return cy.get('[aria-label="Admin"]');
+}   
+
 submitOption(){
 return cy.get('[type="submit"]');
 }
 }
 
-export default LoginPage
+export default LoginPage 
