@@ -1,28 +1,29 @@
+import LoginPage from '../objects/loginPage';
+import Checks from '../objects/checks';
+
+const login = new LoginPage();
+const check = new Checks();
+
 describe('Sourcebooks admin', function() {
     it('Admin creates a task', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Raminta Urbonavičiūtė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get(`[aria-label="Admin"]`).click();
-        cy.get('[type="submit"]').click();
+        var task = [Math.random().toString(36).substring(2, 15), Math.random().toString(36).substring(2, 15)] 
 
-        cy.get('[href="/tasks"]').click();
-        cy.get('.btn').click();
-        var name = "string";
-        cy.get('[id="taskDetailsForm.name"]').type(name);
-        cy.get('[id="taskDetailsForm.description"]').type('this description is created with automation test');
-        cy.get('[class="Select-value"]').click();
-        cy.get('[role="option"]').contains("Yes").click();
-        cy.get('[id="taskDetailsForm.rate"]').clear().type('2');
-        cy.get('[class="btn"]').click();
+        login.visit();
+        login.getUserDropdown("Raminta Urbonavičiūtė").click();
+        login.getRoleDropdown("Admin").click();
+        login.submit().click();
 
-        cy.get('[href="/tasks"]').click();
-        cy.get('[role="grid"]').contains("Billable").click();
-        cy.get('[role="grid"]').contains("Billable").click();
+        check.click('[href="/tasks"]');
+        check.click('.btn');
+        check.inputText('[id="taskDetailsForm.name"]', task[0]);
+        check.inputText('[id="taskDetailsForm.description"]', task[1]);
+        check.click('[class="Select-value"]');
+        check.contentCheck('[role="option"]', "Yes").click();
+        check.inputNumber('[id="taskDetailsForm.rate"]', '2');
+        check.click('[class="btn"]');
 
-        let buttons = document.querySelectorAll(".btn__square");
-        console.log(buttons);
-        //cy.get('.btn__square').within(buttons);
+        check.click('[href="/tasks"]');
+        check.searchTaskName('[type="text"]', task[0]);
+        check.visibilityCheck('[role="row"]');
     })
 })

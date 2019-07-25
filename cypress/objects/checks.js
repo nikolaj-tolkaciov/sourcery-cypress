@@ -18,8 +18,25 @@ class checks {
     colorCheck(nameTitle, color) {
         return cy.get(nameTitle).should('have.css', 'color', `${color}`);
     }
+
     navLengthCheck(nav, find, len) {
         return cy.get(nav).find(find).should('have.length', len);
+    }
+
+    click(click) {
+        cy.get(click).click();
+    }
+
+    inputText(nameTitle, input) {
+        cy.get(nameTitle).type(input);
+    }
+
+    inputNumber(nameTitle, input) {
+        cy.get(nameTitle).clear().type(input);
+    }
+
+    searchTaskName(nameTitle, text) {
+        cy.get(nameTitle).eq(0).type(text);  
     }
 }
 
