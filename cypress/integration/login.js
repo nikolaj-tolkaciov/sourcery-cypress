@@ -33,11 +33,8 @@ describe('Sourcebooks login', function() {
             cy.get('.tile.form').should('be.visible');
             cy.get('.user-info__title').contains('Migle Budryte');
             cy.get('.main-nav').find('li').should('have.length', role.numberOfTabs);
-    
             cy.get('.calendar--today').contains(new Date().getDate());
-
             cy.get('.main-nav__link--active').contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
-    
             cy.get('.user-info__title').click({force:true});
             cy.get('[id="logout-button"]').click({force:true});
         })
