@@ -9,7 +9,6 @@ describe('Sourcebooks login', function() {
     it('Should display validation for empty user after attempted loggin', function () {
         
         loginPage.visit()
-
         loginPage.getValidationError().should('not.visible')
         loginPage.submitButton().click();
         loginPage.getValidationError().should('be.visible')
