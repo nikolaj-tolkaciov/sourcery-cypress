@@ -10,11 +10,15 @@ describe('Sourcebooks login', function() {
         cy.get(`[aria-label="Admin"]`).click();
         cy.get('[type="submit"]').click();
 
+
+        let taskName = Math.random().toString(36).substring(2, 15)
+    
         cy.get('.main-nav__link' + '[href="/tasks"]').should('be.visible');
         cy.get('.main-nav__link' + '[href="/tasks"]').click({force:true});
         cy.get('.btn').should('be.visible');
         cy.get('.btn').click({force:true});
-        cy.get('[id="taskDetailsForm.name"]').type('Name');
+        cy.get('[id="taskDetailsForm.name"]').type(`${taskName}`);
+        console.log(taskName)
         cy.get('[id="taskDetailsForm.description"]').type('Description');
         cy.get('.Select-value').click({force:true});
         cy.get('[role="option"]').contains("Yes").click({force:true});
@@ -26,13 +30,13 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link' + '[href="/tasks"]').click({force:true});
         
         //cy.get('[col-id="name"]').trigger('mouseover', {force:true}).get('.ag-header-cell ag-column-hover').within(() => {
-            cy.get('.field__text field__text--small' + '[type=text').type("name");
+           // cy.get(????).type(`${taskName}`);
        // })
        
         
       
         
-        cy.get('your task locator').should('be.visible')
+        cy.get('.ellipsis' + `[title=${taskName}]`).should('be.visible')
 
     })
 
