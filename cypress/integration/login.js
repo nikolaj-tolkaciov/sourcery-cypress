@@ -8,20 +8,20 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with role User and should see today date', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Ugne Lekstutiene"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
+        cy.url().should('include', '/time-logging');        
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
+        cy.get('.calendar--today').contains(new Date().getDate());
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-    })
+        cy.get('.user-info__title').contains('Ugne Lekstutiene');
+        cy.get('.main-nav').find('li').should('have.length', 1);        
+    })  
 })
