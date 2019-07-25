@@ -1,6 +1,4 @@
 class LoginPage{
-
-
     visit() {
         cy.visit('/') 
     }
@@ -9,7 +7,7 @@ class LoginPage{
         return cy.get('.Select.not-valid')
     }
 
-    submit(){
+    submitButton(){
         return cy.get('[type="submit"]')
     }
 
@@ -28,7 +26,6 @@ class LoginPage{
     selectRole(role){
         return cy.get(`[aria-label="${role}"]`)
     }
-
 }
 
 export default LoginPage

@@ -8,11 +8,10 @@ describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-
         loginPage.visit()
 
         loginPage.getValidationError().should('not.visible')
-        loginPage.submit().click();
+        loginPage.submitButton().click();
         loginPage.getValidationError().should('be.visible')
     })
 
@@ -20,14 +19,14 @@ describe('Sourcebooks login', function() {
 
     for (let i = 0; i < roles.length; i++) {
 
-        it('Should be able to login with each role User', function () {
+        it(`Should be able to login with role ${roles[i][0]}`, function () {
 
                 loginPage.visit()
                 loginPage.getUserId().click({force:true});
                 loginPage.getUserName("Dovilė Martinkutė").click();
                 loginPage.getRole().click({force:true});
                 loginPage.selectRole(roles[i][0]).click();
-                loginPage.submit().click();
+                loginPage.submitButton().click();
 
                 cy.url().should('include', '/time-logging');
                 timeLogging.getPageTitle().contains('Timesheets');                          
@@ -39,8 +38,6 @@ describe('Sourcebooks login', function() {
                 timeLogging.button().should('have.css', 'color', 'rgb(64, 76, 237)');
                 timeLogging.infoTitle().click({force:true});   
                 timeLogging.logout().click({force:true});
-
         })
-
     }
 }) 
