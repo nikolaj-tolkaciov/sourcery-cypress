@@ -18,7 +18,7 @@ class LoginPage {   //klasiu pav is didziosios
         return cy.get('[id="loginForm.role"]');
     }
     getRoleOption(user) {
-        return cy.get(`[aria-label=${user}]`);
+        return cy.get(`[aria-label="${user}"]`);
     }
 }
 
