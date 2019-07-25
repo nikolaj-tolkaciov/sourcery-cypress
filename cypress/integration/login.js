@@ -1,100 +1,45 @@
+import LoginPage from '../Objects/loginPage'
+import TimeLoginPage from '../Objects/ObjectTimeLogin/timeLoginPage'
+
+const loginPage = new LoginPage()
+const timeLoginPage = new TimeLoginPage()
+const testUser = 'Algirdas Viltrakis'
+
+const rolesArray = [
+    {'role' : 'User', 'totalCount' : 1}, 
+    {'role' : 'Team Lead', 'totalCount' : 2},
+    {'role' : 'Manager', 'totalCount' : 5}, 
+    {'role' : 'Accountant', 'totalCount' : 5}, 
+    {'role' : 'Admin', 'totalCount' : 6}
+]
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
 
+        loginPage.visit()
+        loginPage.getValidationError().should('not.visible')
+        loginPage.submitLogin().click()
+        loginPage.getValidationError().should('be.visible')
+    })
+for (let role of rolesArray) {
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Algirdas Viltrakis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.calendar--today').contains(new Date().getDate())
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Algirdas Viltrakis');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+        loginPage.visit()
+        loginPage.getUser().click({force:true})
+        loginPage.getUserName(testUser).click()
+        loginPage.getRole().click({force:true})
+        loginPage.getRoleLogin(role['role']).click()
+        loginPage.submitLogin().click()
+        
+        timeLoginPage.check('.time-logging')
+        timeLoginPage.title().contains('Timesheets')
+        timeLoginPage.calendar().should('be.visible')
+        timeLoginPage.today().contains(new Date().getDate())
+        timeLoginPage.titleForm().should('be.visible')
+        timeLoginPage.userName().contains(testUser)
+        timeLoginPage.tabNumber().should('have.length', role['totalCount'])
+        timeLoginPage.titleColour().should('have.css', 'color', 'rgb(64, 76, 237)')
     })
-
-    it('Should be able to login with role Team Lead', function () {
-
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Algirdas Viltrakis"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label="Team Lead"]').click();
-    cy.get('[type="submit"]').click();
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.calendar--today').contains(new Date().getDate())
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Algirdas Viltrakis');
-    cy.get('.main-nav').find('li').should('have.length', 2);
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to login with role Manager', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Algirdas Viltrakis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Manager"]').click();
-        cy.get('[type="submit"]').click();
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.calendar--today').contains(new Date().getDate())
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Algirdas Viltrakis');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    })
- 
-    it('Should be able to login with role Accountant', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Algirdas Viltrakis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Accountant"]').click();
-        cy.get('[type="submit"]').click();
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.calendar--today').contains(new Date().getDate())
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Algirdas Viltrakis');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to login with role Admin', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Algirdas Viltrakis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.calendar--today').contains(new Date().getDate())
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Algirdas Viltrakis');
-        cy.get('.main-nav').find('li').should('have.length', 6);
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    })
+}
 })
