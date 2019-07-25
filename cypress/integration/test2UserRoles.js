@@ -63,10 +63,6 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
     })
 
-
-
-
-
     it('Should be able to login with role Admin and should see appropriate tabs', function () {
 
         cy.visit('/');
