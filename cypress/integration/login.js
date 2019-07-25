@@ -41,7 +41,6 @@ describe('Sourcebooks login', function() {
             timeLoggingPage.getUserInfoTitle().contains('Migle Budryte')
             timeLoggingPage.findMainNavTabs().should('have.length', role.numberOfTabs)
             timeLoggingPage.getMainNavActiveLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
-            
             timeLoggingPage.getUserInfoTitle().click({force:true})
             timeLoggingPage.getLogoutButton().click({force:true})
         })
