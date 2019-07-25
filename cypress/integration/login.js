@@ -1,145 +1,149 @@
+import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
+
+
+const loginPage = new LoginPage()
+const timeLoggingPage = new TimeLoggingPage()
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+    
+
+        loginPage.visit()
+
+        loginPage.getValidationError().should('not.visible')
+        loginPage.getSubmit().click()
+        loginPage.getValidationError().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Asta Radžiuvienė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit()
+        loginPage.getUserID().click({force:true});
+        loginPage.getUserOption("Asta Radžiuvienė").click();
+        loginPage.getRoleForm().click({force:true});
+        loginPage.getOption("User").click();
+        loginPage.getSubmit().click();
         
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Asta Radžiuviene');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.calendar--today').contains(new Date().getDate());
+        timeLoggingPage.getUrl()
+        timeLoggingPage.getPageTitle().contains('Timesheets')
+        timeLoggingPage.getCalendar().should('be.visible')
+        timeLoggingPage.getTitleForm().should('be.visible')
+        timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+        timeLoggingPage.getMainNavigation().find('li').should('have.length', 1);
+        timeLoggingPage.getToday().contains(new Date().getDate());
     })
 
 it('Should be able to login with role User', function () {
 
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Asta Radžiuvienė"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label="User"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit()
+    loginPage.getUserID().click({force:true});
+    loginPage.getUserOption("Asta Radžiuvienė").click();
+    loginPage.getRoleForm().click({force:true});
+    loginPage.getOption("User").click();
+    loginPage.getSubmit().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Asta Radžiuviene');
-    cy.get('.main-nav').find('li').should('have.length', 1);
-    cy.get('.calendar--today').contains(new Date().getDate());
-    cy.get('.main-nav__link--active').contains('Time Logging');
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+    timeLoggingPage.getUrl()
+    timeLoggingPage.getPageTitle().contains('Timesheets')
+    timeLoggingPage.getCalendar().should('be.visible')
+    timeLoggingPage.getTitleForm().should('be.visible')
+    timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+    timeLoggingPage.getMainNavigation().find('li').should('have.length', 1);
+    timeLoggingPage.getToday().contains(new Date().getDate());
+    timeLoggingPage.getLinkActive().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
 })
 
 it('Should be able to login with role Team Lead', function () {
 
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Asta Radžiuvienė"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label="Team Lead"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit()
+    loginPage.getUserID().click({force:true});
+    loginPage.getUserOption("Asta Radžiuvienė").click();
+    loginPage.getRoleForm().click({force:true});
+    loginPage.getOption("Team Lead").click();
+    loginPage.getSubmit().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Asta Radžiuviene');
-    cy.get('.main-nav').find('li').should('have.length', 2);
-    cy.get('.calendar--today').contains(new Date().getDate());
-    cy.get('.main-nav__link--active').contains('Time Logging');
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    cy.get('.main-nav__link').contains('Time Entries');
+    timeLoggingPage.getUrl()
+    timeLoggingPage.getPageTitle().contains('Timesheets')
+    timeLoggingPage.getCalendar().should('be.visible')
+    timeLoggingPage.getTitleForm().should('be.visible')
+    timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+    timeLoggingPage.getMainNavigation().find('li').should('have.length', 2);
+    timeLoggingPage.getToday().contains(new Date().getDate());;
+    timeLoggingPage.getLinkActive().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
+    timeLoggingPage.getTab().contains('Time Entries');
 
    
 })
 
 it('Should be able to login with role Manager', function () {
 
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Asta Radžiuvienė"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label="Manager"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit()
+    loginPage.getUserID().click({force:true});;
+    loginPage.getUserOption("Asta Radžiuvienė").click();
+    loginPage.getRoleForm().click({force:true});
+    loginPage.getOption("Manager").click();
+    loginPage.getSubmit().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Asta Radžiuviene');
-    cy.get('.main-nav').find('li').should('have.length', 5);
-    cy.get('.calendar--today').contains(new Date().getDate());
-    cy.get('.main-nav__link--active').contains('Time Logging');
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    cy.get('.main-nav__link').contains('Time Entries');
-    cy.get('.main-nav__link').contains('Invoices');
-    cy.get('.main-nav__link').contains('Projects');
-    cy.get('.main-nav__link').contains('Client');
+    timeLoggingPage.getUrl()
+    timeLoggingPage.getPageTitle().contains('Timesheets')
+    timeLoggingPage.getCalendar().should('be.visible')
+    timeLoggingPage.getTitleForm().should('be.visible')
+    timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+    timeLoggingPage.getMainNavigation().find('li').should('have.length', 5);
+    timeLoggingPage.getToday().contains(new Date().getDate());
+    timeLoggingPage.getLinkActive().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
+    timeLoggingPage.getTab().contains('Time Entries');
+    timeLoggingPage.getTab().contains('Invoices');
+    timeLoggingPage.getTab().contains('Projects');
+    timeLoggingPage.getTab().contains('Clients');
 
 })
 it('Should be able to login with Accountant', function () {
 
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Asta Radžiuvienė"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label="Accountant"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit()
+    loginPage.getUserID().click({force:true});
+    loginPage.getUserOption("Asta Radžiuvienė").click();
+    loginPage.getRoleForm().click({force:true});
+    loginPage.getOption("Accountant").click();
+    loginPage.getSubmit().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Asta Radžiuviene');
-    cy.get('.main-nav').find('li').should('have.length', 5);
-    cy.get('.calendar--today').contains(new Date().getDate());
-    cy.get('.main-nav__link--active').contains('Time Logging');
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    cy.get('.main-nav__link').contains('Time Entries');
-    cy.get('.main-nav__link').contains('Invoices');
-    cy.get('.main-nav__link').contains('Projects');
-    cy.get('.main-nav__link').contains('Client');
+    timeLoggingPage.getUrl()
+    timeLoggingPage.getPageTitle().contains('Timesheets')
+    timeLoggingPage.getCalendar().should('be.visible')
+    timeLoggingPage.getTitleForm().should('be.visible')
+    timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+    timeLoggingPage.getMainNavigation().find('li').should('have.length', 5);
+    timeLoggingPage.getToday().contains(new Date().getDate());
+    timeLoggingPage.getLinkActive().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
+    timeLoggingPage.getTab().contains('Time Entries');
+    timeLoggingPage.getTab().contains('Invoices');
+    timeLoggingPage.getTab().contains('Projects');
+    timeLoggingPage.getTab().contains('Clients');
 
 })
 
 it('Should be able to login with Admin', function () {
 
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({force:true});
-    cy.get('[aria-label="Asta Radžiuvienė"]').click();
-    cy.get('[id="loginForm.role"]').click({force:true});
-    cy.get('[aria-label=Admin]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit()
+    loginPage.getUserID().click({force:true});
+    loginPage.getUserOption("Asta Radžiuvienė").click();
+    loginPage.getRoleForm().click({force:true});
+    loginPage.getOption("Admin").click()
+    loginPage.getSubmit().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets')
-    cy.get('.calendar').should('be.visible')
-    cy.get('.tile.form').should('be.visible')
-    cy.get('.user-info__title').contains('Asta Radžiuviene');
-    cy.get('.main-nav').find('li').should('have.length', 6);
-    cy.get('.calendar--today').contains(new Date().getDate());
-    cy.get('.main-nav__link--active').contains('Time Logging');
-    cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-    cy.get('.main-nav__link').contains('Time Entries');
-    cy.get('.main-nav__link').contains('Invoices');
-    cy.get('.main-nav__link').contains('Projects');
-    cy.get('.main-nav__link').contains('Client');
-    cy.get('.main-nav__link').contains('Tasks');
+    timeLoggingPage.getUrl()
+    timeLoggingPage.getPageTitle().contains('Timesheets')
+    timeLoggingPage.getCalendar().should('be.visible')
+    timeLoggingPage.getTitleForm().should('be.visible')
+    timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
+    timeLoggingPage.getMainNavigation().find('li').should('have.length', 6);
+    timeLoggingPage.getToday().contains(new Date().getDate());
+    timeLoggingPage.getLinkActive().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)');
+    timeLoggingPage.getTab().contains('Time Entries');
+    timeLoggingPage.getTab().contains('Invoices');
+    timeLoggingPage.getTab().contains('Projects');
+    timeLoggingPage.getTab().contains('Clients');
+    timeLoggingPage.getTab().contains('Tasks');
 })
 })
