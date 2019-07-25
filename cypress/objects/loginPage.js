@@ -5,7 +5,7 @@ class LoginPage {   //klasiu pav is didziosios
     getValidationError() {
         return cy.get('.Select.not-valid');
     }
-    getSubmit() {
+    getSubmitButton() {
         return cy.get('[type="submit"]');
     }
     getUserID() {
@@ -17,8 +17,8 @@ class LoginPage {   //klasiu pav is didziosios
     getRole() {
         return cy.get('[id="loginForm.role"]');
     }
-    getRoleOption() {
-        return cy.get('[aria-label="User"]');
+    getRoleOption(user) {
+        return cy.get(`[aria-label=${user}]`);
     }
 }
 
