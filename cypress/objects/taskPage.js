@@ -2,7 +2,7 @@ class Tasks {
     getTasks() {
         return cy.get('[href="/tasks"]');
     }
-    getButton() {
+    getCreateTaskButton() {
         return cy.get('.btn');
     }
     getFormName() {
@@ -11,10 +11,10 @@ class Tasks {
     getFieldTextArea() {
         return cy.get('.field__textarea');
     }
-    getValue() {
+    getBillToClient() {
         return cy.get('.Select-value-label');
     }
-    getValueLabel(value) {
+    getBillToClientLabel(value) {
         return cy.get(`[aria-label=${value}]`);
     }
     getFormRate() {

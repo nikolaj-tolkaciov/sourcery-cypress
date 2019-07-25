@@ -12,19 +12,18 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         const tasks = new Tasks;
         tasks.getTasks().click();
-        tasks.getButton().click();
+        tasks.getCreateTaskButton().click();
         var autoName = 'Auto name_' + Math.random().toString(36).substr(2, 9);
         tasks.getFormName().type(autoName);
         tasks.getFieldTextArea().type('auto description');
-        tasks.getValue().click();
-        tasks.getValueLabel("Yes").click();
-        tasks.getFormRate().click();
+        tasks.getBillToClient().click();
+        tasks.getBillToClientLabel("Yes").click();
         tasks.getFormRate().clear();
         tasks.getFormRate().type(1.234);
         tasks.getSubmitButton().click();
         tasks.getUrl().should('not.include', 'create');
         tasks.getTasks().click();
-        tasks.getSmallFieldText().first().type(autoName);
-        tasks.getTitleName(autoName).contains(autoName);
+        tasks.getSmallFieldText().eq(0).type(autoName);
+        tasks.getTitleName(autoName).should('be.visible');
     })
 })
