@@ -17,10 +17,10 @@ class TimeLogingPage {
     getInfoTitle(){
         return cy.get('.user-info__title')
     }
-    getLength(){
-        return cy.get('.main-nav')
+    getNavigationTabCount(){
+        return cy.get('.main-nav').find('li')
     }
-    getTimeLoggingColor(){
+    getActiveTab(){
         return cy.get('.main-nav__link--active')
     }
 }

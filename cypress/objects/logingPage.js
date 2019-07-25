@@ -5,7 +5,7 @@ class LoginPage{
     getValidationError(){
         return cy.get('.Select.not-valid')
     }
-    getSubmit(){
+    getSubmitButton(){
         return cy.get('[type="submit"]')
     }
     getUserForm(){
@@ -17,7 +17,7 @@ class LoginPage{
     getLoginForm(){
         return cy.get('[id="loginForm.role"]')
     }
-    getLabel(role){
+    getRoleOfUser(role){
         return cy.get(`[aria-label="${role}"]`)
     }
 }
