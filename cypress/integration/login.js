@@ -1,27 +1,29 @@
+import LoginPage from '../objects/loginPage'
+
 describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+    it('Admin creates new task', function () {
 
-    it('Should be able to login with role User', function () {
-
-        cy.visit('/');
+        const loginPage = new LoginPage();
+        loginPage.visit()
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Dmitrij Kovner"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
+        cy.get('[aria-label="Admin"]').click();
         cy.get('[type="submit"]').click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.main-nav__link').contains("Tasks").click();
+        cy.contains("Create Task").click();
+        cy.get('[id="taskDetailsForm.name"]').type("Namer");
+        cy.get('[id="taskDetailsForm.description"]').type("Descriptioner");
+        cy.get('.Select-value').click();
+        cy.get('[aria-label="Yes"]').click();
+        cy.get('.btn').contains("Save").click();   
+        cy.get('.main-nav__link').contains("Tasks").click();
+        cy.url().should('not.contain', "create");
+        cy.get('.field__text--small').first().type("Namer");
+        cy.wait(1000);
+        cy.get('.ellipsis').contains("Namer");
     })
+
 })
