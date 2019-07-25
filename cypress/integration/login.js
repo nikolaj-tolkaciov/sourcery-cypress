@@ -21,7 +21,7 @@ describe('Sourcebooks login', function() {
 
         it(`Should be able to login with role ${rolesArr[i][0]}`, function () {
 
-                console.log(i); 
+                //console.log(i); 
                 loginPage.visit();
                 loginPage.getUserNameDropdown().click({force:true});
                 loginPage.getUserName().click();

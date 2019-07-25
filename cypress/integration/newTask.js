@@ -8,7 +8,7 @@ const tasksPage = new TasksPage();
 
 describe('Sourcebooks login', function() {
 
-    it(' should create new task', function () {
+    it('should create new task', function () {
         
         loginPage.visit();
         loginPage.getUserNameDropdown().click({force:true});
@@ -26,8 +26,8 @@ describe('Sourcebooks login', function() {
         tasksPage.getCreateTaskButton().click({force:true});
         tasksPage.getCreateTaskNameInputField().type(`${taskName}`);
 
-        console.log(taskName) // to check for filtering later
-        console.log(taskDescription) // to check for filtering
+        //console.log(taskName) // to check for filtering later
+        //console.log(taskDescription) // to check for filtering
 
         tasksPage.getCreateTaskDescriptionInputField().type(`${taskDescription}`);
         tasksPage.getBillableDropdown().click({force:true});
