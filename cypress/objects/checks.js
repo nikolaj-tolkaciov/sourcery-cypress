@@ -38,6 +38,10 @@ class checks {
     searchTaskName(nameTitle, text) {
         cy.get(nameTitle).eq(0).type(text);  
     }
+
+    searchOrganizationName() {
+        cy.get(nameTitle).eq(0).type(text);
+    }
 }
 
 export default checks
