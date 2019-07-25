@@ -23,7 +23,7 @@ class TimeLoggingPage{
         return  cy.get('.user-info__title')
     }
 
-    findMainNavTabs(){
+    getMainNavTabs(){
         return cy.get('.main-nav').find('li')
     }
 
