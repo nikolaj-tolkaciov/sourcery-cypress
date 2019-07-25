@@ -1,30 +1,28 @@
+import LoginPage from '../objects/loginPage';   //.. - objects up
+import TimeLogging from '../objects/timeLogging';
 describe('Sourcebooks login', function() {
+    it('Should display validation for empty user after attemted login', function () {
+        const loginPage = new LoginPage();
+        loginPage.visit();
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.getValidationError().should('not.visible');
+        loginPage.getSubmit().click();
+        loginPage.getValidationError().should('be.visible');
     })
-    const roles = [['User', 1], ['Team Lead', 2], ['Manager', 5], ['Accountant',5], ['Admin',6]];
-    for(let x = 0; x < 5; x++){
-        it(roles[x][0] + ' can log in', function () {
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});               
-            cy.get('[aria-label="Berta Rėja Butvilaitė"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get('[aria-label="' + roles[x][0] + '"]').click();
-            cy.get('[type="submit"]').click();
+    it('Should be able to login with role User', function () {
+        const loginPage = new LoginPage();
+        loginPage.visit();
+        loginPage.getUserID().click({force:true});
+        loginPage.getUserOption("Berta Rėja Butvilaitė").click();
+        loginPage.getRole().click({force:true});
+        loginPage.getRoleOption().click();
+        loginPage.getSubmit().click();
 
-            cy.url().should('include', '/time-logging');
-            cy.get('.page__title').contains('Timesheets');
-            cy.get('.calendar').should('be.visible');
-            cy.get('.tile.form').should('be.visible');
-            cy.get('.user-info__title').contains('Berta Reja Butvilaite');
-            cy.get('.main-nav').find('li').should('have.length', roles[x][1]);
-            cy.get('.calendar--today').contains(new Date().getDate());
-            cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-        })
-    }
+        const timeLogging = new TimeLogging();
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getTileForm().should('be.visible');
+        timeLogging.getUserInfo().contains('Berta Reja Butvilaite');
+        timeLogging.getMainNav().should('have.length', 1);
+    })
 })
