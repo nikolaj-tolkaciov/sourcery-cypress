@@ -1,11 +1,19 @@
+import LoginPage from '../objects/loginPage'
+import TimeLoggingPage from '../objects/timeLoggingPage';
+
 describe('Sourcebooks login', function() {
+
+    const loginPage = new LoginPage()  
+    const timeLogging = new TimeLoggingPage();    
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+
+        loginPage.visit()
+
+        loginPage.getValidationError().should('not.visible')
+        loginPage.submit().click();
+        loginPage.getValidationError().should('be.visible')
     })
 
     const roles= [['User', 1], ["Team Lead", 2], ['Manager', 5], ['Accountant', 5], ['Admin', 6]]
@@ -14,23 +22,23 @@ describe('Sourcebooks login', function() {
 
         it('Should be able to login with each role User', function () {
 
-                cy.visit('/');
-                cy.get('[id="loginForm.userId"]').click({force:true});
-                cy.get('[aria-label="Dovilė Martinkutė"]').click();
-                cy.get('[id="loginForm.role"]').click({force:true});
-                cy.get(`[aria-label="${roles[i][0]}"]`).click();
-                cy.get('[type="submit"]').click();
+                loginPage.visit()
+                loginPage.getUserId().click({force:true});
+                loginPage.getUserName("Dovilė Martinkutė").click();
+                loginPage.getRole().click({force:true});
+                loginPage.selectRole(roles[i][0]).click();
+                loginPage.submit().click();
 
                 cy.url().should('include', '/time-logging');
-                cy.get('.page__title').contains('Timesheets')
-                cy.get('.calendar').should('be.visible')
-                cy.get('.tile.form').should('be.visible')
-                cy.get('.user-info__title').contains('Dovile Martinkute');
-                cy.get('.main-nav').find('li').should('have.length', roles[i][1]);
-                cy.get('.calendar__date').contains(new Date().getDate());
-                cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-                cy.get('.user-info__title').click({force:true});    //logout
-                cy.get('[id="logout-button"]').click({force:true});
+                timeLogging.getPageTitle().contains('Timesheets');                          
+                timeLogging.calendar().should('be.visible')
+                timeLogging.titleForm().should('be.visible')
+                timeLogging.infoTitle().contains('Dovile Martinkute');
+                timeLogging.mainNav().find('li').should('have.length', roles[i][1]);
+                timeLogging.date().contains(new Date().getDate());
+                timeLogging.button().should('have.css', 'color', 'rgb(64, 76, 237)');
+                timeLogging.infoTitle().click({force:true});   
+                timeLogging.logout().click({force:true});
 
         })
 
