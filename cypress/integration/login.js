@@ -6,11 +6,11 @@ const timeLoginPage = new TimeLoginPage()
 const testUser = 'Algirdas Viltrakis'
 
 const rolesArray = [
-    {'role' : 'User', 'totalCount' : 1}, 
-    {'role' : 'Team Lead', 'totalCount' : 2},
-    {'role' : 'Manager', 'totalCount' : 5}, 
-    {'role' : 'Accountant', 'totalCount' : 5}, 
-    {'role' : 'Admin', 'totalCount' : 6}
+    {'role' : 'User', 'tabCount' : 1}, 
+    {'role' : 'Team Lead', 'tabCount' : 2},
+    {'role' : 'Manager', 'tabCount' : 5}, 
+    {'role' : 'Accountant', 'tabCount' : 5}, 
+    {'role' : 'Admin', 'tabCount' : 6}
 ]
 
 describe('Sourcebooks login', function() {
@@ -38,7 +38,7 @@ for (let role of rolesArray) {
         timeLoginPage.today().contains(new Date().getDate())
         timeLoginPage.titleForm().should('be.visible')
         timeLoginPage.userName().contains(testUser)
-        timeLoginPage.tabNumber().should('have.length', role['totalCount'])
+        timeLoginPage.tabNumber().should('have.length', role['tabCount'])
         timeLoginPage.titleColour().should('have.css', 'color', 'rgb(64, 76, 237)')
     })
 }
