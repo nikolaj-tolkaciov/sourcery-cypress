@@ -13,7 +13,7 @@ class TimeLoggingPage {
     }
 
     getLogHoursForm() {
-       return cy.get('.tile.form');
+        return cy.get('.tile.form');
     }
 
     getUserNameTitle() {
@@ -33,6 +33,7 @@ class TimeLoggingPage {
     }
 
     getLogOutButton() {
+        
         return cy.get('[id="logout-button"]');
     }
 }

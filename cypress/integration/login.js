@@ -19,7 +19,7 @@ describe('Sourcebooks login', function() {
 
     for (let i=0; i<rolesArr.length;i++) {
 
-        it(`Should be able to login with each role ${rolesArr[i][0]}`, function () {
+        it(`Should be able to login with role ${rolesArr[i][0]}`, function () {
 
                 console.log(i); 
                 loginPage.visit();
