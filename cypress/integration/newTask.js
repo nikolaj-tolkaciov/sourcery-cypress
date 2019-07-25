@@ -8,14 +8,16 @@ const tasksPage = new TasksPage();
 
 describe('Sourcebooks login', function() {
 
-    it('should create new task', function () {
-        
+    beforeEach(() => {
         loginPage.visit();
         loginPage.getUserNameDropdown().click({force:true});
         loginPage.getUserName('Vitalij Janukevič').click();
         loginPage.getRoleDropdown().click({force:true});
         loginPage.getRole('Admin').click();
         loginPage.getLoginbutton().click();
+    })
+
+    it('should create new task', function () {
 
         let taskName = Math.random().toString(36).substring(2, 15)
         let taskDescription = Math.random().toString(36).substring(2, 15)
