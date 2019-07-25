@@ -1,4 +1,4 @@
-class Tasks {
+class TaskPage {
     getTasks() {
         return cy.get('[href="/tasks"]');
     }
@@ -11,7 +11,7 @@ class Tasks {
     getFieldTextArea() {
         return cy.get('.field__textarea');
     }
-    getBillToClient() {
+    getBillToClientInputField() {
         return cy.get('.Select-value-label');
     }
     getBillToClientLabel(value) {
@@ -26,11 +26,11 @@ class Tasks {
     getUrl() {
         return cy.url();
     }
-    getSmallFieldText() {
+    getTaskNameInputField() {
         return cy.get('.field__text--small');
     }
-    getTitleName(name) {
+    getFilteredTaskName(name) {
         return cy.get(`[title="${name}"]`);
     }
 }
-export default Tasks;
+export default TaskPage;

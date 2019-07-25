@@ -1,5 +1,5 @@
 import LoginPage from '../objects/loginPage';   
-import Tasks from '../objects/taskPage';
+import TaskPage from '../objects/taskPage';
 
 describe('Sourcebooks login', function() {
     it('Admins can create new task', function () {
@@ -10,20 +10,20 @@ describe('Sourcebooks login', function() {
         loginPage.getRole().click({force:true});
         loginPage.getRoleOption("Admin").click();
         loginPage.getSubmitButton().click();
-        const tasks = new Tasks;
-        tasks.getTasks().click();
-        tasks.getCreateTaskButton().click();
+        const taskPage = new TaskPage;
+        taskPage.getTasks().click();
+        taskPage.getCreateTaskButton().click();
         var autoName = 'Auto name_' + Math.random().toString(36).substr(2, 9);
-        tasks.getFormName().type(autoName);
-        tasks.getFieldTextArea().type('auto description');
-        tasks.getBillToClient().click();
-        tasks.getBillToClientLabel("Yes").click();
-        tasks.getFormRate().clear();
-        tasks.getFormRate().type(1.234);
-        tasks.getSubmitButton().click();
-        tasks.getUrl().should('not.include', 'create');
-        tasks.getTasks().click();
-        tasks.getSmallFieldText().eq(0).type(autoName);
-        tasks.getTitleName(autoName).should('be.visible');
+        taskPage.getFormName().type(autoName);
+        taskPage.getFieldTextArea().type('auto description');
+        taskPage.getBillToClientInputField().click();
+        taskPage.getBillToClientLabel("Yes").click();
+        taskPage.getFormRate().clear();
+        taskPage.getFormRate().type(1.234);
+        taskPage.getSubmitButton().click();
+        taskPage.getUrl().should('not.include', 'create');
+        taskPage.getTasks().click();
+        taskPage.getTaskNameInputField().eq(0).type(autoName);
+        taskPage.getFilteredTaskName(autoName).should('be.visible');
     })
 })
