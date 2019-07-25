@@ -28,6 +28,10 @@ class LoginPage {
         return cy.get(`[aria-label="${rolesArr[i][0]}"]`);
     }
 
+    getRole(role) {
+        return cy.get(`[aria-label="${role}"]`)
+    }
+
 }
 
 export default LoginPage

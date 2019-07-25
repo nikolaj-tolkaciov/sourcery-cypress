@@ -36,6 +36,10 @@ class TimeLoggingPage {
         
         return cy.get('[id="logout-button"]');
     }
+
+    getNavigationPanelTasks() {
+        return cy.get('.main-nav__link' + '[href="/tasks"]');
+    }
 }
 
 export default TimeLoggingPage;
