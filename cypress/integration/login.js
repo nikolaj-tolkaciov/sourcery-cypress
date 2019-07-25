@@ -25,7 +25,6 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 2);
         cy.get('.calendar--today').contains(new Date().getDate());
     })
-})
 
 it('Should be able to login with role User', function () {
 
@@ -142,4 +141,5 @@ it('Should be able to login with Admin', function () {
     cy.get('.main-nav__link').contains('Projects');
     cy.get('.main-nav__link').contains('Client');
     cy.get('.main-nav__link').contains('Tasks');
+})
 })
