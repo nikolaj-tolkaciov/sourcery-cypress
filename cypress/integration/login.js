@@ -9,7 +9,6 @@ describe('Sourcebooks login', function() {
     it('Should display validation for empty user after attempted loggin', function () {
         
         loginPage.visit()
-        
         loginPage.getValidationError().should('not.visible')
         loginPage.getSubmit().click()
         loginPage.getValidationError().should('be.visible')
@@ -18,52 +17,18 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with role User and should see today date', function () {
         
         loginPage.visit()
-
-        //cy.get('[id="loginForm.userId"]').click({force:true});
         loginPage.getUserForm().click({force:true})
-
-        //cy.get('[aria-label="Ugne Lekstutiene"]').click();
         loginPage.getUserOption("Ugne Lekstutiene").click()
-
-        //cy.get('[id="loginForm.role"]').click({force:true});
         loginPage.getLoginForm().click({force:true})
-
-
-        //cy.get('[aria-label="User"]').click();
         loginPage.getLabel('User').click()
-
-        //cy.get('[type="submit"]').click();
         loginPage.getSubmit().click()
-
-
-        //timeLoginPage
-
-        //cy.url().should('include', '/time-logging');
         timeLoginPage.getURL('.time-logging')
-        
-
-        //cy.get('.page__title').contains('Timesheets')
         timeLoginPage.getPageTitle('Timesheets')
-
-        //cy.get('.calendar').should('be.visible')
         timeLoginPage.getCalendarVisable('be.visible')
-
-
-        //cy.get('.calendar--today').contains(new Date().getDate());
         timeLoginPage.getCalendarToday(new Date().getDate())
-
-
-        //cy.get('.tile.form').should('be.visible')
         timeLoginPage.getFileForm('be.visible')
-
-        //cy.get('.user-info__title').contains('Ugne Lekstutiene');
         timeLoginPage.getUserInfoTitle('Ugne Lekstutiene')
-
-
-        //cy.get('.main-nav').find('li').should('have.length', 1);
         timeLoginPage.getMainLength('1')  
-        
-        //cy.get('.main-nav__link--active').contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)')
         timeLoginPage.getTimeLoggingColored('rgb(64, 76, 237)')
     })  
 
@@ -138,9 +103,4 @@ describe('Sourcebooks login', function() {
         timeLoginPage.getMainLength('6')
         timeLoginPage.getTimeLoggingColored('rgb(64, 76, 237)')
     })
-
-
-
-
-
 })

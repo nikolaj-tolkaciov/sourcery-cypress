@@ -27,8 +27,8 @@ class TimeLoginPage {
         return cy.get('.user-info__title').contains('Ugne Lekstutiene')
     }
 
-    getMainLength() {
-        return cy.get('.main-nav').find('li').should('have.length', 1)
+    getMainLength(tabNumber) {
+        return cy.get('.main-nav').find('li').should('have.length', tabNumber)
     }
 
     getTimeLoggingColored() {

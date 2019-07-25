@@ -7,12 +7,9 @@ getValidationError() {
     return cy.get('.Select.not-valid')
 }
 
-
 getSubmit() {
     return cy.get('[type="submit"]')
-
 }
-
 
 getUserOption(userName) {
     return cy.get(`[aria-label="${userName}"]`)
@@ -33,7 +30,6 @@ getLabel(role) {
 getSubmit() {
     return cy.get('[type="submit"]')
 }
-
 }
 
 export default LoginPage
