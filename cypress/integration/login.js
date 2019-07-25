@@ -1,24 +1,29 @@
+import LoginPage from '../objects/loginPage'
+import Timelog from '../objects/timelog'
+
+const loginPage = new LoginPage();
+const timelog = new Timelog();
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit('/');
+        loginPage.getvalidationerror().should('not.visible')
+        loginPage.submitlogin().click();
+        loginPage.getvalidation().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Olga Pikul"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit('/');
+        loginPage.getUserId().click({force:true});
+        loginPage.getUserOption('Olga Pikul').click();
+        loginPage.getRole().click({force:true});
+        loginPage.roleLabel().click();
+        loginPage.submitOption().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
+        timelog.includer();
+        timelog.pagetitle().contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Olga Pikul');
