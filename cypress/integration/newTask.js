@@ -6,7 +6,7 @@ const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 const tasksPage = new TasksPage();
 
-describe('Sourcebooks login', function() {
+describe('Sourcebooks AdminNewTask', function() {
 
     beforeEach(() => {
         cy.loginAs('Admin');
@@ -22,12 +22,12 @@ describe('Sourcebooks login', function() {
         timeLoggingPage.getNavigationPanelTasks().click({force:true});
         tasksPage.getCreateTaskButton().should('be.visible');
         tasksPage.getCreateTaskButton().click({force:true});
-        tasksPage.getCreateTaskNameInputField().type(`${taskName}`);
+        tasksPage.getCreateTaskNameInputField().type(taskName);
 
         //console.log(taskName) // to check for filtering later
         //console.log(taskDescription) // to check for filtering
 
-        tasksPage.getCreateTaskDescriptionInputField().type(`${taskDescription}`);
+        tasksPage.getCreateTaskDescriptionInputField().type(taskDescription);
         tasksPage.getBillableDropdown().click({force:true});
         tasksPage.getYesFromBillableDropdown().click({force:true});
         tasksPage.getBillableInputField().should('not.be.disabled');
