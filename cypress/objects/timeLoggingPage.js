@@ -40,6 +40,10 @@ class TimeLoggingPage {
     getNavigationPanelTasks() {
         return cy.get('.main-nav__link' + '[href="/tasks"]');
     }
+
+    getNavigationPanelClients() {
+        return cy.get('.main-nav__link' + '[href="/clients"]');
+    }
 }
 
 export default TimeLoggingPage;
