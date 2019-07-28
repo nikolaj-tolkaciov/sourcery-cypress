@@ -6,7 +6,7 @@ const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 const clientPage = new ClientPage();
 
-describe('Sourcebooks login', function() {
+describe('Sourcebooks AdminNewClient', function() {
 
     beforeEach(() => {
         cy.loginAs('Admin');
@@ -26,22 +26,22 @@ describe('Sourcebooks login', function() {
         clientPage.getCreateClientsButton().should('be.visible');
         clientPage.getCreateClientsButton().click({force:true});
         clientPage.getCreateOrganisationNameInputField().should('be.visible');
-        clientPage.getCreateOrganisationNameInputField().type(`${OrganisationName}`);
+        clientPage.getCreateOrganisationNameInputField().type(OrganisationName);
         clientPage.getCreateClientFirstNameInputField().should('be.visible');
         clientPage.getCreateClientFirstNameInputField().type('Welf');
         clientPage.getCreateClientLastNameInputField().should('be.visible');
         clientPage.getCreateClientLastNameInputField().type('Crozzo');
         clientPage.getCreateClientEmailInputField().should('be.visible');
-        clientPage.getCreateClientEmailInputField().type(`${ClientEmail}`);
+        clientPage.getCreateClientEmailInputField().type(ClientEmail);
         clientPage.getSaveButton().should('be.visible');
         clientPage.getSaveButton().click({force:true});
-        
+
         //Patikrinimas su filtravimu ar egzistuoja naujai sukurtas klientas
         timeLoggingPage.getNavigationPanelClients().click({force:true});
         clientPage.getOrganisationNameInputField().should('be.empty');
-        clientPage.getOrganisationNameInputField().type(`${OrganisationName}`);
+        clientPage.getOrganisationNameInputField().type(OrganisationName);
         clientPage.getClientEmailInputField().should('be.empty');
-        clientPage.getClientEmailInputField().type(`${ClientEmail}`);
+        clientPage.getClientEmailInputField().type(ClientEmail);
         clientPage.checkIfFilteredClientIsVisible(OrganisationName, ClientEmail);
         
     })
