@@ -23,7 +23,7 @@ describe ('Sourcebooks Admin creates new Project', function() {
         timeLoggingPage.getNavigationPanelProjects().should('be.visible');
         timeLoggingPage.getNavigationPanelProjects().click({force:true});
 
-        //Project creation
+        //Project creation filling mandatory fields
         projectPage.getCreateProjectButton().should('be.visible');
         projectPage.getCreateProjectButton().click({force:true});
         projectPage.getCreateProjectNameInputField().should('be.visible');
@@ -36,8 +36,21 @@ describe ('Sourcebooks Admin creates new Project', function() {
         projectPage.getCreateProjectClientNameInputField().click({force:true});
         projectPage.getCreateProjectClientNameInputField().type(projectClient);
         projectPage.getCreateProjectClientNameInputField().type('{downarrow}{enter}');
+        //Adding task
+        projectPage.getAddTaskButton().click({force:true});
+        projectPage.getSearchInputField().type("Deliver tea to Party leader");
+        projectPage.getSelectAllButton().trigger('Mouseover').click({force:true});
+        projectPage.getModalActionsMenufield().within(() => {
+            projectPage.getAddButton().click({force:true});
+        }) 
+        //Adding member
+        projectPage.getAddMembersButton().click({force:true});
+        projectPage.getSearchInputField().type(projectManager);
+        projectPage.getSelectAllButton().trigger('Mouseover').click({force:true});
+        projectPage.getModalActionsMenufield().within(() => {
+            projectPage.getAddButton().click({force:true});
+        }) 
         projectPage.getSaveButton().click({type:true});
-
         //Making sure that project is saved and contained in projects list
         timeLoggingPage.getNavigationPanelProjects().click({force:true});
         projectPage.getProjectNameInputField().should('be.empty').and('be.visible');
@@ -48,5 +61,4 @@ describe ('Sourcebooks Admin creates new Project', function() {
         projectPage.getClientNameInputField().type(projectClient);
         projectPage.checkIfFilteredProjectIsVisible(projectName, projectClient);
     })
-
 })
