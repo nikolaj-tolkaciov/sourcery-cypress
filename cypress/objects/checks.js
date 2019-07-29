@@ -24,7 +24,15 @@ class checks {
     }
 
     click(click) {
-        cy.get(click).click();
+        return cy.get(click).click();
+    }
+
+    forceClick(click) {
+        return cy.get(click).click({force:true});
+    }
+
+    clickCertainBtn(click, num) {
+        return cy.get(click).eq(num-1).click();
     }
 
     inputText(nameTitle, input) {
