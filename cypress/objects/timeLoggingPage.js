@@ -46,9 +46,14 @@ class TimeLoggingPage {
     }
 
     getNavigationPanelProjects() {
-        return cy.get('.main-nav__link' + '[href="/projects"]')
+        return cy.get('.main-nav__link' + '[href="/projects"]');
     }
 
+    getNavigationPanelTimeLogging() {
+        return cy.get('.main-nav__link' + '[href="/time-logging"]');
+    }
+
+    
 }
 
 export default TimeLoggingPage;
