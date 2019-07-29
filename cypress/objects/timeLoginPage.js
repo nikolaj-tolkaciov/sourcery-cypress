@@ -8,7 +8,7 @@ class TimeLoginPage {
     }
 
     getPageTitle() {
-        return cy.get(".page__title").contains('Timesheets')
+        return cy.get(".page__title")
     }
 
     getCalendarVisable() {
@@ -24,15 +24,15 @@ class TimeLoginPage {
     }
 
     getUserInfoTitle() {
-        return cy.get('.user-info__title').contains('Ugne Lekstutiene')
+        return cy.get('.user-info__title')
     }
 
     getMainLength(tabNumber) {
-        return cy.get('.main-nav').find('li').should('have.length', tabNumber)
+        return cy.get('.main-nav')
     }
 
     getTimeLoggingColored() {
-        return cy.get('.main-nav__link--active').contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)')
+        return cy.get('.main-nav__link--active')
     }
 }
     export default TimeLoginPage
