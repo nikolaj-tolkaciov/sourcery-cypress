@@ -53,7 +53,40 @@ class TimeLoggingPage {
         return cy.get('.main-nav__link' + '[href="/time-logging"]');
     }
 
-    
+    getProjectInputfieldDropdown() {
+        return cy.get('[id="react-select-2--value"]');
+    }
+
+    getProjectInputfield() {
+        return cy.get('.Select-input' + '[aria-expanded="true"]');
+    }
+
+    getTaskInputfieldDropdown() {
+        return cy.get('[id="react-select-3--value"]');
+    }
+    getTaskInputfield() {
+        return cy.get('.Select-input' + '[aria-expanded="true"]');
+    }
+
+    getDescriptionInputfield() {
+        return cy.get('[id="timeLoggingForm.notes"]');
+    }
+
+    getHoursInputfield() {
+        return cy.get('[id="timeLoggingForm.hours"]');
+    }
+
+    getLogHoursButton() {
+        return cy.get('[type="submit"]').contains("Log Hours");
+    }
+
+    checkIfNewRecordAppearedWithCorrectData(description, projectName) {
+
+        cy.get('[col-id="notes"]').within(() => {
+             cy.get('.time-list__description').contains(description).should('be.visible');
+        })  
+        
+    }
 }
 
 export default TimeLoggingPage;
