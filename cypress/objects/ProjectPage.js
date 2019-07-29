@@ -33,6 +33,31 @@ class ProjectPage {
         return cy.get('[id="projectDetailsForm.projectManager"]');
     }
 
+    getAddTaskButton() {
+        return cy.get('[type=button]').contains('Add Tasks');
+    }
+
+    getSearchInputField() {
+        return cy.get('[class="field__text field__text--small"]' + '[placeholder="Search"]');
+    }
+
+    getSelectAllButton() {
+        return cy.get('[type=button]').contains('Select All');
+    }
+
+    getAddMembersButton() {
+        return cy.get('[type=button]').contains('Add Members');
+    }
+
+    getModalActionsMenufield() {
+        return cy.get('.modal__actions');
+    }
+
+    getAddButton () {
+        return cy.get('[type=button]').contains('Add');
+ 
+    }
+
     getSaveButton() {
         return cy.get('[type=submit]').contains('Save');
     }
