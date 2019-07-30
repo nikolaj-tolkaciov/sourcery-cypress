@@ -6,7 +6,7 @@ class Timelog {
     pagetitle() {
         return cy.get('.page__title')
     }
-    calendarv() {
+    getCalendar() {
         return cy.get('.calendar')
     }
     getTimeEntryForm() {

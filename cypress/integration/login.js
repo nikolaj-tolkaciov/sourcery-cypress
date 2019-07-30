@@ -24,7 +24,7 @@ describe('Sourcebooks login', function() {
 
         timelog.includer();
         timelog.pagetitle().contains('Timesheets')
-        timelog.calendarv().should('be.visible')
+        timelog.getCalendar().should('be.visible')
         timelog.getTimeEntryForm().should('be.visible')
         timelog.getUserTitle().contains("Olga Pikul")
         timelog.getNavigationTabs().should('have.length', 1);
@@ -43,7 +43,7 @@ describe('Sourcebooks login', function() {
 
         timelog.includer();
         timelog.pagetitle().contains('Timesheets')
-        timelog.calendarv().should('be.visible')
+        timelog.getCalendar().should('be.visible')
         timelog.getTimeEntryForm().should('be.visible')
         timelog.getUserTitle().contains("Olga Pikul")
         timelog.getNavigationTabs().should('have.length', 2);
@@ -62,7 +62,7 @@ describe('Sourcebooks login', function() {
 
         timelog.includer();
         timelog.pagetitle().contains('Timesheets')
-        timelog.calendarv().should('be.visible')
+        timelog.getCalendar().should('be.visible')
         timelog.getTimeEntryForm().should('be.visible')
         timelog.getUserTitle().contains("Olga Pikul")
         timelog.getNavigationTabs().should('have.length', 5);
@@ -81,7 +81,7 @@ describe('Sourcebooks login', function() {
 
         timelog.includer();
         timelog.pagetitle().contains('Timesheets')
-        timelog.calendarv().should('be.visible')
+        timelog.getCalendar().should('be.visible')
         timelog.getTimeEntryForm().should('be.visible')
         timelog.getUserTitle().contains("Olga Pikul")
         timelog.getNavigationTabs().should('have.length', 5);
@@ -99,7 +99,7 @@ describe('Sourcebooks login', function() {
 
         timelog.includer();
         timelog.pagetitle().contains('Timesheets')
-        timelog.calendarv().should('be.visible')
+        timelog.getCalendar().should('be.visible')
         timelog.getTimeEntryForm().should('be.visible')
         timelog.getUserTitle().contains("Olga Pikul")
         timelog.getNavigationTabs().should('have.length', 6);
