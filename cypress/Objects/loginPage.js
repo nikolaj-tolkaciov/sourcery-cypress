@@ -8,25 +8,18 @@ class LoginPage {
     submitlogin(){
        return cy.get('[type="submit"]');
     }
-    getvalidation(){
-        return cy.get('.Select.not-valid');
-    }
-    getUserID(){
+    openUsersDropDown(){
         return cy.get('[id="loginForm.userId"]');
     }
-    getUserName(UserName){
+    chooseSelectedUser(UserName){
         return cy.get(`[aria-label="${UserName}"]`);
     }
-    getName(){
+    openRoleList(){
         return cy.get('[id="loginForm.role"]');
     }
     getUserRole(UserRole){
         return cy.get(`[aria-label="${UserRole}"]`);
-    }
-    getRole(){
-        return cy.get('[type="submit"]');
-    }
-
+    }    
 }
 
 export default LoginPage;

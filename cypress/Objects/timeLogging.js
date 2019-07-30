@@ -1,20 +1,20 @@
 class TimeLogging {
-    check(){
+    visitURL(){
     cy.url().should('include', '/time-logging');
     }
-    getTitle(){
+    getPageTitle(){
         return cy.get('.page__title');
     }
     getCalendar(){
         return cy.get('.calendar');
     }
-    getTile(){
+    getCalendarTody(){
         return cy.get('.tile.form');
     }
     getUserTitle(){
         return cy.get('.user-info__title');
     }
-    mainNav(){
+    countTabs(){
         return cy.get('.main-nav').find('li');
     }
     celendarToday(){
