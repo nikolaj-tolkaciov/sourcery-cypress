@@ -80,12 +80,43 @@ class TimeLoggingPage {
         return cy.get('[type="submit"]').contains("Log Hours");
     }
 
-    checkIfNewRecordAppearedWithCorrectData(description, projectName) {
+    /*checkIfNewRecordAppearedWithCorrectData(description, projectName) {
 
         cy.get('[col-id="notes"]').within(() => {
              cy.get('.time-list__description').contains(description).should('be.visible');
         })  
+        checkIFNewRecordWithCorrectData(projectName, taskName, description, spentHours) {
+            cy.get('[role="row"]').should('exist').should('contain', projectName);
+            cy.get('[role="row"]').should('exist').should('contain', taskName);
+            cy.get('[role="row"]').should('exist').should('contain', description);
+            cy.get('[role="row"]').should('exist').should('contain', spentHours);
+        }
+    }*/
+
+    checkgg(projectName, taskName, description, spentHours) {
+        cy.get('[role="row"]').within(() => {
+            cy.get('[col-id="projectName"]').within(() => {
+                cy.get('.time-list__description').contains(projectName).should('exist');
+            })
+        })
         
+        cy.get('[role="row"]').within(() => {
+            cy.get('[col-id="taskName"]').contains(taskName).should('exist');
+        })
+        
+        cy.get('[role="row"]').within(() => {
+            cy.get('[col-id="notes"]').within(() => {
+                cy.get('.time-list__description').contains(description).should('exist');
+                cy.get()
+            })
+        })
+        
+        cy.get('[role="row"]').within(() => {
+            cy.get('[col-id="1"]').within(() => {
+                cy.get('.time-list__hours').contains(spentHours).should('exist');
+            })
+        })
+       
     }
 }
 

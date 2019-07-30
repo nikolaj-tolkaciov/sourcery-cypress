@@ -36,10 +36,10 @@ describe('Sourcebooks logging time', function() {
         timeLoggingPage.getLogHoursButton().should('be.enabled');
         timeLoggingPage.getLogHoursButton().click();
         timeLoggingPage.getPageTitle().click();
-        setTimeout(10000);
+        cy.wait(100)
         cy.reload();
-        timeLoggingPage.checkIfNewRecordAppearedWithCorrectData(description);
-   
+        //timeLoggingPage.checkIfNewRecordAppearedWithCorrectData(description);
+        timeLoggingPage.checkgg(projectName, taskName, description, spentHours);
    
     })
 })
