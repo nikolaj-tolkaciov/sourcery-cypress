@@ -24,22 +24,9 @@ class LoginPage {
   getRole() {
     return cy.get('[id="loginForm.role"]');
   }
-  roleLabeluser() {
-    return cy.get('[aria-label="User"]');
+  roleLabeluser(roleName){
+    return cy.get(`[aria-label="${roleName}"]`);
   }
-  roleLabelteam() {
-    return cy.get('[aria-label="Team Lead"]');
-  }
-  roleLabelmanager() {
-    return cy.get('[aria-label="Manager"]');
-  }
-  roleLabelaccountant() {
-    return cy.get('[aria-label="Accountant"]');
-  }
-  roleLabeladmin() {
-    return cy.get('[aria-label="Admin"]');
-  }
-
   submitOption() {
     return cy.get('[type="submit"]');
   }
