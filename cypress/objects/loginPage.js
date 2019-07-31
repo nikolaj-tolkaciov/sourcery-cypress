@@ -5,7 +5,7 @@ class LoginPage {
     getValidationError(){
         return cy.get('.Select.not-valid')
     }
-    getSubmit(){
+    getSelectedItemSubmit(){
         return cy.get('[type="submit"]')
     }
     getUserID(){
@@ -19,7 +19,7 @@ class LoginPage {
     return cy.get('[id="loginForm.role"]')
     }
 
-    getOption(option){
+    getUserRoleOption(option){
     return cy.get(`[aria-label="${option}"]`)
 }
 
