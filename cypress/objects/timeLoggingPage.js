@@ -84,40 +84,49 @@ class TimeLoggingPage {
 
         cy.get('[col-id="notes"]').within(() => {
              cy.get('.time-list__description').contains(description).should('be.visible');
-        })  
-        checkIFNewRecordWithCorrectData(projectName, taskName, description, spentHours) {
-            cy.get('[role="row"]').should('exist').should('contain', projectName);
-            cy.get('[role="row"]').should('exist').should('contain', taskName);
-            cy.get('[role="row"]').should('exist').should('contain', description);
-            cy.get('[role="row"]').should('exist').should('contain', spentHours);
+        })  */
+        /*checkIFNewRecordWithCorrectData(projectName, taskName, description, spentHours) {
+            cy.get('.ag-row-level-0').contains(projectName)
+            .and().contains(taskName)
+            .and().contains(description)
+            .and().contains(spentHours).should('exist');
+        }*/
+    
+        nr1(projectName, taskName, description, spentHours) {
+            cy.get(`.//div[@role="row"]/div[contains(text(), ${projectName}]`/*/following-sibling::div[contains(text(), ${taskName}]/following-sibling::div[contains(text(), ${description}]/following-sibling::div[contains(text(), ${spentHours}]`).should('exist'*/);
         }
-    }*/
 
-    checkgg(projectName, taskName, description, spentHours) {
+    /*checkgg(projectName, taskName, description, spentHours) {
         cy.get('[role="row"]').within(() => {
+            
             cy.get('[col-id="projectName"]').within(() => {
-                cy.get('.time-list__description').contains(projectName).should('exist');
+                cy.get('.time-list__description').contains(projectName).should('exist').should('contain', projectName);
             })
-        })
-        
-        cy.get('[role="row"]').within(() => {
-            cy.get('[col-id="taskName"]').contains(taskName).should('exist');
-        })
-        
-        cy.get('[role="row"]').within(() => {
+            
+            cy.get('[col-id="taskName"]').contains(taskName).should('exist').should('contain', taskName)
+            
             cy.get('[col-id="notes"]').within(() => {
-                cy.get('.time-list__description').contains(description).should('exist');
-                cy.get()
+                cy.get('.time-list__description').contains(description).should('exist').should('contain', description);
             })
-        })
-        
-        cy.get('[role="row"]').within(() => {
+            
             cy.get('[col-id="1"]').within(() => {
-                cy.get('.time-list__hours').contains(spentHours).should('exist');
+                cy.get('.time-list__hours').contains(spentHours).should('exist').should('contain', spentHours);
             })
         })
-       
-    }
+
+        checkg(projectName, taskName, description, spentHours) {
+            cy.get('[role="row"]').should('have.all.keys', projectName, taskName, description, spentHours)
+        }
+
+        /*check(projectName, taskName, description, spentHours) {
+            cy.get('[role="row"]' ).next.should(($lis) => {
+                expect($lis.eq(0), 'first item').to.contain(projectName)
+                expect($lis.eq(1), 'second item').to.contain(taskName)
+                expect($lis.eq(2), 'third item').to.contain(description)
+                expect($lis.eq(3), 'fourth item').to.contain(spentHours)
+              })
+            }*/
+        
 }
 
 export default TimeLoggingPage;

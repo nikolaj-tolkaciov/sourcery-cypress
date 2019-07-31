@@ -39,7 +39,7 @@ describe('Sourcebooks logging time', function() {
         cy.wait(100)
         cy.reload();
         //timeLoggingPage.checkIfNewRecordAppearedWithCorrectData(description);
-        timeLoggingPage.checkgg(projectName, taskName, description, spentHours);
-   
+        timeLoggingPage.nr1(projectName, taskName, description, spentHours);
+        
     })
 })
