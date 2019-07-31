@@ -56,7 +56,7 @@ describe('Sourcebooks admin', function() {
         check.clickCertainBtn('.btn__secondary', 4);
         check.contentCheck('.tile__list-item', 'Urbonaviciute, Raminta').click()
         check.clickCertainBtn('.btn', 9);
-        
+
         check.click('[type="Submit"]');
         check.click('[href="/projects"]');
     })
