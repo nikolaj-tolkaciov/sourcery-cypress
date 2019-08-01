@@ -25,6 +25,6 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 2);
 
         var date1 = new Date;
-        cy.get('.calendar__day.calendar--today.calendar--selected').contains(date1.getDate());
+        cy.get('.calendar--today').contains(date1.getDate());
     })
 })
