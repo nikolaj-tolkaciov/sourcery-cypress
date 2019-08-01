@@ -1,13 +1,5 @@
-describe('Sourcebooks login', function() {
-
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
-
+describe('Sourcebooks testLogIn', function() {
+    
     var roles = [
         { name: 'User', 'tabCount': 1 }, 
         { name: 'Team Lead', tabCount: 2 }, 
@@ -17,22 +9,45 @@ describe('Sourcebooks login', function() {
     ];
 
     function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-           result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
+        return 'Random_Name_' + Math.floor(Math.random() * 1000000000000);
     }
 
-    it('Should be able to create new task as Admin', function () {
+    it('Should display validation for empty user after attempted loggin', function () {
+        
+        cy.visit('/');
+        cy.get('.Select.not-valid').should('not.visible')
+        cy.get('[type="submit"]').click();
+        cy.get('.Select.not-valid').should('be.visible')
+    })
+
+    function testLogIn(role) {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Marius Lastauskas"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
+        cy.get('[aria-label="' + role + '"]').click();
         cy.get('[type="submit"]').click();
+    }
+
+    it('Should be available for Admin to create new client', function () {
+        testLogIn('Admin');
+
+        let organization = makeid(20);
+        cy.visit('/clients');
+        cy.get('button').contains('Create Client').click();
+        cy.get('[id="clientDetailsForm.organization"]').type(organization);
+        cy.get('[id="clientDetailsForm.contacts_firstName_0"]').type(makeid(20));
+        cy.get('[id="clientDetailsForm.contacts_lastName_0"]').type(makeid(20));
+        cy.get('[id="clientDetailsForm.contacts_email_0"]').type(makeid(20) + '@mail.com');
+        cy.get('[type="submit"]').click();
+        
+        cy.visit('/clients');
+        cy.get('[class="field--filter"]').first().find('input').type(organization);
+        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
+    })
+
+    it('Should be able to create new task as Admin', function () {
+        testLogIn('Admin');
 
         let taskName = makeid(20);
 
@@ -44,23 +59,17 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Yes"]').click();
         cy.get('[id="taskDetailsForm.rate"]').clear();
         cy.get('[id="taskDetailsForm.rate"]').type(Math.random() * 10);
-        cy.get('button').contains('Save').click();
+        cy.get('[type="submit"]').click();
 
         cy.url().should('match', new RegExp('[^\s]*tasks\\\/[0-9]+'));
         cy.visit('/tasks');
         cy.get('[class="field--filter"]').first().find('input').type(taskName);
-        cy.wait(3000);
         cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
     })
 
     for (let i = 0; i < roles.length; i++) {
         it('Should display ' + roles[i].tabCount + ' tabs when logged in as ' + roles[i].name + '.', function () {
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});
-            cy.get('[aria-label="Marius Lastauskas"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get('[aria-label="' + roles[i].name + '"]').click();
-            cy.get('[type="submit"]').click();
+            testLogIn(roles[i].name);
 
             cy.url().should('include', '/time-logging');
             cy.get('.page__title').contains('Timesheets')
