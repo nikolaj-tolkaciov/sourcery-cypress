@@ -19,13 +19,13 @@ class TimeLoggingPage {
     getUserTitle(){
         return cy.get('.user-info__title')
     }
-    getMainNavigation(){
+    getMainNavigationMenuBar(){
         return cy.get('.main-nav')
     }
-    getToday(){
+    showTodaysDate(){
         return cy.get('.calendar--today')
     }
-    getLinkActive(){
+    getActiveTab(){
         return cy.get('.main-nav__link--active')
     }
     getTab (){

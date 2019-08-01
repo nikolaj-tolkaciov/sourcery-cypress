@@ -1,10 +1,13 @@
 import LoginPage from '../objects/loginPage';
 import TimeLoggingPage from '../objects/timeLoggingPage';
+import adminCreatesTask from '../objects/adminPage';
 
 
 const loginPage = new LoginPage()
 const timeLoggingPage = new TimeLoggingPage()
+const adminPage = new adminCreatesTask()
 let taskName=Math.random().toString('36').substring('2, 15')
+let money=Math.floor(Math.random() * 100.2 + 1)
 
 describe('Sourcebooks login', function() {
 
@@ -20,19 +23,20 @@ describe('Sourcebooks login', function() {
         timeLoggingPage.getCalendar().should('be.visible')
         timeLoggingPage.getTitleForm().should('be.visible')
         timeLoggingPage.getUserTitle().contains('Asta Radžiuviene')
-        timeLoggingPage.getMainNavigation().find('li').should('have.length', 6);
-        timeLoggingPage.getToday().contains(new Date().getDate());
+        timeLoggingPage.getMainNavigationMenuBar().find('li').should('have.length', 6);
+        timeLoggingPage.showTodaysDate().contains(new Date().getDate());
 
-        cy.get('.main-nav__link').contains('Task').click({force:true})
-        cy.get('button.btn').contains('Create Task').click({force:true})
-        cy.get('[id="taskDetailsForm.name"]').type(taskName)
-        cy.get('[id="taskDetailsForm.description"]').type('tasko aprasymas')
-        cy.get('.Select-arrow').click()
-        cy.get('[aria-label="Yes"]').click()
-        cy.get('[id="taskDetailsForm.rate"]').clear('0.000').type('10.51')
-        cy.get('button.btn').contains('Save').click({force:true})   
+        timeLoggingPage.getTab().contains('Task').click({force:true})
+        adminPage.showButton().contains('Create Task').click({force:true})
+        adminPage.showTaskNameField().type(taskName)
+        adminPage.showDescriptionField().type('tasko aprasymas')
+        adminPage.getDropdownForBilling().click()
+        adminPage.getYesForBilling().click()
+        adminPage.getRateField().clear('0.000').type(money)
+        adminPage.showButton().contains('Save').click({force:true})   
 
-        cy.get('.main-nav__link').contains('Task').click({force:true})
-        cy.get('.field__text').eq('0').type('zzz')      
+        timeLoggingPage.getTab().contains('Task').click({force:true})
+        //adminPage.showTaskNameFieldForSearch().type('dfefe')
+        cy.get('.field__text').eq(0).type('ehfjehkef')  
     })
 })
