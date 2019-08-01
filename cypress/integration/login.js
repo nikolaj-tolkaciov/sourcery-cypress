@@ -38,7 +38,7 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
         cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 1); //tabu skaicius
+        cy.get('.main-nav').find('li').should('have.length', 1); 
         cy.url().should('include', '/time-logging');
         cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
     })
@@ -52,7 +52,7 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Team Lead"]').click();
         cy.get('[type="submit"]').click();
         cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 2); //tabu skaicius
+        cy.get('.main-nav').find('li').should('have.length', 2); 
         cy.url().should('include', '/time-logging');
         cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
     })
@@ -66,7 +66,7 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Manager"]').click();
         cy.get('[type="submit"]').click();
         cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 5); //tabu skaicius
+        cy.get('.main-nav').find('li').should('have.length', 5); 
         cy.url().should('include', '/time-logging');
         cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
     })
@@ -80,7 +80,7 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Accountant"]').click();
         cy.get('[type="submit"]').click();
         cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 5); //tabu skaicius
+        cy.get('.main-nav').find('li').should('have.length', 5); 
         cy.url().should('include', '/time-logging');
         cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
     })
@@ -94,9 +94,10 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Admin"]').click();
         cy.get('[type="submit"]').click();
         cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 6); //tabu skaicius
+        cy.get('.main-nav').find('li').should('have.length', 6); 
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');       
-    })
+        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');               
+
+    })   
 
 })
