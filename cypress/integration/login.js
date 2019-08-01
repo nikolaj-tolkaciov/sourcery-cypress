@@ -3,6 +3,7 @@ describe('Sourcebooks login', function() {
     var today = new Date();
     const roles = ['User','Team Lead','Manager','Accountant','Admin'];
     const Tabs = ['1','2','5','5','6'];
+    // added unnecessary comment
     
     for(let i = 0; i < roles.length;i++){
     it('Should be able to login with role ' + roles[i] , function () {
