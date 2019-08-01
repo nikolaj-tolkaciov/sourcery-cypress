@@ -15,7 +15,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Jelena Cernyšova')
         cy.get('.main-nav').find('li').should('have.length', 6)
-        cy.get('a[class="main-nav__link main-nav__link--active"]').contains('Time Logging')
+        cy.get('.main-nav').find('li').contains('Time Logging')
         cy.get('a[class="main-nav__link main-nav__link--active"]').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
     })
 
@@ -34,7 +34,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Jelena Cernyšova')
         cy.get('.main-nav').find('li').should('have.length', 5)
-        cy.get('a[class="main-nav__link main-nav__link--active"]').contains('Time Logging')
+        cy.get('.main-nav').find('li').contains('Time Logging')
         cy.get('a[class="main-nav__link main-nav__link--active"]').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
     })
 
@@ -53,7 +53,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Jelena Cernyšova')
         cy.get('.main-nav').find('li').should('have.length', 5)
-        cy.get('a[class="main-nav__link main-nav__link--active"]').contains('Time Logging')
+        cy.get('.main-nav').find('li').contains('Time Logging')
         cy.get('a[class="main-nav__link main-nav__link--active"]').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
     })
 
@@ -72,7 +72,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Jelena Cernyšova')
         cy.get('.main-nav').find('li').should('have.length', 2)
-        cy.get('a[class="main-nav__link main-nav__link--active"]').contains('Time Logging')
+        cy.get('.main-nav').find('li').contains('Time Logging')
         cy.get('a[class="main-nav__link main-nav__link--active"]').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
     })
 
@@ -91,7 +91,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Jelena Cernyšova')
         cy.get('.main-nav').find('li').should('have.length', 1)
-        cy.get('a[class="main-nav__link main-nav__link--active"]').contains('Time Logging')
+        cy.get('.main-nav').find('li').contains('Time Logging')
         cy.get('a[class="main-nav__link main-nav__link--active"]').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
     })
 })
