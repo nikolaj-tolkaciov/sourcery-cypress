@@ -23,8 +23,7 @@ describe('Sourcebooks login', function() {
             cy.get('.main-nav').find('li').should('have.length', menu[i]); 
             i += 1;           
             cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
-            
-         })
+        })
     })
 
 
