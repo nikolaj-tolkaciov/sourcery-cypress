@@ -24,8 +24,8 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Liepa Popescu');
         cy.get('.main-nav').find('li').should('have.length', 1);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
- 
     })
+
     it('Should display validation for empty user after attempted loggin', function () {
  
         cy.visit('/');
@@ -50,8 +50,8 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Liepa Popescu');
         cy.get('.main-nav').find('li').should('have.length', 2);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
- 
     })
+
     it('Should display validation for empty user after attempted loggin', function () {
  
         cy.visit('/');
@@ -76,8 +76,8 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Liepa Popescu');
         cy.get('.main-nav').find('li').should('have.length', 5);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
- 
     })
+
     it('Should display validation for empty user after attempted loggin', function () {
  
         cy.visit('/');
@@ -102,8 +102,8 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Liepa Popescu');
         cy.get('.main-nav').find('li').should('have.length', 5);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
- 
     })
+
     it('Should display validation for empty user after attempted loggin', function () {
  
         cy.visit('/');
@@ -126,8 +126,8 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Liepa Popescu');
-        cy.get('.main-nav').find('li').should('have.length', 6);cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
- 
+        cy.get('.main-nav').find('li').should('have.length', 6);
+        cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
     })
  })
  
