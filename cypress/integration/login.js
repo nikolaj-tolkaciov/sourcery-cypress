@@ -27,7 +27,7 @@ describe('Sourcebooks login', function() {
 
     it('Date should match todays date', function() {
         var d = new Date();
-        cy.get('.calendar--selected').find('span').get(".calendar__date").contains(d.getDate());
+        cy.get('.calendar--today').find('span').contains(d.getDate());
     })
 
     it('I can login as a User', function(){
@@ -44,7 +44,7 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Valentinas Kasteckis');
         cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('main-nav__link--active').should("color", "#404ced");
+        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
 
     })   
 
@@ -63,6 +63,8 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Valentinas Kasteckis');
         cy.get('.main-nav').find('li').should('have.length', 5);
+        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+
     })
 
 
