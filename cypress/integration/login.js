@@ -14,7 +14,7 @@ describe('Sourcebooks login', function() {
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Demo User"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
+        cy.get('[aria-label="User"]').click();
         cy.get('[type="submit"]').click();
 
         cy.url().should('include', '/time-logging');
