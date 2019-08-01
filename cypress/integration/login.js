@@ -29,4 +29,13 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar--selected').find('span').contains(1);
     })
 
+    it('Should verify all user roles can log in and should see appropriate tabs:', function () {
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Ieva Stonkaitė"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get('[aria-label="Team Lead"]').click();
+        cy.get('[type="submit"]').click();
+    
+    })
+
 })
