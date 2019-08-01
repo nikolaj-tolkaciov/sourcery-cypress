@@ -17,7 +17,7 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.css', 'color')
         .and('eq', 'rgb(64, 76, 237)')
         var date1 = new Date;
-        cy.get('.calendar--today').contains(date1.getDate());
+        cy.get('.calendar--today').find('.calendar__date').contains(date1.getDate());
     })
 }
 })
