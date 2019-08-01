@@ -1,5 +1,5 @@
 export default {
-    visit: () => crypto.visit('/time-logging'),
+    visit: () => cy.visit('/time-logging'),
 
     getCalendar: () => cy.get('.calendar'),
 
@@ -12,4 +12,6 @@ export default {
     getUserName: () => cy.get('.user-info__title'),
 
     getTabs: () => cy.get('.main-nav').find('li'),
+
+    getCurrDay: () => cy.get('.calendar--today > span')
 }
