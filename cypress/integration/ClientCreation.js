@@ -7,11 +7,11 @@ describe('Client creation', () => {
         cy.loginAs('Admin')
         ClientsPage.visit()
 
-        const randomName = Math.random().toString(36).substring(9);
+        const randomName = Math.random().toString(10).substring(9);
 
         ClientsPage.getCreateButton().click()
 
-        ClientsPage.getOrganizationField().type(randomName)
+        ClientsPage.getOrganizationField().type('orgname' + randomName)
         ClientsPage.getFirstNameField().type('first name')
         ClientsPage.getLastNameField().type('Last name')
         ClientsPage.getEmailField().type('my@email.com')
