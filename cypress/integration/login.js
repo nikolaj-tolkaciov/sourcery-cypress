@@ -8,23 +8,35 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role Team Lead', function () {
+    var roles = [
+        { name: 'User', 'tabCount': 1 }, 
+        { name: 'Team Lead', tabCount: 2 }, 
+        { name: 'Manager', tabCount: 5 }, 
+        { name: 'Accountant', tabCount: 5}, 
+        { name: 'Admin', tabCount: 6 }
+    ];
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+    for (let i = 0; i < roles.length; i++) {
+        it('Should display ' + roles[i].tabCount + ' tabs when logged in as ' + roles[i].name + '.', function () {
+            cy.visit('/');
+            cy.get('[id="loginForm.userId"]').click({force:true});
+            cy.get('[aria-label="Marius Lastauskas"]').click();
+            cy.get('[id="loginForm.role"]').click({force:true});
+            cy.get('[aria-label="' + roles[i].name + '"]').click();
+            cy.get('[type="submit"]').click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-    })
-
+            cy.url().should('include', '/time-logging');
+            cy.get('.page__title').contains('Timesheets')
+            cy.get('.calendar').should('be.visible')
+            cy.get('.tile.form').should('be.visible')
+            cy.get('.user-info__title').contains('Marius Lastauskas');
+            cy.get('.main-nav').find('li').should('have.length', roles[i].tabCount);
+            
+            cy.get('.main-nav__link--active').contains('Time Logging');
+            cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+        })
+    }
+    
     it('Should be displaying todays date in Time Logging page', function () {
         const today = new Date();
         const date = today.getDate();
