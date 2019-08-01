@@ -7,7 +7,7 @@ const loginPage = new LoginPage()
 const timeLoggingPage = new TimeLoggingPage()
 const adminPage = new adminCreatesTask()
 let taskName=Math.random().toString('36').substring('2, 15')
-let money=Math.floor(Math.random() * 100.2 + 1)
+let money=Math.floor(Math.random()* 10) + 0.1
 
 describe('Sourcebooks login', function() {
 
