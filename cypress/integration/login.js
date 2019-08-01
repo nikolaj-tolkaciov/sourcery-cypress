@@ -8,13 +8,17 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    let role = 'Team Lead';
+    //console.log(role);
+    var today = new Date();
+    it('Should be able to login with role ' + role, function () {
+        
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Demo User"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
+        cy.get(`[aria-label="${role}"]`).click();
         cy.get('[type="submit"]').click();
 
         cy.url().should('include', '/time-logging');
@@ -22,6 +26,7 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.main-nav').find('li').should('have.length', 2);
+        cy.get('.calendar__day.calendar--today.calendar--selected').contains(2); //(today.getDate());
     })
 })
