@@ -27,4 +27,19 @@ describe('Sourcebooks login', function() {
         var date1 = new Date;
         cy.get('.calendar--today').contains(date1.getDate());
     })
+
+    it('Verify all user roles can log in and should see appropriate tabs', function() {
+        cy.visit('/');
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Modestas Kmieliauskas"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get('[aria-label="Team Lead"]').click();
+        cy.get('[type="submit"]').click();
+
+        cy.get('.user-info__title').contains('Modestas Kmieliauskas');
+        cy.get('.main-nav').find('li').should('have.length', 2);
+        cy.get('.main-nav__link--active').contains("Time Logging");
+        cy.get('.main-nav__link--active').should('have.css', 'color')
+        .and('eq', 'rgb(64, 76, 237)')
+    })
 })
