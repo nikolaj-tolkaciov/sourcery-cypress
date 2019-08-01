@@ -30,26 +30,27 @@ describe('Sourcebooks login', function() {
     })
 
     it('Verify all user roles can log in and should see appropriate tabs', function(){
+
         let Roles = [
             {
-                "name":"User",
+                "name": "User",
                 "tabs": 1
             },
             {
                 "name": "Team Lead",
-                "tabs":2
+                "tabs": 2
             },
             {
-                "name":"Manager",
-                "tabs":5
+                "name": "Manager",
+                "tabs": 5
             },
             {
-                "name":"Accountant",
-                "tabs":5
+                "name": "Accountant",
+                "tabs": 5
             }, 
             {
-                "name":"Admin",
-                "tabs":6
+                "name": "Admin",
+                "tabs": 6
             }];
 
         for(let i = 0; i < Roles.length; i++){
@@ -62,6 +63,8 @@ describe('Sourcebooks login', function() {
 
             cy.get('.user-info__title').contains('Dominykas Poškus');
             cy.get('.main-nav').find('li').should('have.length', Roles[i].tabs);
+            cy.get('.main-nav__link--active').contains("Time Logging");
+            cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
             
             cy.get('.user-info__title').click();
             cy.get('[id="logout-button"]').click();
