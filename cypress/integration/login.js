@@ -24,4 +24,18 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
+    
+    it('Validate today\'s date', function () {
+
+        cy.visit('/');
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Kamilė Stugytė"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get('[aria-label="Team Lead"]').click();
+        cy.get('[type="submit"]').click();
+
+        const today = new Date();
+        const date = today.getDate();
+        cy.get('.calendar--today').find('.calendar__date').contains(date);
+    })
 })
