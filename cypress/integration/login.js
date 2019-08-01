@@ -8,7 +8,6 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    // Tab count test
     var roles = [
         { name: 'User', 'tabCount': 1 }, 
         { name: 'Team Lead', tabCount: 2 }, 
