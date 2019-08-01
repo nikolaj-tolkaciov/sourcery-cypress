@@ -24,4 +24,11 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
+    
+    it('Validate today\'s date', function () {
+
+        const today = new Date();
+        const date = today.getDate();
+        cy.get('.calendar--today').find('.calendar__date').contains(date);
+    })
 })
