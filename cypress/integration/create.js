@@ -1,6 +1,8 @@
 describe('Sourcebooks login', function() {
 
-    it('Admin should create a new task', function () {
+    it('Admin should create a new client', function () {
+
+        const organizationName = Math.ceil(Math.random()*100000);
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -9,20 +11,19 @@ describe('Sourcebooks login', function() {
         cy.get('[aria-label="Admin"]').click();
         cy.get('[type="submit"]').click();
 
-        cy.get('[href="/tasks"]').click();
+        cy.get('[href="/clients"]').click();
         cy.get('.btn').click();
-        cy.get('[id="taskDetailsForm.name"]').type("Simple Sample7");
-        cy.get('[id="taskDetailsForm.description"]').type("Writing first automated test on thursday.");
-        cy.get('[aria-selected="true"]').click({ force: true }).get('[aria-label="Yes"]').click({ force: true });
-        cy.get('[id="taskDetailsForm.rate"]').clear().type("5.000");
-        cy.get('[type="submit"]').click({force:true});
 
+        cy.get('[id="clientDetailsForm.organization"]').type(organizationName);
+        cy.get('[id="clientDetailsForm.contacts_firstName_0"]').type(organizationName+1);
+        cy.get('[id="clientDetailsForm.contacts_lastName_0"]').type(organizationName+2);
+        cy.get('[id="clientDetailsForm.contacts_email_0"]').type(organizationName+'@email.com');
+        cy.get('[type="submit"]').click();
         cy.wait(1000);
-        cy.url().should('to.not.equal',('/tasks/create'));
-        
-        cy.visit('/tasks');
-        cy.get('.field__text').first().click().type("Simple Sample7");
-        cy.get('[title="Simple Sample7"]').should('exist');
-        cy.get('[row-index="1"]').should('not.exist');
+        cy.url().should('to.not.equal',('/clients/create'));
+
+        cy.visit('/clients');
+        cy.get('.field__text').first().click().type(organizationName);
+        cy.get('[title=' + organizationName +']').should('exist');
     })
 })
