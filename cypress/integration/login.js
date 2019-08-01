@@ -27,6 +27,6 @@ describe('Sourcebooks login', function() {
 
     it('Date should match todays date', function() {
         var d = new Date();
-        cy.get('.calendar--today').find('span').contains(d.getDate());
+        cy.get('.calendar--today').find('span').get(".calendar__date").contains(d.getDate());
     })
 })
