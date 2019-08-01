@@ -35,8 +35,6 @@ describe('Sourcebooks login', function() {
 
     cy.visit('/time-logging');
     let date = new Date();
-    cy.get('.calendar__day.calendar--today.calendar--selected').contains(
-      date.getDate()
-    );
+    cy.get('.calendar--today.calendar--selected').contains(date.getDate());
   });
 });
