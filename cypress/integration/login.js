@@ -40,5 +40,4 @@ describe('Sourcebooks login', function () {
             TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     })
-    // css(name, [value])	expect($el).to.have.css('background-color', 'rgb(0, 0, 0)')
 })
