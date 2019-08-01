@@ -21,15 +21,13 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 6);
 
         const today = new Date();
         const day = today.getDate();
         cy.get('.calendar__date').contains(day);
     })
 
-    it('Verify "User" can log in and should see appropriate tabs', function() {
+    it('Verify "User" can log in and should see appropriate number of tabs (1)', function() {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Edvinas Kveselys"]').click();
@@ -42,7 +40,7 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
     })
 
-    it('Verify "Team Lead" can log in and should see appropriate tabs', function() {
+    it('Verify "Team Lead" can log in and should see appropriate number of tabs (2)', function() {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Edvinas Kveselys"]').click();
@@ -55,7 +53,7 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
     })
 
-    it('Verify "Manager" can log in and should see appropriate tabs', function() {
+    it('Verify "Manager" can log in and should see appropriate number of tabs (5)', function() {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Edvinas Kveselys"]').click();
@@ -67,7 +65,8 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
         cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
     })
-    it('Verify "Accountant" can log in and should see appropriate tabs', function() {
+
+    it('Verify "Accountant" can log in and should see appropriate number of tabs (5)', function() {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Edvinas Kveselys"]').click();
@@ -79,7 +78,8 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
         cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
     })
-    it('Verify "Admin" can log in and should see appropriate tabs', function() {
+
+    it('Verify "Admin" can log in and should see appropriate number of tabs (6)', function() {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Edvinas Kveselys"]').click();
