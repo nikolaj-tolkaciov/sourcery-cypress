@@ -117,6 +117,5 @@ describe('Sourcebooks login', function() {
         let today = new Date();
         cy.get('.calendar--today').find('.calendar__date').contains(today.getDate());         
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');   
-           
     })
  })
