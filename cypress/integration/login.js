@@ -23,9 +23,8 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.calendar--today').contains('1');
     })
-    it('should cheeck if today date is correct', function () {
+    it('should check if today date is correct', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
