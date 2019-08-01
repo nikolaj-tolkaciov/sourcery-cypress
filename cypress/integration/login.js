@@ -14,7 +14,7 @@ describe('Sourcebooks login', function() {
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Dainius Gaidamavičius"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
+        cy.get('[aria-label="Team Lead"]').click();
         cy.get('[type="submit"]').click();
 
         cy.url().should('include', '/time-logging');
@@ -22,7 +22,7 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Dainius Gaidamavicius');
-        cy.get('.main-nav').find('li').should('have.length', 1);          
+        cy.get('.main-nav').find('li').should('have.length', 2);          
         cy.get('.calendar--today').find('span').should('contain', new Date().getDate())
     })
 })
