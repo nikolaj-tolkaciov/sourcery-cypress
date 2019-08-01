@@ -8,20 +8,25 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with role Team Lead', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Valentinas Kasteckis"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
+        cy.get('[aria-label="Team Lead"]').click();
         cy.get('[type="submit"]').click();
 
         cy.url().should('include', '/time-logging');
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        cy.get('.user-info__title').contains('Valentinas Kasteckis');
+        cy.get('.main-nav').find('li').should('have.length', 2);
+    })
+
+    it('Date should match todays date', function() {
+        var d = new Date();
+        cy.get('.calendar--today').find('span').get(".calendar__date").contains(d.getDate());
     })
 })
