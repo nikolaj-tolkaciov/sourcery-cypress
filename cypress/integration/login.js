@@ -10,8 +10,7 @@ describe('Sourcebooks login', function() {
 
     const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
     const menu = ['1', '2', '5', '5', '6'];
-    let i = 0;
-    roles.forEach((role) => {
+    roles.forEach((role, id) => {
         it('Verify all user roles can log in and should see appropriate tabs', function() {
             cy.visit('/');
             cy.get('[id="loginForm.userId"]').click({force:true});
@@ -20,8 +19,7 @@ describe('Sourcebooks login', function() {
             cy.get(`[aria-label='${role}']`).click();
             cy.get('[type="submit"]').click();
             cy.get('.user-info__title').contains('Dainius Gaidamavicius'); 
-            cy.get('.main-nav').find('li').should('have.length', menu[i]); 
-            i += 1;           
+            cy.get('.main-nav').find('li').should('have.length', menu[id]);                      
             cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
         })
     })
