@@ -28,6 +28,7 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
+    
     it('should check if today date is correct', function () {
 
         cy.visit('/');
@@ -47,6 +48,7 @@ describe('Sourcebooks login', function() {
     let tabsAmount = [1, 2, 5, 5, 6];
 
     for(let i=0; i< roles.length; i++ ){
+
         it('User:' + roles[i] + ' logs in and can see ' + tabsAmount[i] + ' tab(s)', function () {
             cy.visit('/');
             cy.get('[id="loginForm.userId"]').click({force:true});
