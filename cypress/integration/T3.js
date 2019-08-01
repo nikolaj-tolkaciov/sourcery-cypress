@@ -20,7 +20,7 @@ describe('Sourcebooks login', function() {
         cy.get('[type="button"]').click();
         cy.visit('/tasks');
         cy.get('[class = "field--filter"]').first().find('input').type(taskName);
-        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 5);
+        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
     }) 
  
 })
