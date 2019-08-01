@@ -16,6 +16,43 @@ describe('Sourcebooks login', function() {
         { name: 'Admin', tabCount: 6 }
     ];
 
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    it('Should be able to create new task as Admin', function () {
+        cy.visit('/');
+        cy.get('[id="loginForm.userId"]').click({force:true});
+        cy.get('[aria-label="Marius Lastauskas"]').click();
+        cy.get('[id="loginForm.role"]').click({force:true});
+        cy.get('[aria-label="Admin"]').click();
+        cy.get('[type="submit"]').click();
+
+        let taskName = makeid(20);
+
+        cy.visit('/tasks');
+        cy.get('button').contains('Create Task').click();
+        cy.get('[id="taskDetailsForm.name"]').type(taskName);
+        cy.get('[id="taskDetailsForm.description"]').type('Automated test created task');
+        cy.get('label').contains('Bill to Client').next().click();
+        cy.get('[aria-label="Yes"]').click();
+        cy.get('[id="taskDetailsForm.rate"]').clear();
+        cy.get('[id="taskDetailsForm.rate"]').type(Math.random() * 10);
+        cy.get('button').contains('Save').click();
+
+        cy.url().should('match', new RegExp('[^\s]*tasks\\\/[0-9]+'));
+        cy.visit('/tasks');
+        cy.get('[class="field--filter"]').first().find('input').type(taskName);
+        cy.wait(3000);
+        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
+    })
+
     for (let i = 0; i < roles.length; i++) {
         it('Should display ' + roles[i].tabCount + ' tabs when logged in as ' + roles[i].name + '.', function () {
             cy.visit('/');
