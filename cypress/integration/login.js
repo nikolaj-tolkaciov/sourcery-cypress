@@ -8,11 +8,11 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with role Team Lead and check if date is todays date', function () {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Aistė Laugalytė"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="Team Lead"]').click();
         cy.get('[type="submit"]').click();
@@ -21,7 +21,7 @@ describe('Sourcebooks login', function() {
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
+        cy.get('.user-info__title').contains('Aiste Laugalyte');
         cy.get('.main-nav').find('li').should('have.length', 2);
 
         let today = new Date();
