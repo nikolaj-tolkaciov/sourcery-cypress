@@ -12,7 +12,6 @@ describe('Sourcebooks login', function() {
     var today = new Date();
     it('Should be able to login with role ' + role, function () {
         
-
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
         cy.get('[aria-label="Demo User"]').click();
