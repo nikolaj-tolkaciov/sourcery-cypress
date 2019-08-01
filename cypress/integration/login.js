@@ -63,6 +63,8 @@ describe('Sourcebooks login', function() {
 
         cy.get('.user-info__title').contains('Dominykas Poškus');
         cy.get('.main-nav').find('li').should('have.length', Roles[i].tabs);
+        cy.get('.main-nav__link--active').contains("Time Logging");
+        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
 
         cy.get('.user-info__title').click();
         cy.get('[id="logout-button"]').click();
