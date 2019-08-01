@@ -23,5 +23,9 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 1);
+
+        cy.get('.calendar--today').find('span').contains(new Date().getDate());
+
+        
     })
 })
