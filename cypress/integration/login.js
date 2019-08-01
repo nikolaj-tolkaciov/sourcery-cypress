@@ -8,30 +8,6 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role Team Lead', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Marius Lastauskas"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Marius Lastauskas');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-    })
-
-    it('Should be displaying todays date in Time Logging page', function () {
-        const today = new Date();
-        const date = today.getDate();
-
-        cy.get('.calendar--today').find('.calendar__date').contains(date);
-    })
-
     // Tab count test
     var roles = [
         { name: 'User', 'tabCount': 1 }, 
@@ -61,4 +37,11 @@ describe('Sourcebooks login', function() {
             cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
         })
     }
+    
+    it('Should be displaying todays date in Time Logging page', function () {
+        const today = new Date();
+        const date = today.getDate();
+
+        cy.get('.calendar--today').find('.calendar__date').contains(date);
+    })
 })
