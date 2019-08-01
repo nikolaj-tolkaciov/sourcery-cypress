@@ -25,10 +25,5 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
 
-    it('Should mark today\'s date with a blue dot', function () {
 
-        const today = new Date();
-        const date = today.getDate();
-        cy.get('.calendar--today').contains(date);
-    })
 })
