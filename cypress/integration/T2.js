@@ -1,6 +1,5 @@
 describe('Sourcebooks login', function() {
-
- 
+    
     it('Should be able to login with Admin role', function () {
 
         cy.visit('/');
