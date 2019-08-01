@@ -113,9 +113,10 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Rasa Kapacinskaite');
-        cy.get('.main-nav').find('li').should('have.length', 6);        
-        cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');   
+        cy.get('.main-nav').find('li').should('have.length', 6);
         let today = new Date();
-        cy.get('.calendar--today').find('.calendar__date').contains(today.getDate());    
+        cy.get('.calendar--today').find('.calendar__date').contains(today.getDate());         
+        cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');   
+           
     })
  })
