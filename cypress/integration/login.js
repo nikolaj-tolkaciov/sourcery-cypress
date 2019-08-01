@@ -8,21 +8,24 @@ describe('Sourcebooks login', function() {
         cy.get('.Select.not-valid').should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);          
-        cy.get('.calendar--today').find('span').should('contain', new Date().getDate())
+    const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
+    const menu = ['1', '2', '5', '5', '6'];
+    let i = 0;
+    roles.forEach((role) => {
+        it('Verify all user roles can log in and should see appropriate tabs', function() {
+            cy.visit('/');
+            cy.get('[id="loginForm.userId"]').click({force:true});
+            cy.get('[aria-label="Dainius Gaidamavičius"]').click();
+            cy.get('[id="loginForm.role"]').click({force:true});
+            cy.get(`[aria-label='${role}']`).click();
+            cy.get('[type="submit"]').click();
+            cy.get('.user-info__title').contains('Dainius Gaidamavicius'); 
+            cy.get('.main-nav').find('li').should('have.length', menu[i]); 
+            i += 1;           
+            cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
+            
+         })
     })
+
+
 })
