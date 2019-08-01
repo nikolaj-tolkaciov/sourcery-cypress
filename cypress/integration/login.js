@@ -29,30 +29,30 @@ describe('Sourcebooks login', function() {
         cy.get('.calendar--today').find('.calendar__date').contains((new Date()).getDate());
     })
 
-    it('Verify all user roles can log in and should see appropriate tabs', function(){
-        let Roles = [
-            {
-                "name":"User",
-                "tabs": 1
-            },
-            {
-                "name": "Team Lead",
-                "tabs":2
-            },
-            {
-                "name":"Manager",
-                "tabs":5
-            },
-            {
-                "name":"Accountant",
-                "tabs":5
-            }, 
-            {
-                "name":"Admin",
-                "tabs":6
-            }];
+    let Roles = [
+        {
+            "name":"User",
+            "tabs": 1
+        },
+        {
+            "name": "Team Lead",
+            "tabs":2
+        },
+        {
+            "name":"Manager",
+            "tabs":5
+        },
+        {
+            "name":"Accountant",
+            "tabs":5
+        }, 
+        {
+            "name":"Admin",
+            "tabs":6
+        }];
 
-        for(let i = 0; i < Roles.length; i++){
+    for(let i = 0; i < Roles.length; i++){
+        it('Verify that ' + Roles[i].name + ' can log in and should see '+ Roles[i].tabs +' tabs', function(){
             cy.visit('/');
             cy.get('[id="loginForm.userId"]').click({force:true});
             cy.get('[aria-label="Dominykas Poškus"]').click();
@@ -67,6 +67,6 @@ describe('Sourcebooks login', function() {
             
             cy.get('.user-info__title').click();
             cy.get('[id="logout-button"]').click();
-        }
-    })
+        })
+    }
 })
