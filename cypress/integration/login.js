@@ -25,16 +25,16 @@ describe('Sourcebooks login', function () {
             LoginPage.getSubmitButton().click()
 
             cy.url().should('include', '/time-logging');
-            TimeLoggingPage.getPageTitle().contains('Timesheets')
+            TimeLoggingPage.getPageTitle().should('contain', 'Timesheets')
             TimeLoggingPage.getCalendar().should('be.visible')
             TimeLoggingPage.getTileForm().should('be.visible')
 
             const activeTab = TimeLoggingPage.getActiveTab()
             
             activeTab.should('have.length', 1)
-            activeTab.contains('Time Logging')
+            activeTab.should('contain', 'Time Logging')
 
-            TimeLoggingPage.getUserName().contains('Modestas Gujis')
+            TimeLoggingPage.getUserName().should('contain', 'Modestas Gujis')
             TimeLoggingPage.getTabs().should('have.length', tabCount[idx])
 
             TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')

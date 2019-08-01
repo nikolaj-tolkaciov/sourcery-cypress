@@ -9,7 +9,6 @@ describe('Task creation', () => {
         TaskPage.getCreateButton().click()
 
         cy.url().should('include', '/tasks/create');
-
         
         const randomName = Math.random().toString(36).substring(9);
         TaskPage.getTaskNameInput().type(randomName)
@@ -20,7 +19,7 @@ describe('Task creation', () => {
         billToClient.click()
         TaskPage.getBillToClientOption('Yes').click()
 
-        TaskPage.getHourlyRate().type(Math.random()*15)
+        TaskPage.getHourlyRate().type(Math.random() * 15)
 
         TaskPage.getSubmitButton().click()
         
@@ -31,6 +30,5 @@ describe('Task creation', () => {
 		TaskPage.getNameFilter().type(randomName)
 		TaskPage.getTaskList().should('have.length', 1)
     })
-
 
 })
