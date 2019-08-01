@@ -26,7 +26,7 @@ describe('Sourcebooks login', function() {
 
         const today = new Date();
         const day = today.getDate();
-        cy.get('.calendar--today').contains(day);
+        cy.get('.calendar__date').contains(day);
     })
 
     it('Verify "User" can log in and should see appropriate tabs', function() {
