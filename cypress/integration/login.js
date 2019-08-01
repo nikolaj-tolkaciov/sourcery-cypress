@@ -6,7 +6,8 @@ describe('Sourcebooks login', function() {
     // added unnecessary comment
     
     for(let i = 0; i < roles.length;i++){
-    it('Should be able to login with role ' + roles[i] , function () {
+    it('Should be able to login with role ' + roles[i] + 
+       ' , check current day and active tab color' , function () {
         
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
