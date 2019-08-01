@@ -25,11 +25,8 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 1);
     })
 
-    //test
     it('Should validate todays date', function () {
 
-        var today = new Date();
-
-        cy.get('.calendar--today').find('span').contains(today.getDate());
+        cy.get('.calendar--today').find('span').contains(new Date().getDate());
     })
 })
