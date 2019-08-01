@@ -1,28 +1,48 @@
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
-        
+
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
-
-    it('Should be able to login with role User', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Dainius Gaidamavičius"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Dainius Gaidamavicius');
-        cy.get('.main-nav').find('li').should('have.length', 2);          
-        cy.get('.calendar--today').find('span').should('contain', new Date().getDate())
-    })
+  
+    const Roles =
+    [
+        {
+            name: "User",
+            tabs: '1'
+        },
+        {
+            name: "Team Lead",
+            tabs: '2'
+        },
+        {
+            name: "Manager",
+            tabs: '5'
+        },
+        {
+            name: "Accountant",
+            tabs: '5'
+        },
+        {
+            name: "Admin",
+            tabs: '6'
+        }
+    ];
+      
+    Roles.forEach((role) => {
+        it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
+            cy.visit('/');
+            cy.get('[id="loginForm.userId"]').click({force:true});
+            cy.get('[aria-label="Dainius Gaidamavičius"]').click();
+            cy.get('[id="loginForm.role"]').click({force:true});
+            cy.get(`[aria-label='${role.name}']`).click();
+            cy.get('[type="submit"]').click();
+            cy.get('.user-info__title').contains('Dainius Gaidamavicius'); 
+            cy.get('.main-nav').find('li').should('have.length', role.tabs);                      
+            cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
+        })
+    })  
 })
