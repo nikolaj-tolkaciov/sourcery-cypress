@@ -12,7 +12,7 @@ describe('Sourcebooks login', function() {
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
+        cy.get('[aria-label="Dominykas Poškus"]').click();
         cy.get('[id="loginForm.role"]').click({force:true});
         cy.get('[aria-label="Team Lead"]').click();
         cy.get('[type="submit"]').click();
@@ -24,6 +24,7 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
+    
     it('Calendar should show todays date', function(){
         cy.get('.calendar--today').find('.calendar__date').contains((new Date()).getDate());
     })
