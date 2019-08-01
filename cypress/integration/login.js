@@ -24,4 +24,12 @@ describe('Sourcebooks login', function() {
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
     })
+
+    it('Should be displaying todays date in Time Logging page', function () {
+        const today = new Date();
+        const date = today.getDate();
+        const mont = today.getMonth();
+
+        cy.get('[class="calendar__day calendar--today calendar--selected"]').find('[class="calendar__date"]').contains(date);
+    })
 })
