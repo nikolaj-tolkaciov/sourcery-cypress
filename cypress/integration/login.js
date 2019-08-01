@@ -28,8 +28,7 @@ describe('Sourcebooks login', function() {
     it('Should be displaying todays date in Time Logging page', function () {
         const today = new Date();
         const date = today.getDate();
-        const mont = today.getMonth();
 
-        cy.get('[class="calendar__day calendar--today calendar--selected"]').find('[class="calendar__date"]').contains(date);
+        cy.get('.calendar--today').find('.calendar__date').contains(date);
     })
 })
