@@ -1,27 +1,43 @@
-describe('Sourcebooks login', function() {
+import LoginPage from '../helpers/LoginPage'
+import TimeLoggingPage from '../helpers/TimeLoggingPage'
+import { ROLES, tabCount } from '../helpers/constants'
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+// T-2
+describe('Sourcebooks login', function () {
+
+    it('Should display validation for empty user after attempted loggin', () => {
+        LoginPage.visit('/');
+        LoginPage.getValidationIndicator().should('not.visible')
+        LoginPage.getSubmitButton().click()
+        LoginPage.getValidationIndicator().should('be.visible')
     })
 
-    it('Should be able to login with role User', function () {
+    const userName = 'Modestas Gujis'
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+    ROLES.forEach((role, idx) => {
+        it('Should be able to login with role "' + role + '"', () => {
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+            LoginPage.visit()
+            LoginPage.getUserDropDown().click({ force: true })
+            LoginPage.getUserOption(userName).click()
+            LoginPage.getRoleDropDown().click({ force: true })
+            LoginPage.getRoleOption(role).click()
+            LoginPage.getSubmitButton().click()
+
+            cy.url().should('include', '/time-logging');
+            TimeLoggingPage.getPageTitle().contains('Timesheets')
+            TimeLoggingPage.getCalendar().should('be.visible')
+            TimeLoggingPage.getTileForm().should('be.visible')
+
+            const activeTab = TimeLoggingPage.getActiveTab()
+            
+            activeTab.should('have.length', 1)
+            activeTab.contains('Time Logging')
+
+            TimeLoggingPage.getUserName().contains('Modestas Gujis')
+            TimeLoggingPage.getTabs().should('have.length', tabCount[idx])
+
+            TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')
+        })
     })
 })
