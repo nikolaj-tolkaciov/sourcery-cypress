@@ -9,7 +9,6 @@ describe('Sourcebooks login', function() {
     })
 
     let role = 'Team Lead';
-    //console.log(role);
     var today = new Date();
     it('Should be able to login with role ' + role, function () {
         
@@ -27,6 +26,6 @@ describe('Sourcebooks login', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User');
         cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.calendar__day.calendar--today.calendar--selected').contains(2); //(today.getDate());
+        cy.get('.calendar__day.calendar--today.calendar--selected').contains(today.getDate());
     })
 })
