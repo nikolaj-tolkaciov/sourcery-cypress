@@ -1,10 +1,12 @@
 describe('Sourcebooks login', function() {
+
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
+
     it('Should be able to login with role User', function () {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -20,15 +22,15 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 1);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
     })
- })
 
- describe('Sourcebooks login', function() {
+
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
+
     it('Should be able to login with role Tem Lead', function () {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -44,15 +46,15 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 2);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');       
     })
- })
 
- describe('Sourcebooks login', function() {
-    it('Should display validation for empty user after attempted loggin', function () {
+
+     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
+
     it('Should be able to login with role Manager', function () {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -68,15 +70,15 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 5);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');       
     })
- })
 
- describe('Sourcebooks login', function() {
-    it('Should display validation for empty user after attempted loggin', function () {
+
+     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
+
     it('Should be able to login with role Accountant', function () {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -92,15 +94,15 @@ describe('Sourcebooks login', function() {
         cy.get('.main-nav').find('li').should('have.length', 5);
         cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');       
     })
- })
+    
 
- describe('Sourcebooks login', function() {
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
+
     it('Should be able to login with role Admin', function () {
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
