@@ -24,9 +24,9 @@ describe('Sourcebooks login', function() {
     timeLoggingPage.getPageTitle().contains('Timesheets');
     timeLoggingPage.getCalendar().should('be.visible');
     timeLoggingPage.getTileForm().should('be.visible');
-    timeLoggingPage.getUserInfoTitle().contains('Demo User');
+    timeLoggingPage.getUserName().contains('Demo User');
     timeLoggingPage
-      .getMainNav()
+      .getNavigationBar()
       .find('li')
       .should('have.length', 1);
   });
@@ -58,13 +58,13 @@ describe('Sourcebooks login', function() {
       timeLoggingPage.getUrl().should('include', '/time-logging');
       timeLoggingPage.getPageTitle().contains('Timesheets');
       timeLoggingPage.getCalendar().should('be.visible');
-      timeLoggingPage.getUserInfoTitle().contains('Mindaugas Maceika');
+      timeLoggingPage.getUserName().contains('Mindaugas Maceika');
       timeLoggingPage
-        .getMainNav()
+        .getNavigationBar()
         .find('li')
         .should('have.length', tabs[i]);
       timeLoggingPage
-        .getMainNavActiveLink()
+        .getActiveTab()
         .should('have.css', 'color')
         .and('eq', 'rgb(64, 76, 237)');
     });

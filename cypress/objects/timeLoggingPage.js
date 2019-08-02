@@ -19,11 +19,11 @@ class TimeLoggingPage {
     return cy.get('.tile.form');
   }
 
-  getUserInfoTitle() {
+  getUserName() {
     return cy.get('.user-info__title');
   }
 
-  getMainNav() {
+  getNavigationBar() {
     return cy.get('.main-nav');
   }
 
@@ -31,7 +31,7 @@ class TimeLoggingPage {
     return cy.get('.calendar--today.calendar--selected');
   }
 
-  getMainNavActiveLink() {
+  getActiveTab() {
     return cy.get('.main-nav__link--active');
   }
 }
