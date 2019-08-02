@@ -46,6 +46,10 @@ class LoginPage {
     getElementCountOfNavigationBar(length) {
         return cy.get('.main-nav').find('li').should('have.length', length);
     }
+
+    getCalendarTodaysDate() {
+        return cy.get('.calendar--selected').find('span').contains(new Date().getDate())
+    }
 }
 
 export default LoginPage
