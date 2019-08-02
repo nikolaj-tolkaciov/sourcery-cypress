@@ -6,6 +6,7 @@ import TaskCreatePage from '../obj/tasks/taskCreatePage';
 import TasksEditPage from '../obj/tasks/taskEditPage';
 import TaskEditPage from '../obj/tasks/taskEditPage';
 import TimeLoggingPage from '../obj/timeLogging/timeLoggingPage';
+import Common from '../obj/common';
 
 const loginPage = new LoginPage();
 const clientsPage = new ClientsPage();
@@ -14,6 +15,7 @@ const tasksPage = new TasksPage();
 const taskCreatePage = new TaskCreatePage();
 const taskEditPage = new TaskEditPage();
 const timeLoggingPage = new TimeLoggingPage();
+const common = new Common();
     
 var roles = [
     { name: 'User', 'tabCount': 1 }, 
@@ -94,14 +96,14 @@ describe('Sourcebooks testLogIn', function() {
             testLogIn(roles[i].name);
 
             timeLoggingPage.checkUrl();
-            timeLoggingPage.getPageTitle().contains('Timesheets')
+            common.getPageTitle().contains('Timesheets')
             timeLoggingPage.getCalendar().should('be.visible')
             timeLoggingPage.getFormTile().should('be.visible')
-            timeLoggingPage.getUserNameTitle().contains('Marius Lastauskas');
-            timeLoggingPage.getNavTabs().should('have.length', roles[i].tabCount);
+            common.getUserNameTitle().contains('Marius Lastauskas');
+            common.getNavTabs().should('have.length', roles[i].tabCount);
             
-            timeLoggingPage.getActiveTab().contains('Time Logging');
-            timeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)');
+            common.getActiveTab().contains('Time Logging');
+            common.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)');
         })
     }
 })
