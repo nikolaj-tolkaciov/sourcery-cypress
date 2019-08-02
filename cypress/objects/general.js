@@ -1,6 +1,7 @@
 class General {
-    urlShouldInclude(text) {
-        cy.url().should('include', text);
+    
+    getUrl() {
+        return cy.url();
     }
 
     getLoggedUserName() {
@@ -23,8 +24,23 @@ class General {
         return cy.get('[class="user-button"]');
     }
 
+    getSubmitButton() {
+        return cy.get('[type="submit"]');
+    }
+
     getLogoutButton() {
         return cy.get('[id="logout-button"]');
+    }
+    getRegularButton() {
+        return cy.get('[class="btn"]');
+    }
+
+    getTasksFromMenu() {
+        return cy.get('[href="/tasks"]');
+    }
+
+    getSpecificValueFromDropDown(itemName) {
+        return cy.get(`[aria-label="${itemName}"]`);
     }
 }
 

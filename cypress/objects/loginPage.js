@@ -7,10 +7,6 @@ class LoginPage {
         return cy.get('.Select.not-valid');
     }
 
-    getSubmitButton() {
-        return cy.get('[type="submit"]')
-    }
-
     getSpecificValueFromDropDown(userName) {
         return cy.get(`[aria-label="${userName}"]`);
     }
