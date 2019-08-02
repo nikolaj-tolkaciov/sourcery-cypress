@@ -11,7 +11,7 @@ class TasksPage extends PageComponents{
 
     assertTaskExists(task){
         this.getFirstSearchField().type(task.name + '{enter}')
-        this.getElementByClass("ag-cell ag-cell-not-inline-editing ag-cell-no-focus ag-cell-value").contains(task.description)
+        cy.get(`[title="${task.description}"]`)
     }
 }
 export default TasksPage

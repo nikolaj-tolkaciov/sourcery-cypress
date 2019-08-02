@@ -11,7 +11,7 @@ class ClientsPage extends PageComponents{
 
     assertClientCreated(organization){
         this.getFirstSearchField().type(organization + '{enter}')
-        cy.get('[class="ag-cell ag-cell-not-inline-editing ag-cell-no-focus ag-cell-value"]').contains('LastName, FirstName')
+        cy.get('[title="LastName, FirstName"]')
     }
 }
 
