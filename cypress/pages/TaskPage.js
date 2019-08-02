@@ -15,7 +15,9 @@ export default {
 
     getSubmitButton: () => cy.get('[type="submit"]'),
 
-    getNameFilter: () => cy.get('.field__text.field__text--small').first(),
+    getNameFilter: () => cy.get('.field--filter').get('input').first(),
+
+    getDescriptionFilter: () => cy.get('.field--filter').get('input').last(),
 
     getTaskList: () => cy.get('.ag-body-container > div'),
 }

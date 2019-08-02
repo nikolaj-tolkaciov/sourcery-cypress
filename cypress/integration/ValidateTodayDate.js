@@ -1,6 +1,5 @@
-import TimeLoggingPage from '../helpers/TimeLoggingPage'
+import TimeLoggingPage from '../pages/TimeLoggingPage'
 
-// T-1
 describe('Today date validation', () => {
 
     it('today\'s date should be indicated in the calendar', () => {

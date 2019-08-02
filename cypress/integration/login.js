@@ -1,8 +1,7 @@
-import LoginPage from '../helpers/LoginPage'
-import TimeLoggingPage from '../helpers/TimeLoggingPage'
+import LoginPage from '../pages/LoginPage'
+import TimeLoggingPage from '../pages/TimeLoggingPage'
 import { ROLES, current_user } from '../helpers/constants'
 
-// T-2
 describe('Sourcebooks login', function () {
 
     it('Should display validation for empty user after attempted loggin', () => {
