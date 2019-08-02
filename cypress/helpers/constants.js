@@ -6,5 +6,31 @@ export const USER_ROLES_MAP = {
     "Admin": "role=admins"
 }
 
-export const ROLES = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin']
-export const tabCount = [1, 2, 5, 5, 6]
+export const ROLES = [
+    {
+        name: 'User',
+        tabs: 1,
+    },
+    {
+        name: 'Team Lead',
+        tabs: 2,
+    },
+    {
+        name: 'Manager',
+        tabs: 5,
+    },
+    {
+        name: 'Accountant',
+        tabs: 5,
+    },
+    {
+        name: 'Admin',
+        tabs: 6,
+    },
+]
+
+export const current_user = {
+    firstName: 'Modestas',
+    lastName: 'Gujis',
+    id: 30,
+}

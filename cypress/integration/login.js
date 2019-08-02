@@ -1,6 +1,6 @@
 import LoginPage from '../helpers/LoginPage'
 import TimeLoggingPage from '../helpers/TimeLoggingPage'
-import { ROLES, tabCount } from '../helpers/constants'
+import { ROLES, current_user } from '../helpers/constants'
 
 // T-2
 describe('Sourcebooks login', function () {
@@ -12,16 +12,15 @@ describe('Sourcebooks login', function () {
         LoginPage.getValidationIndicator().should('be.visible')
     })
 
-    const userName = 'Modestas Gujis'
-
-    ROLES.forEach((role, idx) => {
-        it('Should be able to login with role "' + role + '"', () => {
+    const fullUserName = current_user.firstName + ' ' + current_user.lastName
+    ROLES.forEach((role) => {
+        it('Should be able to login with role "' + role.name + '"', () => {
 
             LoginPage.visit()
             LoginPage.getUserDropDown().click({ force: true })
-            LoginPage.getUserOption(userName).click()
+            LoginPage.getUserOption(fullUserName).click()
             LoginPage.getRoleDropDown().click({ force: true })
-            LoginPage.getRoleOption(role).click()
+            LoginPage.getRoleOption(role.name).click()
             LoginPage.getSubmitButton().click()
 
             cy.url().should('include', '/time-logging');
@@ -34,8 +33,8 @@ describe('Sourcebooks login', function () {
             activeTab.should('have.length', 1)
             activeTab.should('contain', 'Time Logging')
 
-            TimeLoggingPage.getUserName().should('contain', 'Modestas Gujis')
-            TimeLoggingPage.getTabs().should('have.length', tabCount[idx])
+            TimeLoggingPage.getUserName().should('contain', fullUserName)
+            TimeLoggingPage.getTabs().should('have.length', role.tabs)
 
             TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
