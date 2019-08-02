@@ -1,6 +1,6 @@
-import ProjectPage from '../helpers/ProjectPage'
+import ProjectPage from '../pages/ProjectPage'
 import { current_user as curr_user, getRandomName } from '../helpers/constants'
-// T-5
+
 describe('Project creation', () => {
 
     it('admin should be able to add new project', () => {
@@ -27,7 +27,9 @@ describe('Project creation', () => {
 
         ProjectPage.getSubmitButton().click()
 
+        ProjectPage.should('contain', 'Project Saved.')
         cy.url().should('not.contain', '/create')
+        
     })
 
 })

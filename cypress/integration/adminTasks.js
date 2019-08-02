@@ -1,6 +1,6 @@
-import TaskPage from '../helpers/TaskPage'
+import TaskPage from '../pages/TaskPage'
 import { getRandomName } from '../helpers/constants'
-// T-3
+
 describe('Task creation', () => {
 
     it('admin should be able to add new tasks', () => {
@@ -11,8 +11,9 @@ describe('Task creation', () => {
         cy.url().should('include', '/tasks/create');
         
         const taskName = getRandomName()
+        const description = getRandomName()
         TaskPage.getTaskNameInput().type(taskName)
-        TaskPage.getDescriptionInput().type(getRandomName())
+        TaskPage.getDescriptionInput().type(description)
 
         const billToClient = TaskPage.getBillToClient()
         billToClient.should('have.length', 1)
@@ -28,11 +29,9 @@ describe('Task creation', () => {
 
         TaskPage.visit()
         TaskPage.getNameFilter().type(taskName)
-        TaskPage.getTaskList().should('not.have.length', 0)
+        TaskPage.getDescriptionFilter().type(description)
+        TaskPage.getTaskList().should('have.length', 1)
         
-        // don't know how to find exact matches
-        // so it only checks if list is not empty
-        // because it returns all tasks that contain our task name
     })
 
 })
