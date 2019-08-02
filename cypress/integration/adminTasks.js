@@ -1,4 +1,4 @@
-import TaskPage from '../pages/TaskPage'
+import TaskPage from '../pages/taskPage'
 import { getRandomName } from '../helpers/constants'
 
 describe('Task creation', () => {
@@ -23,7 +23,7 @@ describe('Task creation', () => {
         TaskPage.getHourlyRate().type(Math.random() * 15)
 
         TaskPage.getSubmitButton().click()
-        
+
         cy.url().should('include', '/tasks')
         cy.url().should('not.include', '/create')
 

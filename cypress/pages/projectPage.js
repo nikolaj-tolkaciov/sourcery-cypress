@@ -8,7 +8,7 @@ export default {
     getClientDropDown: () => cy.get('[id="projectDetailsForm.client"]'),
 
     getClientOption: (client) => cy.get(`[aria-label="${client}"]`),
-    
+
     getProjectManagerDropDown: () => cy.get('[id="projectDetailsForm.projectManager"]'),
 
     getProjectManagerOption: (firstName, lastName) => cy.get('.Select-menu-outer').contains(firstName).contains(lastName),

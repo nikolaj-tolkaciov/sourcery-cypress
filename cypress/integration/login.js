@@ -1,5 +1,5 @@
-import LoginPage from '../pages/LoginPage'
-import TimeLoggingPage from '../pages/TimeLoggingPage'
+import LoginPage from '../pages/loginPage'
+import TimeLoggingPage from '../pages/timeLoggingPage'
 import { ROLES, current_user } from '../helpers/constants'
 
 describe('Sourcebooks login', function () {
@@ -27,15 +27,14 @@ describe('Sourcebooks login', function () {
             TimeLoggingPage.getCalendar().should('be.visible')
             TimeLoggingPage.getTileForm().should('be.visible')
 
-            const activeTab = TimeLoggingPage.getActiveTab()
-            
-            activeTab.should('have.length', 1)
-            activeTab.should('contain', 'Time Logging')
+            TimeLoggingPage.getActiveTab().should('have.length', 1)
+                .and('contain', 'Time Logging')
+                .and('have.css', 'color', 'rgb(64, 76, 237)')
 
             TimeLoggingPage.getUserName().should('contain', fullUserName)
             TimeLoggingPage.getTabs().should('have.length', role.tabs)
 
-            TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     })
+
 })

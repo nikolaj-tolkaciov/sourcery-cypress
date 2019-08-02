@@ -13,5 +13,5 @@ export default {
 
     getTabs: () => cy.get('.main-nav').find('li'),
 
-    getCurrDay: () => cy.get('.calendar--today > span')
+    getCurrDay: () => cy.get('.calendar--today').find('span'),
 }
