@@ -2,7 +2,7 @@ describe('Sourcebooks login', function() {
 
     it('Admin should create a new task', function () {
 
-        const taskName = Math.ceil((Math.random())*10000);
+        const taskName = 'task ' + Date.now();
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
