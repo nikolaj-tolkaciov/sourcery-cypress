@@ -1,9 +1,7 @@
 import LoginPage from '../objects/loginPage';
-import TimeLoggingPage from '../objects/timeLoggingPage';
 import Common from '../objects/common';
 
 const loginPage = new LoginPage();
-const timeLoggingPage = new TimeLoggingPage();
 const common = new Common();
 
 describe('Sourcebooks login', function() {
@@ -19,33 +17,33 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with role Team Lead', function () {
 
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("Team Lead").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
         cy.wait(2000); // for reason js sometimes doesn't load my client
-        timeLoggingPage.visit();
+        common.visit();
         // loginPage.getSpecificUrl('/time-logging');
         common.getPageTitle().contains('Timesheets');
-        timeLoggingPage.getCalendar().should('be.visible');
+        common.getCalendar().should('be.visible');
         common.getPageTitle().should('be.visible');
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);
     })
 
     it('Should validate what date is selected as “Today” on Time Logging page', function () {
-        timeLoggingPage.getCalendarTodaysDate();
+        common.getCalendarTodaysDate();
     })
 
     it('Should verify all user roles can log in and should see appropriate tabs - USER', function () {
     
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("User").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("User").click();
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(1);
@@ -55,10 +53,10 @@ describe('Sourcebooks login', function() {
     it('Should verify all user roles can log in and should see appropriate tabs - TEAM LEAD', function () {
     
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("Team Lead").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);
@@ -68,10 +66,10 @@ describe('Sourcebooks login', function() {
     it('Should verify all user roles can log in and should see appropriate tabs - MANAGER', function () {
     
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("Manager").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Manager").click();
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(5);
@@ -81,10 +79,10 @@ describe('Sourcebooks login', function() {
     it('Should verify all user roles can log in and should see appropriate tabs - ACCOUNTANT', function () {
     
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("Accountant").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Accountant").click();
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(5);
@@ -94,10 +92,10 @@ describe('Sourcebooks login', function() {
     it('Should verify all user roles can log in and should see appropriate tabs - ADMIN', function () {
     
         loginPage.visit();
-        loginPage.getUserDropDown().click({force:true});
-        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
-        loginPage.getRoleDropDown().click({force:true});
-        loginPage.getSpecificRoleFromDropDown("Admin").click();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Admin").click();
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(6);
