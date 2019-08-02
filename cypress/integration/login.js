@@ -1,27 +1,32 @@
+import LoginPage from '../objects/LoginPage';
+import TimeLoggin from '../objects/TimeLoggin';
+const timeLoggin = new TimeLoggin();
+const loginPage = new LoginPage();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Demo User").click();
+        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getSpecificUserRoleFromDropDown("User").click();
+        loginPage.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        timeLoggin.urlIncludeTimeLogging().should('include', '/time-logging');
+        timeLoggin.getPageTitle().contains('Timesheets')
+        timeLoggin.getCalendar().should('be.visible')
+        timeLoggin.getTimeTile().should('be.visible')
+        timeLoggin.getUserInfoFromTitle().contains('Demo User');
+        timeLoggin.getMainNavWithSpecificLength().should('have.length', 1);
     })
 })
