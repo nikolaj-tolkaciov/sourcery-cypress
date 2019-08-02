@@ -1,5 +1,5 @@
-import LoginPage from '../helpers/loginPage'
-import TimeLoggingPage from '../helpers/timeLoggingPage'
+import LoginPage from '../pages/loginPage'
+import TimeLoggingPage from '../pages/timeLoggingPage'
 import { ROLES, current_user } from '../helpers/constants'
 
 describe('Sourcebooks login', function () {

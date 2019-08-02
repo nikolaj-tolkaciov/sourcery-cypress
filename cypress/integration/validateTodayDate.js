@@ -1,4 +1,4 @@
-import TimeLoggingPage from '../helpers/timeLoggingPage'
+import TimeLoggingPage from '../pages/timeLoggingPage'
 
 describe('Today date validation', () => {
 

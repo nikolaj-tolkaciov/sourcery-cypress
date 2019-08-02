@@ -1,4 +1,4 @@
-import ClientsPage from '../helpers/clientsPage'
+import ClientsPage from '../pages/clientsPage'
 import { getRandomName } from '../helpers/constants'
 
 describe('Client creation', () => {
