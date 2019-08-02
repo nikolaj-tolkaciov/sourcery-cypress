@@ -8,7 +8,7 @@ class TaskCreatePage {
     }
 
     getBillableDropdown() {
-        return cy.get('label').contains('Bill to Client').next();
+        return cy.get('[class="Select has-value is-searchable Select--single"]');
     }
 
     getBillableFromDropdown(billable) {

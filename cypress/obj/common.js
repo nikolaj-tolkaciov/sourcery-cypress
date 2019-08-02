@@ -1,4 +1,9 @@
 class Common {
+    makeId() {
+        let timeStamp = new Date().getTime();
+        return 'Random_Name_' + timeStamp;
+    }
+    
     getPageTitle() {
         return cy.get('.page__title');
     }
