@@ -19,7 +19,7 @@ class LoginPage {
         return  cy.get('[id="loginForm.role"]')
     }
 
-    getUserRole(role) {
+    getSpecificrRoleFromDropDown(role) {
         return cy.get(`[aria-label="${role}"]`)
     }
 

@@ -4,6 +4,9 @@ const loginPage = new LoginPage()
 import TimeLogging from '../objects/timeLogging';
 const timeLogging = new TimeLogging();
 
+import PageComponents from '../objects/pageComponents';
+const pageComponents = new PageComponents();
+
 describe('Sourcebooks login', function() {
 
     let roles = [
@@ -36,17 +39,17 @@ describe('Sourcebooks login', function() {
         loginPage.getLoginFieldUser().click({force:true});
         loginPage.getSpecificUserFromDropDown("Aistė Laugalytė").click();
         loginPage.getLoginFieldRole().click({force:true});
-        loginPage.getUserRole(`${element.name}`).click();
-        loginPage.getSubmitButton().click();
+        loginPage.getSpecificrRoleFromDropDown(`${element.name}`).click();
+        pageComponents.getSubmitButton().click();
 
-        timeLogging.getUrl().should('include', '/time-logging');
+        pageComponents.getUrl().should('include', '/time-logging');
         timeLogging.getPageTitle().contains('Timesheets')
         timeLogging.getCalendar().should('be.visible')
-        timeLogging.getTitleForm().should('be.visible')
-        timeLogging.getUserInfoTitles().contains('Aiste Laugalyte');
-        timeLogging.getTabsCount().should('have.length', element.tabs);
+        timeLogging.getTileForm().should('be.visible')
+        pageComponents.getUserName().contains('Aiste Laugalyte');
+        pageComponents.getTabsCount().should('have.length', element.tabs);
         timeLogging.assertTodayDate()
-        timeLogging.getTheColor()
+        pageComponents.getActiveTabColor()
         })
     })
 })
