@@ -1,9 +1,6 @@
 import LoginPage from '../objects/loginPage';
 const loginPage = new LoginPage();
 
-import TaskPage from '../objects/taskPage';
-const taskPage = new TaskPage();
-
 import Common from '../objects/common';
 const common = new Common();
 
