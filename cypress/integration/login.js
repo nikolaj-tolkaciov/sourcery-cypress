@@ -1,13 +1,13 @@
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
-
+        
         cy.visit('/');
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click();
         cy.get('.Select.not-valid').should('be.visible')
     })
-  
+ 
     const Roles =
     [
         {
@@ -31,7 +31,7 @@ describe('Sourcebooks login', function() {
             tabs: '6'
         }
     ];
-      
+       
     Roles.forEach((role) => {
         it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
             cy.visit('/');
@@ -45,4 +45,6 @@ describe('Sourcebooks login', function() {
             cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
         })
     })  
+ 
 })
+
