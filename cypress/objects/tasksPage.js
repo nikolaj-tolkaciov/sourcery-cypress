@@ -10,7 +10,7 @@ class TasksPage extends PageComponents{
     }
 
     assertTaskExists(task){
-        cy.get('[class="field__text field__text--small"]').eq(0).type(task.name + '{enter}')
+        this.getFirstSearchField().type(task.name + '{enter}')
         this.getElementByClass("ag-cell ag-cell-not-inline-editing ag-cell-no-focus ag-cell-value").contains(task.description)
     }
 }
