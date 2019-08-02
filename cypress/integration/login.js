@@ -1,40 +1,72 @@
+import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
+
+const loginPage = new LoginPage();
+const timeLoggingPage = new TimeLoggingPage();
+
 describe('Sourcebooks login', function() {
   it('Should display validation for empty user after attempted loggin', function() {
-    cy.visit('/');
-    cy.get('.Select.not-valid').should('not.visible');
-    cy.get('[type="submit"]').click();
-    cy.get('.Select.not-valid').should('be.visible');
+    loginPage.visit();
+    loginPage.getUserValidationIndicator().should('not.visible');
+    loginPage.getSubmitButton().click();
+    loginPage.getUserValidationIndicator().should('be.visible');
   });
 
   it('Should be able to login with role User', function() {
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({ force: true });
-    cy.get('[aria-label="Demo User"]').click();
-    cy.get('[id="loginForm.role"]').click({ force: true });
-    // cy.get('[aria-label="User"]').click();
-    cy.get('[aria-label="Team Lead"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit();
+    loginPage.getUserId().click({ force: true });
+    loginPage.getSpecificUserFromDropDown('Demo User').click();
+    loginPage.getUserRole().click({ force: true });
+    loginPage.getSpecificRoleFromDropDown('User').click();
+    loginPage.getSubmitButton().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets');
-    cy.get('.calendar').should('be.visible');
-    cy.get('.tile.form').should('be.visible');
-    cy.get('.user-info__title').contains('Demo User');
-    cy.get('.main-nav')
+    timeLoggingPage.getUrl().should('include', '/time-logging');
+    timeLoggingPage.getPageTitle().contains('Timesheets');
+    timeLoggingPage.getCalendar().should('be.visible');
+    timeLoggingPage.getTileForm().should('be.visible');
+    timeLoggingPage.getUserName().contains('Demo User');
+    timeLoggingPage
+      .getNavigationBar()
       .find('li')
       .should('have.length', 1);
   });
 
   it('Should validate what date is selected as “Today” on Time Logging page', function() {
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({ force: true });
-    cy.get('[aria-label="Demo User"]').click();
-    cy.get('[id="loginForm.role"]').click({ force: true });
-    cy.get('[aria-label="Team Lead"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit();
+    loginPage.getUserId().click({ force: true });
+    loginPage.getSpecificUserFromDropDown('Demo User').click();
+    loginPage.getUserRole().click({ force: true });
+    loginPage.getSpecificRoleFromDropDown('User').click();
+    loginPage.getSubmitButton().click();
 
-    cy.visit('/time-logging');
-    let date = new Date();
-    cy.get('.calendar--today.calendar--selected').contains(date.getDate());
+    timeLoggingPage.visit();
+    timeLoggingPage.getSelectedDateToday().contains(new Date().getDate());
+  });
+
+  const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
+  const tabs = [1, 2, 5, 5, 6];
+
+  roles.forEach(function(item, i) {
+    it(`Verify role ${item}, if it can log in and see appropriate tabs`, function() {
+      loginPage.visit();
+      loginPage.getUserId().click({ force: true });
+      loginPage.getSpecificUserFromDropDown('Mindaugas Maceika').click();
+      loginPage.getUserRole().click({ force: true });
+      loginPage.getSpecificRoleFromDropDown(item).click();
+      loginPage.getSubmitButton().click();
+
+      timeLoggingPage.getUrl().should('include', '/time-logging');
+      timeLoggingPage.getPageTitle().contains('Timesheets');
+      timeLoggingPage.getCalendar().should('be.visible');
+      timeLoggingPage.getUserName().contains('Mindaugas Maceika');
+      timeLoggingPage
+        .getNavigationBar()
+        .find('li')
+        .should('have.length', tabs[i]);
+      timeLoggingPage
+        .getActiveTab()
+        .should('have.css', 'color')
+        .and('eq', 'rgb(64, 76, 237)');
+    });
   });
 });
