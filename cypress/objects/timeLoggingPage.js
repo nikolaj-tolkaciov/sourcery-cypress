@@ -1,5 +1,4 @@
 class TimeLoggingPage {
-    
     visit() {
         cy.visit('/time-logging'); 
     }
@@ -10,14 +9,6 @@ class TimeLoggingPage {
 
     getCalendarTodaysDate() {
         return cy.get('.calendar--selected').find('span').contains(new Date().getDate())
-    }
-
-    getPageTitle() {
-        return cy.get('.page__title')
-    }
-    
-    getUserTitle() {
-        return cy.get('.user-info__title')
     }
 }
 

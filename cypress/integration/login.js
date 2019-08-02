@@ -1,8 +1,10 @@
 import LoginPage from '../objects/loginPage';
-import TimeLoggingPage from '../objects/timeLoggingPage'
+import TimeLoggingPage from '../objects/timeLoggingPage';
+import Common from '../objects/common';
 
 const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
+const common = new Common();
 
 describe('Sourcebooks login', function() {
 
@@ -26,15 +28,80 @@ describe('Sourcebooks login', function() {
         cy.wait(2000); // for reason js sometimes doesn't load my client
         timeLoggingPage.visit();
         // loginPage.getSpecificUrl('/time-logging');
-        timeLoggingPage.getPageTitle().contains('Timesheets');
+        common.getPageTitle().contains('Timesheets');
         timeLoggingPage.getCalendar().should('be.visible');
-        timeLoggingPage.getPageTitle().should('be.visible');
-        timeLoggingPage.getUserTitle().contains('Ieva Stonkaite');
+        common.getPageTitle().should('be.visible');
+        common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);
     })
 
     it('Should validate what date is selected as “Today” on Time Logging page', function () {
         timeLoggingPage.getCalendarTodaysDate();
+    })
+
+    it('Should verify all user roles can log in and should see appropriate tabs - USER', function () {
+    
+        loginPage.visit();
+        loginPage.getUserDropDown().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        loginPage.getRoleDropDown().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("User").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(1);
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');      
+    })
+    
+    it('Should verify all user roles can log in and should see appropriate tabs - TEAM LEAD', function () {
+    
+        loginPage.visit();
+        loginPage.getUserDropDown().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        loginPage.getRoleDropDown().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(2);
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');          
+    })
+    
+    it('Should verify all user roles can log in and should see appropriate tabs - MANAGER', function () {
+    
+        loginPage.visit();
+        loginPage.getUserDropDown().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        loginPage.getRoleDropDown().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Manager").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(5);
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');    
+    })
+    
+    it('Should verify all user roles can log in and should see appropriate tabs - ACCOUNTANT', function () {
+    
+        loginPage.visit();
+        loginPage.getUserDropDown().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        loginPage.getRoleDropDown().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Accountant").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(5);
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
+    })
+    
+    it('Should verify all user roles can log in and should see appropriate tabs - ADMIN', function () {
+    
+        loginPage.visit();
+        loginPage.getUserDropDown().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        loginPage.getRoleDropDown().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Admin").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(6);
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
     })
     
 })
