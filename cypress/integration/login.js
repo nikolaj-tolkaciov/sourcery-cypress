@@ -8,8 +8,6 @@ describe('Sourcebooks login', function () {
 
     var today = new Date();
     const userName = 'Modestas Kmieliauskas';
-    const urlTimeLogging = '/time-logging';
-    const pageTitle = 'Timesheets';
     const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
     const Tabs = ['1', '2', '5', '5', '6'];
     const activeTabColor = 'rgb(64, 76, 237)';
@@ -33,8 +31,7 @@ describe('Sourcebooks login', function () {
                 loginPage.getRoleOption(roles[i]).click();
                 loginPage.getSubmitButton().click();
 
-
-                timeLoggingPage.assertUrl(urlTimeLogging);
+                timeLoggingPage.assertUrl();
                 timeLoggingPage.getPageTitle().contains('Timesheets');
                 timeLoggingPage.getCalendarSelector().should('be.visible');
                 timeLoggingPage.getTileForm().should('be.visible');
