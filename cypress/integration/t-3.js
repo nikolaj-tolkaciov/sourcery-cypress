@@ -10,7 +10,6 @@ describe('Create task', function() {
 
     beforeEach(function(){
         cy.loginAs("Admin")
-        cy.visit('/')
     })
 
     it('Should be able to create new task with role admin', function () {
