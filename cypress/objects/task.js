@@ -7,7 +7,7 @@ class task {
         return cy.get('[type="button"]');
     }
 
-    getTaskName() {
+    getRandomTaskName() {
         return 'Task' + String(Math.random()*10000);
     }
 
@@ -36,11 +36,11 @@ class task {
     }
 
     getTaskNameFieldForFiltering() {
-        return cy.get('[class = "field--filter"]').first().find('input');
+        return cy.get('.field--filter').first().find('input');;
     }
 
     getViewPortWrapper() {
-       return cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport')
+       return cy.get('.ag-body-viewport-wrapper').find('.ag-body-viewport')
     }
 }
 

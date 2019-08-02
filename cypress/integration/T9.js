@@ -4,8 +4,8 @@ var login = new LoginPage();
 var task = new Task();
 
 
-describe('Sourcebooks testLogin', function(){
-    it('T1: TestLogin with Today date', function() {
+describe('Sourcebooks testLogin with Team Lead role', function(){
+    it('TestLogin and checks today day', function() {
         login.visit();
         login.userDropDown().click({force:true});
         login.getUser("Dainius Gaidamavičius").click();
@@ -22,7 +22,7 @@ describe('Sourcebooks testLogin', function(){
     })
 })
 
-describe('Sorcebooks verify all user roles', function() {
+describe('Sourcebooks Test login with all user roles', function() {
     let Roles = [
         {
             "name": "User",
