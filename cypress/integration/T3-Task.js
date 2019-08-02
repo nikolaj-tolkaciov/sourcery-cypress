@@ -1,3 +1,8 @@
+import LoginPage from  '../objects/loginPage';
+import Task from '../objects/task';
+var login = new LoginPage();
+var task = new Task();
+
 describe('Sourcebooks creates task', function() {
       it('T-3: Admin creates new task', function () {
         task.visitTasks();
@@ -7,7 +12,7 @@ describe('Sourcebooks creates task', function() {
         login.getRoleOption("Admin").click();
         login.getSubmitButton().click();
         task.getCreateTaskButton().click();
-        let taskName = task.getTaskName();
+        let taskName = task.getRandomTaskName();
         task.getTaskNameForm().type(taskName);
         task.getTaskDescriptionForm().type('TASK11');
         task.getTaskBillDrop().next().click();
@@ -15,7 +20,7 @@ describe('Sourcebooks creates task', function() {
         task.getTaskRateForm().clear();
         task.getTaskRateForm().type(Math.random() * 5);
         task.getTaskSubmitButton().click();
-        login.getURL().should('not.contain', 'create');
+        cy.url().should('not.contain', 'create');
         task.visitTasks()
         task.getTaskNameFieldForFiltering().type(taskName);
         task.getViewPortWrapper().should('have.length', 1);
