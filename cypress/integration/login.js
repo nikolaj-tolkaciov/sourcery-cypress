@@ -1,42 +1,47 @@
+import LoginPage from '../objects/loginPage';
+import General from '../objects/general';
+import TimeLogging from '../objects/timeLogging';
+
+const loginPage = new LoginPage();
+const general = new General();
+const timeLogging = new TimeLogging();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.openUserDropDown().click({force:true});
+        loginPage.getSpecificValueFromDropDown("Demo User").click();
+        loginPage.openRoleDropDown().click({force:true});
+        loginPage.getSpecificValueFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 2);
+        general.urlShouldInclude('/time-logging');
+        general.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getTileForm().should('be.visible');
+        general.getLoggedUserName().contains('Demo User');
+        general.getMainMenuItems().should('have.length', 2);
     })
     
     it('Validate today\'s date', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Kamilė Stugytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-
-        const today = new Date();
-        const date = today.getDate();
-        cy.get('.calendar--today').find('.calendar__date').contains(date);
+        loginPage.visit();
+        loginPage.openUserDropDown().click({force:true});
+        loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
+        loginPage.openRoleDropDown().click({force:true});
+        loginPage.getSpecificValueFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
+        timeLogging.getTodaysDate().contains(new Date().getDate());
     })
 
     it('Verify all user roles can log in and should see appropriate tabs', function () {
@@ -45,41 +50,41 @@ describe('Sourcebooks login', function() {
 
         function testFunction(currentRole) {
             
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});
-            cy.get('[aria-label="Kamilė Stugytė"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get('[aria-label=\"' + currentRole + '\"]').click();
-            cy.get('[type="submit"]').click();
+            loginPage.visit();
+            loginPage.openUserDropDown().click({force:true});
+            loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
+            loginPage.openRoleDropDown().click({force:true});
+            loginPage.getSpecificValueFromDropDown(currentRole).click();
+            loginPage.getSubmitButton().click();
 
             //checks if correct user name is displayed
-            cy.get('.user-info__title').contains('Kamile Stugyte');
+            general.getLoggedUserName().contains('Kamile Stugyte');
 
             //checks if correct number of tabs is displayed in menu list
             switch(currentRole) {
                 case 'User' :
-                    cy.get('.main-nav').find('li').should('have.length', 1);
+                    general.getMainMenuItems().should('have.length', 1);
                     break;
                 case 'Team Lead' :
-                    cy.get('.main-nav').find('li').should('have.length', 2);
+                    general.getMainMenuItems().should('have.length', 2);
                     break;
                 case 'Manager' :
-                    cy.get('.main-nav').find('li').should('have.length', 5);
+                    general.getMainMenuItems().should('have.length', 5);
                     break;
                 case 'Accountant' :
-                    cy.get('.main-nav').find('li').should('have.length', 5);
+                    general.getMainMenuItems().should('have.length', 5);
                     break;
                 case 'Admin' :
-                    cy.get('.main-nav').find('li').should('have.length', 6);
+                    general.getMainMenuItems().should('have.length', 6);
                     break;
             }
 
             //checks if Time logging item is selected
-            cy.get('.main-nav__link--active').contains('Time Logging');
+            general.getSelectedMenuItem().contains('Time Logging');
             //checks if it's marked in blue
-            cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
-            cy.get('[class="user-button"]').click();
-            cy.get('[id="logout-button"]').click();
+            general.getSelectedMenuItem().should('have.css', 'color', 'rgb(64, 76, 237)');
+            general.getUserButton().click();
+            general.getLogoutButton().click();
         }
 
         rolesArray.forEach(testFunction);        
