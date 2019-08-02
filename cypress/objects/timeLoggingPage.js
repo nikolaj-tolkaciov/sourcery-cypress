@@ -1,8 +1,4 @@
 class TimeLoggingPage {
-  visit() {
-    cy.visit('/time-logging');
-  }
-
   getUrl() {
     return cy.url();
   }
