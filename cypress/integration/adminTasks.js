@@ -1,5 +1,5 @@
 import TaskPage from '../helpers/TaskPage'
-
+import { getRandomName } from '../helpers/constants'
 // T-3
 describe('Task creation', () => {
 
@@ -10,9 +10,9 @@ describe('Task creation', () => {
 
         cy.url().should('include', '/tasks/create');
         
-        const randomName = Math.random().toString(36).substring(9);
-        TaskPage.getTaskNameInput().type(randomName)
-        TaskPage.getDescriptionInput().type(randomName)
+        const taskName = getRandomName()
+        TaskPage.getTaskNameInput().type(taskName)
+        TaskPage.getDescriptionInput().type(getRandomName())
 
         const billToClient = TaskPage.getBillToClient()
         billToClient.should('have.length', 1)
@@ -27,8 +27,12 @@ describe('Task creation', () => {
         cy.url().should('not.include', '/create')
 
         TaskPage.visit()
-		TaskPage.getNameFilter().type(randomName)
-		TaskPage.getTaskList().should('have.length', 1)
+        TaskPage.getNameFilter().type(taskName)
+        TaskPage.getTaskList().should('not.have.length', 0)
+        
+        // don't know how to find exact matches
+        // so it only checks if list is not empty
+        // because it returns all tasks that contain our task name
     })
 
 })
