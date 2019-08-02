@@ -6,7 +6,7 @@ describe('Sourcebooks login', function() {
     cy.get('.Select.not-valid').should('be.visible');
   });
 
-  it('Should be able to login with role User', function() {
+  it('Should be able to login with Team Lead', function() {
     cy.visit('/');
     cy.get('[id="loginForm.userId"]').click({ force: true });
     cy.get('[aria-label="Demo User"]').click();
@@ -21,13 +21,13 @@ describe('Sourcebooks login', function() {
     cy.get('.user-info__title').contains('Demo User');
     cy.get('.main-nav')
       .find('li')
-      .should('have.length', 1);
+      .should('have.length', 2);
   });
 
   it('Should validate what date is selected as “Today” on Time Logging page', function() {
     cy.visit('/');
     cy.get('[id="loginForm.userId"]').click({ force: true });
-    cy.get('[aria-label="Demo User"]').click();
+    cy.get('[aria-label="Mindaugas Maceika"]').click();
     cy.get('[id="loginForm.role"]').click({ force: true });
     cy.get('[aria-label="Team Lead"]').click();
     cy.get('[type="submit"]').click();
