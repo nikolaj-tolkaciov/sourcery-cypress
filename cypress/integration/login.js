@@ -1,31 +1,34 @@
+import LoginPage from '../objects/loginPage';
+const loginPage = new LoginPage()
+
+import TimeLogging from '../objects/timeLogging';
+const timeLogging = new TimeLogging();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role Team Lead and check if date is todays date', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getLoginFieldUser().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Aistė Laugalytė").click();
+        loginPage.getLoginFieldRole().click({force:true});
+        loginPage.getUserRole("Team Lead").click();
+        loginPage.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-
-        let today = new Date();
-
-        cy.get('.calendar--today').find('.calendar__date').contains(today.getDate());
+        timeLogging.getUrl().should('include', '/time-logging');
+        timeLogging.getPageTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTitleForm().should('be.visible')
+        timeLogging.getUserInfoTitles().contains('Aiste Laugalyte');
+        timeLogging.getTabsCount().should('have.length', 2);
+        timeLogging.assertTodayDate()
     })
 })
