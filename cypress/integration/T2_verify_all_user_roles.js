@@ -30,7 +30,7 @@ describe('Sourcebooks login', function() {
     ];
 
     roles.forEach(function(element) {
-    it('Verify if the ${role.name} role can log in and check if "Time Logging" color is blue', function() {
+    it(`Verify if the ${element.name} role can log in and check if "Time Logging" color is blue`, function() {
         
         loginPage.visit();
         loginPage.getLoginFieldUser().click({force:true});
