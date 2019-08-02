@@ -1,94 +1,115 @@
+import LoginPage from '../objects/loginPage';
+const loginPage = new LoginPage();
+
+import TaskPage from '../objects/taskPage';
+const taskPage = new TaskPage();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Check login as Admin and if the day is today', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Admin").click();
+        loginPage.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 6);
+        loginPage.urlShouldInclude("/time-logging");
+        loginPage.getPageTitle("Timesheets");
+        loginPage.getCalendar().should('be.visible');
+        loginPage.getTileForm().should('be.visible');
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 6);
 
-        const today = new Date();
-        const day = today.getDate();
-        cy.get('.calendar__date').contains(day);
+        loginPage.getTodaysDay();
     })
 
     it('Verify "User" can log in and should see appropriate tabs', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
-        cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("User").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 1);
+        loginPage.getActiveNavLinkColor("rgb(64, 76, 237)");
+        loginPage.getActiveNavLink("/time-logging");
     })
 
     it('Verify "Team Lead" can log in and should see appropriate tabs', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
-        cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 2);
+        loginPage.getActiveNavLinkColor("rgb(64, 76, 237)");
+        loginPage.getActiveNavLink("/time-logging");
     })
 
     it('Verify "Manager" can log in and should see appropriate tabs', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Manager"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
-        cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Manager").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 5);
+        loginPage.getActiveNavLinkColor("rgb(64, 76, 237)");
+        loginPage.getActiveNavLink("/time-logging");
     })
+
     it('Verify "Accountant" can log in and should see appropriate tabs', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Accountant"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
-        cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Accountant").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 5);
+        loginPage.getActiveNavLinkColor("rgb(64, 76, 237)");
+        loginPage.getActiveNavLink("/time-logging");
     })
+
     it('Verify "Admin" can log in and should see appropriate tabs', function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Edvinas Kveselys"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Edvinas Kveselys');
-        cy.get('.main-nav').find('li').should('have.length', 6);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
-        cy.get('.main-nav__link--active').should('have.attr', 'href', '/time-logging');
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Admin").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getUserInfoTitle("Edvinas Kveselys");
+        loginPage.getNavigationLength().should('have.length', 6);
+        loginPage.getActiveNavLinkColor("rgb(64, 76, 237)");
+        loginPage.getActiveNavLink("/time-logging");
     })
+
+    /*it('Admin creates new task', function() {
+        loginPage.visit();
+        loginPage.getLoginUserId().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Edvinas Kveselys").click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getSpecificRoleFromDropDown("Admin").click();
+        loginPage.getSubmitButton().click();
+        loginPage.getNavLink("Tasks").click();
+        taskPage.createTaskButtonClick();
+        taskPage.getTaskDetailsFormName().click().type('hello worlds');
+        taskPage.getTaskDetailsFormDescription().click().type('hello worlds description');
+        taskPage.getTaskBillableDropDown().click({ force: true });
+        taskPage.getYesFromDropDown().click();
+    })*/
 })
