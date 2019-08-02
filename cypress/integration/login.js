@@ -1,14 +1,10 @@
 import LoginPage from '../objects/loginPage';
 import General from '../objects/general';
 import TimeLogging from '../objects/timeLogging';
-import CreateTasks from '../objects/createTasks';
-import Tasks from '../objects/tasks';
 
 const loginPage = new LoginPage();
 const general = new General();
 const timeLogging = new TimeLogging();
-const createTasks = new CreateTasks();
-const tasks = new Tasks();
 
 describe('Sourcebooks login', function() {
     
@@ -82,36 +78,4 @@ describe('Sourcebooks login', function() {
 
         rolesArray.forEach(testFunction);        
     })    
-})
-
-describe('Sourcebook admin tasks', function() {
-
-    beforeEach(function() {
-        cy.loginAs('Admin');
-        loginPage.visit();
-    })
-
-    it('Validate today\'s date', function () {
-
-        timeLogging.getTodaysDate().contains(new Date().getDate());
-    })
-
-    it('Admin creates new task', function() {
-
-        general.getTasksFromMenu().click();
-        general.getRegularButton().click();
-
-        let taskName = 'TestTask' + new Date().getTime();
-
-        createTasks.getField('name').type(taskName);
-        createTasks.getField('description').type('Description');
-        createTasks.getBillableField().click();
-        general.getSpecificValueFromDropDown('Yes').click();
-        createTasks.getField('rate').clear().type(2);
-        general.getSubmitButton().click();
-        general.getUrl().should('not.include', 'create');
-        general.getTasksFromMenu().click();
-        tasks.getFilterFields().first().type(taskName);
-        tasks.getDisplayedTasks().contains(taskName);
-    })
 })

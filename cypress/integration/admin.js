@@ -10,7 +10,7 @@ const timeLogging = new TimeLogging();
 const createTasks = new CreateTasks();
 const createClient = new CreateClient();
 
-describe('Sourcebook admin tasks', function() {
+describe('Sourcebook admin actions', function() {
 
     beforeEach(function() {
         cy.loginAs('Admin');
