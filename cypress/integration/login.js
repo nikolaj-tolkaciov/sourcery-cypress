@@ -1,32 +1,43 @@
+import LoginPage from '../objects/loginPage';
+
+const loginPage = new LoginPage();
+
 describe('Sourcebooks login', function() {
 
+    beforeEach(function() {
+
+        cy.loginAs('User');
+        loginPage.visit();
+    })
+
+    /*
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
+    })*/
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        /*loginPage.visit();
+        loginPage.getElementById("loginForm.userId").click({force:true});
+        loginPage.getSpecificUserFromDropdown("Demo User").click();
+        loginPage.getElementById("loginForm.role").click({force:true});
+        loginPage.getSpecificUserFromDropdown("User").click();
+        loginPage.getSubmitButton().click();*/
 
         cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        loginPage.getElementByClass('page__title').contains('Timesheets');
+        loginPage.getElementByClass("calendar").should('be.visible');
+        loginPage.getElementByClass("tile.form").should('be.visible');
+        loginPage.getElementByClass("user-info__title").contains('Demo User');
+        loginPage.getElementByClass("main-nav").should('have.length', 1);
     })
 
     it('Should validate todays date', function () {
 
-        cy.get('.calendar--today').find('span').contains(new Date().getDate());
+        loginPage.getElementByClass("calendar--today").find('span').contains(new Date().getDate());
     })
 })
