@@ -33,8 +33,8 @@ class TimeLoggingPage extends PageComponents{
     }
 
     assertTimeEntrySaved(description){
-        this.getElementByClass("time-list__description").contains(description)
-        this.getElementByClass("time-list__hours").contains("1.00")
+        cy.get(`[title="${description}"]`)
+        this.getElementByClass("time-list__hours").eq(-1).contains("1.00")
     }
 }
 export default TimeLoggingPage
