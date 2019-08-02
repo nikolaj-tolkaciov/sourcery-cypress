@@ -1,8 +1,10 @@
 import LoginPage from '../objects/loginPage';
 import TimeLoggingPage from '../objects/timeLoggingPage';
+import Page from '../objects/pageComponents';
 
 const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
+const page = new Page();
 
 function prepareSUT () {
     let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
@@ -22,21 +24,21 @@ describe('Sourcebooks login', function() {
 
     for(let i = 0; i < roles.length; i++) {
     it(`Verify user with role "${roles[i]}" log in, see selected date and see appropriate tab number`, function() {
-        loginPage.visit();
-        loginPage.getUserFieldSelectorById().click({force:true});
+        loginPage.visitLoginPage();
+        loginPage.getUserField().click({force:true});
         loginPage.getUserOptionFromDropdown(user).click();
-        loginPage.getRoleFieldSelectorById().click({force:true});
+        loginPage.getRoleField().click({force:true});
         loginPage.getRolesOptionFromDropdown(roles[i]).click();
-        loginPage.getButtonByType(buttonSubmit).click();
+        page.getButtonByType(buttonSubmit).click();
 
         timeLoggingPage.assertPageTimeLogginDisplayed();
-        timeLoggingPage.getUserProfileButtonSelector().contains(user);
-        timeLoggingPage.getNavListSelector().find('li').should('have.length', tabs[i]);
-        timeLoggingPage.getActiveNavMenuOptionSelector().contains(titlePageTimeLogging);
-        timeLoggingPage.getActiveNavMenuOptionSelector().should('have.css', 'color')
+        page.getUserProfileButton().contains(user);
+        page.getNavList().find('li').should('have.length', tabs[i]);
+        page.getActiveNavMenuOption().contains(titlePageTimeLogging);
+        page.getActiveNavMenuOption().should('have.css', 'color')
             .and('eq', colorActiveNavOption)
         timeLoggingPage.getTodayCalendarCell()
-            .find(timeLoggingPage.getDayNumberOfCalendarCellSelector()).contains(date.getDate());
+            .find(timeLoggingPage.getDayNumberOfCalendarCell()).contains(date.getDate());
     })
 }
 })

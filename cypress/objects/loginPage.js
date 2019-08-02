@@ -1,13 +1,13 @@
 class LoginPage {
-    visit() {
+    visitLoginPage() {
         cy.visit('/');
     }
 
-    getUserFieldSelectorById() {
+    getUserField() {
         return cy.get('[id="loginForm.userId"]');
     }
 
-    getRoleFieldSelectorById(){
+    getRoleField(){
         return cy.get('[id="loginForm.role"]');
     }
 
@@ -19,9 +19,6 @@ class LoginPage {
         return cy.get(`[aria-label="${role}"]`);
     }
 
-    getButtonByType(type) {
-        return cy.get(`[type="${type}"]`);
-    }
 }
 
 export default LoginPage;
