@@ -5,7 +5,7 @@ import Common from '../objects/common';
 
 const loginPage = new LoginPage();
 const timePage = new TimeLoggingPage();
-const pageComp = new PageComponents();
+const pageComponents = new PageComponents();
 const common = new Common();
 
 describe('Sourcebooks login', function() {
@@ -28,11 +28,11 @@ describe('Sourcebooks login', function() {
         loginPage.clickSubmitButton();
 
         common.checkIfUrlIncludes('/time-logging');
-        pageComp.getPageTitle().contains("Timesheets");
+        pageComponents.getPageTitle().contains("Timesheets");
         timePage.getCalendar().should('be.visible');
         timePage.getTileForm().should('be.visible');
-        pageComp.checkIfUserTitleContains("Dominykas Poškus");
-        pageComp.checkMainNavigationTabsCount(2);
+        pageComponents.checkIfUserTitleContains("Dominykas Poškus");
+        pageComponents.checkMainNavigationTabsCount(2);
     })
 
     it('Calendar should show todays date', function(){
@@ -71,14 +71,14 @@ describe('Sourcebooks login', function() {
           loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
           loginPage.clickSubmitButton();
 
-          pageComp.checkIfUserTitleContains('Dominykas Poškus');
-          pageComp.checkMainNavigationTabsCount(Roles[i].tabs);
+          pageComponents.checkIfUserTitleContains('Dominykas Poškus');
+          pageComponents.checkMainNavigationTabsCount(Roles[i].tabs);
 
-          pageComp.getActiveNavigationTab().contains("Time Logging");
-          pageComp.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
+          pageComponents.getActiveNavigationTab().contains("Time Logging");
+          pageComponents.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
 
-          pageComp.getUserInfoTitle().click();
-          pageComp.clickLogoutButton();
+          pageComponents.getUserInfoTitle().click();
+          pageComponents.clickLogoutButton();
         })
     }
 })
