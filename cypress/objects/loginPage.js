@@ -27,7 +27,25 @@ class LoginPage {
         return cy.get(`[aria-label="${role}"]`)
     }
 
+    getSpecificUrl(url) {
+        return cy.url().should('include', url)
+    }
 
+    getPageTitle() {
+        return cy.get('.page__title')
+    }
+
+    getCalendar() {
+        return cy.get('.calendar')
+    }
+    
+    getUserTitle() {
+        return cy.get('.user-info__title')
+    }
+
+    getElementCountOfNavigationBar(length) {
+        return cy.get('.main-nav').find('li').should('have.length', length);
+    }
 }
 
 export default LoginPage

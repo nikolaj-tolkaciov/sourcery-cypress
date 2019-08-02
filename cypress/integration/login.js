@@ -21,14 +21,13 @@ describe('Sourcebooks login', function() {
         loginPage.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
-        
+        loginPage.getSpecificUrl('/time-logging');
+        loginPage.getPageTitle().contains('Timesheets');
+        loginPage.getCalendar().should('be.visible');
+        loginPage.getPageTitle().should('be.visible');
+        loginPage.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(2);
 
-        // cy.url().should('include', '/time-logging');
-        // cy.get('.page__title').contains('Timesheets')
-        // cy.get('.calendar').should('be.visible')
-        // cy.get('.tile.form').should('be.visible')
-        // cy.get('.user-info__title').contains('Ieva Stonkaite');
-        // cy.get('.main-nav').find('li').should('have.length', 2);
     })
 
     it('Should show calendar date', function () {
