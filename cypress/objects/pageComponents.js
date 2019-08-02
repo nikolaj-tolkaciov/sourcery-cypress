@@ -12,7 +12,11 @@ class PageComponents {
     }
 
     getElementById(id){
-        return cy.get(`[id=${id}]`)
+        return cy.get(`[id="${id}"]`)
+    }
+
+    getElementByClass(elClass){
+        return cy.get(`[class="${elClass}"]`)
     }
 
     clickSubmit(){

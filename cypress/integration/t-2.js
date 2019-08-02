@@ -1,10 +1,8 @@
 import LoginPage from '../objects/loginPage';
 import TimeLoggingPage from '../objects/timeLoggingPage';
-import PageComponents from '../objects/pageComponents';
 
 const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
-const pageComponents = new PageComponents();
 
 describe('Sourcebooks login with my user and different roles', function() {
 
@@ -38,12 +36,12 @@ describe('Sourcebooks login with my user and different roles', function() {
             loginPage.loginWithUserAndRole("Jelena Černyšova", role.name)
             cy.url().should('include', '/time-logging');
             
-            pageComponents.getPageTitle().contains('Timesheets')
+            timeLoggingPage.getPageTitle().contains('Timesheets')
             timeLoggingPage.getCalendar().should('be.visible')
             timeLoggingPage.getTileForm().should('be.visible')
-            pageComponents.getLoggedInUser().contains('Jelena Cernyšova');
-            pageComponents.getNavigationTabsList().should('have.length', role.tabs)
-            pageComponents.getNavigationTabsList().contains('Time Logging').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
+            timeLoggingPage.getLoggedInUser().contains('Jelena Cernyšova');
+            timeLoggingPage.getNavigationTabsList().should('have.length', role.tabs)
+            timeLoggingPage.getNavigationTabsList().contains('Time Logging').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
         })
     })
 })

@@ -1,4 +1,6 @@
-class TimeLoggingPage {
+import PageComponents from "./pageComponents";
+
+class TimeLoggingPage extends PageComponents{
     
     getTileForm(){
         return cy.get('.tile.form')
