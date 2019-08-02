@@ -22,7 +22,7 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("User").click();
         loginPage.getSubmitButton().click();
-        loginPage.url().should('include', '/time-logging');
+        loginPage.geturl().should('include', '/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         let today = new Date();
@@ -40,7 +40,7 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
-        loginPage.url().should('include', '/time-logging');
+        loginPage.geturl().should('include', '/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
@@ -56,7 +56,7 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Manager").click();
         loginPage.getSubmitButton().click();
-        loginPage.url().should('include', '/time-logging');
+        loginPage.geturl().should('include', '/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
@@ -72,7 +72,7 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Accountant").click();
         loginPage.getSubmitButton().click();
-        loginPage.url().should('include', '/time-logging');
+        loginPage.geturl().should('include', '/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
@@ -88,7 +88,7 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Admin").click();
         loginPage.getSubmitButton().click();
-        loginPage.url().should('include', '/time-logging');
+        loginPage.geturl().should('include', '/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
