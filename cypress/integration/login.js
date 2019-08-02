@@ -1,12 +1,14 @@
 import LoginPage from "../objects/loginPage";
 import TimeLoggingPage from "../objects/timeLoggingPage";
 import TaskPage from "../objects/taskPage";
+import ClientPage from "../objects/clientPage";
 
 const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 const taskPage = new TaskPage();
+const clientPage = new ClientPage();
 
-describe('Sourcebooks login', function () {
+describe('Sourcebooks testing', function () {
 
     var today = new Date();
     const userName = 'Modestas Kmieliauskas';
@@ -24,7 +26,7 @@ describe('Sourcebooks login', function () {
         loginPage.getUserValidationIndicator().should('be.visible')
     })
 
-    for (let i = 0; i < roles.length; i++) {
+    for (let i = 4; i < roles.length; i++) {
         it('Should be able to login with role ' + roles[i] +
             ', check current day and active tab color', function () {
 
@@ -51,14 +53,30 @@ describe('Sourcebooks login', function () {
         taskPage.visit();
         taskPage.getCreateTaskButton().click();
         taskPage.getTaskNameField().type(taskName);
-        taskPage.getTaskDescriptionField().type('Description9990');
+        taskPage.getTaskDescriptionField().type(randomString);
         taskPage.getBillToClientDropdown().click({ force: true });
         taskPage.getBillToClientOption().click();
-        taskPage.getHourlyRateField().clear().type("15");
+        taskPage.getHourlyRateField().clear().type(Math.random() * 50);
         taskPage.getSubmitButton().click();
-        taskPage.assertUrl();
+        taskPage.assertNotCreateUrl();
         taskPage.visit();
         taskPage.getFilterField().type(taskName);
         taskPage.getTaskItem().contains(taskName);
+    })
+
+    it('Should be able to create new client as admin', function () {
+        const organizationName = randomString;
+        cy.loginAs('Admin');
+        clientPage.visit();
+        clientPage.getCreateClientButton().click();
+        clientPage.getClientOrganizationField().type(organizationName);
+        clientPage.getClientFirstnameField().type(randomString);
+        clientPage.getClientLastnameField().type(randomString);
+        clientPage.getClientEmailField().type('superuser@gmail.com');
+        clientPage.getSubmitClientButton().click();
+        clientPage.assertNotCreateUrl();
+        clientPage.visit();
+        clientPage.getFilterField().type(organizationName);
+        clientPage.getClientItem().contains(organizationName);
     })
 })
