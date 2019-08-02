@@ -26,7 +26,7 @@ class TimeLoggingPage extends PageComponents{
         this.clickInputField("react-select-3--value")
         cy.get('[aria-label="My billable task"]').click();
         this.getElementById("timeLoggingForm.notes").click().type(description);
-        this.getElementById("timeLoggingForm.hours").click().type("1");
+        this.getElementById("timeLoggingForm.hours").click().type("0.1");
         this.clickSubmit();
 
         return description
@@ -34,7 +34,7 @@ class TimeLoggingPage extends PageComponents{
 
     assertTimeEntrySaved(description){
         cy.get(`[title="${description}"]`)
-        this.getElementByClass("time-list__hours").eq(-1).contains("1.00")
+        this.getElementByClass("time-list__hours").eq(-1).contains("0.1")
     }
 }
 export default TimeLoggingPage
