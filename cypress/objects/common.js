@@ -11,6 +11,10 @@ class Common{
         return cy.url().should('include', `${endPoint}`)
     }
 
+    urlShouldNotInclude(endPoint){
+        return cy.url().should('not.include', `${endPoint}`)
+    }
+
     getPageTitle(title){
         return cy.get('.page__title').contains(`${title}`)
     }
