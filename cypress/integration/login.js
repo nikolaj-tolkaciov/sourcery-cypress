@@ -58,21 +58,21 @@ describe('Sourcebooks login', function() {
     for(let i = 0; i < Roles.length; i++){
         it('Verify that ' + Roles[i].name + ' can log in and should see ' + Roles[i].tabs + ' tabs', function(){
             
-        loginPage.visit();
-        loginPage.clickUserDropDown();
-        loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
-        loginPage.clickRoleDropDown();
-        loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
-        loginPage.clickSubmitButton();
+          loginPage.visit();
+          loginPage.clickUserDropDown();
+          loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
+          loginPage.clickRoleDropDown();
+          loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
+          loginPage.clickSubmitButton();
 
-        loginPage.checkIfUserTitleContains('Dominykas Poškus');
-        loginPage.checkMainNavigationTabsCount(Roles[i].tabs);
+          loginPage.checkIfUserTitleContains('Dominykas Poškus');
+          loginPage.checkMainNavigationTabsCount(Roles[i].tabs);
 
-        loginPage.getActiveNavigationTab().contains("Time Logging");
-        loginPage.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
+          loginPage.getActiveNavigationTab().contains("Time Logging");
+          loginPage.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
 
-        loginPage.getUserInfoTitle().click();
-        loginPage.clickLogoutButton();
+          loginPage.getUserInfoTitle().click();
+          loginPage.clickLogoutButton();
         })
     }
 })
