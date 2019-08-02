@@ -1,32 +1,42 @@
+import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
+import PageComponents from '../objects/pageComponents';
+import Common from '../objects/common';
+
+const loginPage = new LoginPage();
+const timePage = new TimeLoggingPage();
+const pageComponents = new PageComponents();
+const common = new Common();
+
 describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
+    it('Should display validation for empty user after attempted login', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible');
+        loginPage.clickSubmitButton();
+        loginPage.getUserValidationIndicator().should('be.visible');
     })
 
     it('Should be able to login with role Team Lead', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Dominykas Poškus"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.clickUserDropDown();
+        loginPage.clickSpecificUserFromDropDown("Dominykas Poškus");
+        loginPage.clickRoleDropDown();
+        loginPage.clickSpecificRoleFromDropDown("Team Lead");
+        loginPage.clickSubmitButton();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets');
-        cy.get('.calendar').should('be.visible');
-        cy.get('.tile.form').should('be.visible');
-        cy.get('.user-info__title').contains('Dominykas Poškus');
-        cy.get('.main-nav').find('li').should('have.length', 2);
+        common.checkIfUrlIncludes('/time-logging');
+        pageComponents.getPageTitle().contains("Timesheets");
+        timePage.getCalendar().should('be.visible');
+        timePage.getTileForm().should('be.visible');
+        pageComponents.checkIfUserTitleContains("Dominykas Poškus");
+        pageComponents.checkMainNavigationTabsCount(2);
     })
 
     it('Calendar should show todays date', function(){
-        cy.get('.calendar--today').find('.calendar__date').contains((new Date()).getDate());
+        timePage.getTodayInCalendar().contains((new Date()).getDate());
     })
 
     let Roles = [
@@ -54,21 +64,21 @@ describe('Sourcebooks login', function() {
     for(let i = 0; i < Roles.length; i++){
         it('Verify that ' + Roles[i].name + ' can log in and should see ' + Roles[i].tabs + ' tabs', function(){
             
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Dominykas Poškus"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="'+ Roles[i].name +'"]').click();
-        cy.get('[type="submit"]').click();
+          loginPage.visit();
+          loginPage.clickUserDropDown();
+          loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
+          loginPage.clickRoleDropDown();
+          loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
+          loginPage.clickSubmitButton();
 
-        cy.get('.user-info__title').contains('Dominykas Poškus');
-        cy.get('.main-nav').find('li').should('have.length', Roles[i].tabs);
-        cy.get('.main-nav__link--active').contains("Time Logging");
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
+          pageComponents.checkIfUserTitleContains('Dominykas Poškus');
+          pageComponents.checkMainNavigationTabsCount(Roles[i].tabs);
 
-        cy.get('.user-info__title').click();
-        cy.get('[id="logout-button"]').click();
-        }
-    )
-}
+          pageComponents.getActiveNavigationTab().contains("Time Logging");
+          pageComponents.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
+
+          pageComponents.getUserInfoTitle().click();
+          pageComponents.clickLogoutButton();
+        })
+    }
 })
