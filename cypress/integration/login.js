@@ -1,23 +1,42 @@
-describe('Sourcebooks login', function() {
+import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
 
+const loginPage = new LoginPage();
+const timeLoggingPage = new TimeLoggingPage();
+
+function prepareSUT () {
     let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
     let tabs = [1, 2, 5, 5, 6];
+    let user = 'Modestas Kmieliauskas';
+    let date = new Date();
+    let buttonSubmit = "submit";
+    let titlePageTimeLogging = "Time Logging";
+    let colorActiveNavOption = 'rgb(64, 76, 237)';
+
+    return { roles, tabs, user, date, buttonSubmit, titlePageTimeLogging, colorActiveNavOption }    
+}
+
+describe('Sourcebooks login', function() {
+
+    const { roles, tabs, user, date, buttonSubmit, titlePageTimeLogging, colorActiveNavOption } = prepareSUT();
+
     for(let i = 0; i < roles.length; i++) {
     it(`Verify user with role "${roles[i]}" log in, see selected date and see appropriate tab number`, function() {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Modestas Kmieliauskas"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get(`[aria-label="${roles[i]}"]`).click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getUserFieldSelectorById().click({force:true});
+        loginPage.getUserOptionFromDropdown(user).click();
+        loginPage.getRoleFieldSelectorById().click({force:true});
+        loginPage.getRolesOptionFromDropdown(roles[i]).click();
+        loginPage.getButtonByType(buttonSubmit).click();
 
-        cy.get('.user-info__title').contains('Modestas Kmieliauskas');
-        cy.get('.main-nav').find('li').should('have.length', tabs[i]);
-        cy.get('.main-nav__link--active').contains("Time Logging");
-        cy.get('.main-nav__link--active').should('have.css', 'color')
-        .and('eq', 'rgb(64, 76, 237)')
-        var date1 = new Date;
-        cy.get('.calendar--today').find('.calendar__date').contains(date1.getDate());
+        timeLoggingPage.assertPageTimeLogginDisplayed();
+        timeLoggingPage.getUserProfileButtonSelector().contains(user);
+        timeLoggingPage.getNavListSelector().find('li').should('have.length', tabs[i]);
+        timeLoggingPage.getActiveNavMenuOptionSelector().contains(titlePageTimeLogging);
+        timeLoggingPage.getActiveNavMenuOptionSelector().should('have.css', 'color')
+            .and('eq', colorActiveNavOption)
+        timeLoggingPage.getTodayCalendarCell()
+            .find(timeLoggingPage.getDayNumberOfCalendarCellSelector()).contains(date.getDate());
     })
 }
 })
