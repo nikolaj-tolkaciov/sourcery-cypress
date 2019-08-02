@@ -13,10 +13,6 @@ class LoginPage extends PageComponents{
         return cy.get(`[aria-label="${option}"]`)
     }
 
-    clickInputField(inputId){
-        cy.get(`[id="${inputId}"]`).click({force:true});
-    }
-
     loginWithUserAndRole(user, role){
         this.clickInputField("loginForm.userId")
         this.getSpecifiedOptionDromDropdown(user).click()

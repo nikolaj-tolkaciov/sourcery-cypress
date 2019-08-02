@@ -1,8 +1,6 @@
-import LoginPage from '../objects/loginPage';
 import TasksPage from '../objects/tasksPage';
 import CreateTaskPage from '../objects/createTaskPage';
 
-const loginPage = new LoginPage();
 const tasksPage = new TasksPage();
 const createTaskPage = new CreateTaskPage();
 
