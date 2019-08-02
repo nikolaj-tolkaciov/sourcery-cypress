@@ -1,6 +1,12 @@
 import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
+import PageComponents from '../objects/pageComponents';
+import Common from '../objects/common';
 
 const loginPage = new LoginPage();
+const timePage = new TimeLoggingPage();
+const pageComp = new PageComponents();
+const common = new Common();
 
 describe('Sourcebooks login', function() {
 
@@ -21,16 +27,16 @@ describe('Sourcebooks login', function() {
         loginPage.clickSpecificRoleFromDropDown("Team Lead");
         loginPage.clickSubmitButton();
 
-        loginPage.checkIfUrlIncludes('/time-logging');
-        loginPage.getPageTitle().contains("Timesheets");
-        loginPage.getCalendar().should('be.visible');
-        loginPage.getTileForm().should('be.visible');
-        loginPage.checkIfUserTitleContains("Dominykas Poškus");
-        loginPage.checkMainNavigationTabsCount(2);
+        common.checkIfUrlIncludes('/time-logging');
+        pageComp.getPageTitle().contains("Timesheets");
+        timePage.getCalendar().should('be.visible');
+        timePage.getTileForm().should('be.visible');
+        pageComp.checkIfUserTitleContains("Dominykas Poškus");
+        pageComp.checkMainNavigationTabsCount(2);
     })
 
     it('Calendar should show todays date', function(){
-        loginPage.getTodayInCalendar().contains((new Date()).getDate());
+        timePage.getTodayInCalendar().contains((new Date()).getDate());
     })
 
     let Roles = [
@@ -58,21 +64,21 @@ describe('Sourcebooks login', function() {
     for(let i = 0; i < Roles.length; i++){
         it('Verify that ' + Roles[i].name + ' can log in and should see ' + Roles[i].tabs + ' tabs', function(){
             
-        loginPage.visit();
-        loginPage.clickUserDropDown();
-        loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
-        loginPage.clickRoleDropDown();
-        loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
-        loginPage.clickSubmitButton();
+          loginPage.visit();
+          loginPage.clickUserDropDown();
+          loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
+          loginPage.clickRoleDropDown();
+          loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
+          loginPage.clickSubmitButton();
 
-        loginPage.checkIfUserTitleContains('Dominykas Poškus');
-        loginPage.checkMainNavigationTabsCount(Roles[i].tabs);
+          pageComp.checkIfUserTitleContains('Dominykas Poškus');
+          pageComp.checkMainNavigationTabsCount(Roles[i].tabs);
 
-        loginPage.getActiveNavigationTab().contains("Time Logging");
-        loginPage.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
+          pageComp.getActiveNavigationTab().contains("Time Logging");
+          pageComp.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
 
-        loginPage.getUserInfoTitle().click();
-        loginPage.clickLogoutButton();
+          pageComp.getUserInfoTitle().click();
+          pageComp.clickLogoutButton();
         })
     }
 })
