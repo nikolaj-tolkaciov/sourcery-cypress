@@ -10,7 +10,6 @@ describe('Sourcebooks login', function () {
 
     var today = new Date();
     const userName = 'Modestas Kmieliauskas';
-    const urlTimeLogging = '/time-logging';
     const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
     const Tabs = ['1', '2', '5', '5', '6'];
     const activeTabColor = 'rgb(64, 76, 237)';

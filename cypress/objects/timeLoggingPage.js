@@ -1,6 +1,6 @@
 class TimeLoggingPage {
-    assertUrl(url) {
-        cy.url().should('include', '/time-logging');
+    assertUrl() {
+        cy.url().should('include', '/time-logging')
     }
     getPageTitle() {
         return cy.get('.page__title');
