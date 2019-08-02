@@ -1,4 +1,6 @@
-class LoginPage {
+import PageComponents from "./pageComponents";
+
+class LoginPage extends PageComponents{
     visit(){
         cy.visit('/');
     }
@@ -7,22 +9,18 @@ class LoginPage {
         return cy.get('.Select.not-valid')
     }
 
-    clickSubmit(){
-        cy.get('[type="submit"]').click();
-    }
-
     getSpecifiedOptionDromDropdown(option){
         return cy.get(`[aria-label="${option}"]`)
     }
 
-    chooseInputField(inputId){
+    clickInputField(inputId){
         cy.get(`[id="${inputId}"]`).click({force:true});
     }
 
     loginWithUserAndRole(user, role){
-        this.chooseInputField("loginForm.userId")
+        this.clickInputField("loginForm.userId")
         this.getSpecifiedOptionDromDropdown(user).click()
-        this.chooseInputField("loginForm.role")
+        this.clickInputField("loginForm.role")
         this.getSpecifiedOptionDromDropdown(role).click()
         this.clickSubmit()
     }

@@ -13,6 +13,7 @@ describe('Sourcebooks login', function() {
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible')
         loginPage.clickSubmit()
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role Team Lead and check today\'s date', function () {
@@ -20,7 +21,7 @@ describe('Sourcebooks login', function() {
         loginPage.visit();        
         loginPage.loginWithUserAndRole("Jelena Černyšova", "Team Lead")
 
-        pageComponents.getUrl().should('include', '/time-logging');
+        cy.url().should('include', '/time-logging');
         pageComponents.getPageTitle().contains('Timesheets')
         timeLoggingPage.getCalendar().should('be.visible')
         timeLoggingPage.getTileForm().should('be.visible')

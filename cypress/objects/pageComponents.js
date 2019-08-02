@@ -1,8 +1,4 @@
 class PageComponents {
-    getUrl(){
-        return cy.url()
-    }
-
     getPageTitle(){
         return cy.get('.page__title')
     }
@@ -13,6 +9,14 @@ class PageComponents {
 
     getNavigationTabsList(){
         return cy.get('.main-nav').find('li')
+    }
+
+    getElementById(id){
+        return cy.get(`[id=${id}]`)
+    }
+
+    clickSubmit(){
+        cy.get('[type="submit"]').click();
     }
 }
 export default PageComponents

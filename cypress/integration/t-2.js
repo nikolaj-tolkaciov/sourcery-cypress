@@ -36,7 +36,7 @@ describe('Sourcebooks login with my user and different roles', function() {
         it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
             loginPage.visit();        
             loginPage.loginWithUserAndRole("Jelena Černyšova", role.name)
-            pageComponents.getUrl().should('include', '/time-logging');
+            cy.url().should('include', '/time-logging');
             
             pageComponents.getPageTitle().contains('Timesheets')
             timeLoggingPage.getCalendar().should('be.visible')
