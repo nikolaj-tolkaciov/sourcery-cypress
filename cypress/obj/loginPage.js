@@ -5,11 +5,6 @@ class LoginPage
         cy.visit('/');
     }
 
-    visitSpecificURL(url)
-    {
-        cy.visit(url);
-    }
-
     getUserValidationIndicator()
     {
         return cy.get('.Select.not-valid');

@@ -1,8 +1,11 @@
 import T3Page from '../obj/t3Page';
 import LoginPage from '../obj/loginPage';
+import Common from '../obj/common';
+
 
 const t3page = new T3Page();
 const loginPage = new LoginPage();
+const common = new Common();
 
 describe('Sourcebooks login', function() {
 
@@ -13,7 +16,7 @@ describe('Sourcebooks login', function() {
 
         loginPage.visit();
         loginPage.loginAsSpecificUserAndRole("Valentinas Kasteckis", "Admin");
-        loginPage.visitSpecificURL('/tasks');
+        common.visitSpecificURL('/tasks');
 
         t3page.typeInTaskName(taskName);
         cy.wait(3000); // for some reason JS does not have enough time to load in, so this helps
@@ -27,7 +30,7 @@ describe('Sourcebooks login', function() {
         t3page.clearRateInput();
         t3page.typeInRateInputField(rateValue);
         t3page.getSaveButton().click();
-        loginPage.visitSpecificURL('/tasks');
+        common.visitSpecificURL('/tasks');
         t3page.typeInTaskName(taskName);
         t3page.checkIfTaskExistInTheList(taskDescription);
 
