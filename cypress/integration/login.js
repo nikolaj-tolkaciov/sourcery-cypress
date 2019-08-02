@@ -1,28 +1,37 @@
+import LoginPage from '../objects/loginPage';
+const loginPage = new LoginPage()
+
+import TimeLogging from '../objects/timeLogging';
+const timeLogging = new TimeLogging()
+
+import PageComponents from '../objects/pageComponents';
+const pageComponents = new PageComponents()
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getuserValidationIndicator().should('not.visible')
+        pageComponents.getSubmitButton().click();
+        loginPage.getuserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getLoginFieldUser().click({force:true});
+        loginPage. getSpecificUserFromDropDown("Greta Ališauskienė").click();
+        loginPage.getLoginfieldRole().click({force:true});
+        loginPage.getUserRole("Team Lead").click();
+        pageComponents.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.calendar--today').find('span').contains(new Date().getDate());
+        timeLogging.getUrl().should('include', '/time-logging');
+        timeLogging.getPageTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTileForm().should('be.visible')
+        pageComponents.getUserName().contains('Greta Ališauskiene');
+        pageComponents.getTabsCount().should('have.length', 2);
+        timeLogging.assertTodayDate().contains(new Date().getDate());
     })
 })
