@@ -1,92 +1,117 @@
-describe('Sourcebooks testLogIn', function() {
+import LoginPage from '../obj/loginPage';
+import ClientsPage from '../obj/clients/clientsPage';
+import ClientCreatePage from '../obj/clients/clientCreatePage';
+import TasksPage from '../obj/tasks/tasksPage';
+import TaskCreatePage from '../obj/tasks/taskCreatePage';
+import TaskEditPage from '../obj/tasks/taskEditPage';
+import TimeLoggingPage from '../obj/timeLogging/timeLoggingPage';
+import Common from '../obj/common';
+
+const loginPage = new LoginPage();
+const clientsPage = new ClientsPage();
+const clientCreatePage = new ClientCreatePage();
+const tasksPage = new TasksPage();
+const taskCreatePage = new TaskCreatePage();
+const taskEditPage = new TaskEditPage();
+const timeLoggingPage = new TimeLoggingPage();
+const common = new Common();
     
-    var roles = [
-        { name: 'User', 'tabCount': 1 }, 
-        { name: 'Team Lead', tabCount: 2 }, 
-        { name: 'Manager', tabCount: 5 }, 
-        { name: 'Accountant', tabCount: 5}, 
-        { name: 'Admin', tabCount: 6 }
-    ];
+var roles = [
+    { name: 'User', 'tabCount': 1 }, 
+    { name: 'Team Lead', tabCount: 2 }, 
+    { name: 'Manager', tabCount: 5 }, 
+    { name: 'Accountant', tabCount: 5}, 
+    { name: 'Admin', tabCount: 6 }
+];
 
-    function makeid(length) {
-        return 'Random_Name_' + Math.floor(Math.random() * 1000000000000);
-    }
+function makeId() {
+    let timeStamp = new Date().getTime();
+    return 'Random_Name_' + timeStamp;
+}
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+function testLogIn(role) {
+    loginPage.visit();
+    loginPage.getUserDropdown().click({force:true});
+    loginPage.getUserFromDropdown('Marius Lastauskas').click();
+    loginPage.getRoleDropdown().click({force:true});
+    loginPage.getRoleFromDropdown(role).click();
+    loginPage.getSubmitButton().click();
+}
 
-    function testLogIn(role) {
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Marius Lastauskas"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="' + role + '"]').click();
-        cy.get('[type="submit"]').click();
-    }
-
+describe('Sourcebook test Clients', function() {
     it('Should be available for Admin to create new client', function () {
-        testLogIn('Admin');
+        cy.loginAs("Admin");
 
-        let organization = makeid(20);
-        cy.visit('/clients');
-        cy.get('button').contains('Create Client').click();
-        cy.get('[id="clientDetailsForm.organization"]').type(organization);
-        cy.get('[id="clientDetailsForm.contacts_firstName_0"]').type(makeid(20));
-        cy.get('[id="clientDetailsForm.contacts_lastName_0"]').type(makeid(20));
-        cy.get('[id="clientDetailsForm.contacts_email_0"]').type(makeid(20) + '@mail.com');
-        cy.get('[type="submit"]').click();
+        const organization = makeId();
+        const email = makeId() + '@mail.com';
+        clientsPage.visit();
+        clientsPage.getCreateClientButton().click();
+        clientCreatePage.getFormOrganization().type(organization);
+        clientCreatePage.getFormFirstName().type(makeId());
+        clientCreatePage.getFormLastName().type(makeId());
+        clientCreatePage.getFormEmail().type(email);
+        clientCreatePage.getSubmitButton().click();
         
-        cy.visit('/clients');
-        cy.get('[class="field--filter"]').first().find('input').type(organization);
-        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
+        clientsPage.visit();
+        clientsPage.getOrganizationFilter().type(organization);
+        clientsPage.getFilteredList().should('have.length', 1);
     })
+})
 
+describe('Sourcebook test Tasks', function() {
     it('Should be able to create new task as Admin', function () {
-        testLogIn('Admin');
+        cy.loginAs("Admin");
 
-        let taskName = makeid(20);
+        let taskName = makeId();
 
-        cy.visit('/tasks');
-        cy.get('button').contains('Create Task').click();
-        cy.get('[id="taskDetailsForm.name"]').type(taskName);
-        cy.get('[id="taskDetailsForm.description"]').type('Automated test created task');
-        cy.get('label').contains('Bill to Client').next().click();
-        cy.get('[aria-label="Yes"]').click();
-        cy.get('[id="taskDetailsForm.rate"]').clear();
-        cy.get('[id="taskDetailsForm.rate"]').type(Math.random() * 10);
-        cy.get('[type="submit"]').click();
+        tasksPage.visit();
+        tasksPage.getCreateTaskButton().click();
+        taskCreatePage.getFormName().type(taskName);
+        taskCreatePage.getFormDescription().type('Automated test created task');
+        taskCreatePage.getBillableDropdown().click();
+        taskCreatePage.getBillableFromDropdown('Yes').click();
+        taskCreatePage.getFormRate().clear();
+        taskCreatePage.getFormRate().type(Math.random() * 10);
+        taskCreatePage.getSubmitButton().click();
 
-        cy.url().should('match', new RegExp('[^\s]*tasks\\\/[0-9]+'));
-        cy.visit('/tasks');
-        cy.get('[class="field--filter"]').first().find('input').type(taskName);
-        cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').should('have.length', 1);
+        taskEditPage.checkUrl();
+        tasksPage.visit();
+        tasksPage.getNameFilter().type(taskName);
+        tasksPage.getFilteredList().should('have.length', 1);
+    })
+})
+
+describe('Sourcebooks testLogIn', function() {
+    it('Should display validation for empty user after attempted loggin', function () {
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     for (let i = 0; i < roles.length; i++) {
         it('Should display ' + roles[i].tabCount + ' tabs when logged in as ' + roles[i].name + '.', function () {
             testLogIn(roles[i].name);
 
-            cy.url().should('include', '/time-logging');
-            cy.get('.page__title').contains('Timesheets')
-            cy.get('.calendar').should('be.visible')
-            cy.get('.tile.form').should('be.visible')
-            cy.get('.user-info__title').contains('Marius Lastauskas');
-            cy.get('.main-nav').find('li').should('have.length', roles[i].tabCount);
+            timeLoggingPage.checkUrl();
+            common.getPageTitle().contains('Timesheets')
+            timeLoggingPage.getCalendar().should('be.visible')
+            timeLoggingPage.getFormTile().should('be.visible')
+            common.getUserNameTitle().contains('Marius Lastauskas');
+            common.getNavTabs().should('have.length', roles[i].tabCount);
             
-            cy.get('.main-nav__link--active').contains('Time Logging');
-            cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');
+            common.getActiveTab().contains('Time Logging');
+            common.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)');
         })
     }
-    
+})
+
+describe('Sourcebooks test Time Logging', function() {
     it('Should be displaying todays date in Time Logging page', function () {
+        cy.loginAs("Admin");
         const today = new Date();
         const date = today.getDate();
 
-        cy.get('.calendar--today').find('.calendar__date').contains(date);
+        timeLoggingPage.getCalendarToday().contains(date);
     })
 })
