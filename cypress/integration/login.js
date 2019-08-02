@@ -22,15 +22,15 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("User").click();
         loginPage.getSubmitButton().click();
-        loginPage.geturl().should('include', '/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
+        common.geturl().should('include', '/time-logging');
+        common.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         let today = new Date();
         loginPage.getCalendarDayToday().find('.calendar__date').contains(today.getDate());
         loginPage.getFormTitle().should('be.visible');
         common.getUserInfoTitle().contains('Rasa Kapacinskaite');
-        loginPage.getMainNavigationBar().find('li').should('have.length', 1);        
-        loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');
+        common.getMainNavigationBar().find('li').should('have.length', 1);        
+        common.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');
     })
 
      it('Should be able to login with role Team Lead', function () {
@@ -40,13 +40,13 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
-        loginPage.geturl().should('include', '/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
+        common.geturl().should('include', '/time-logging');
+        common.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
         common.getUserInfoTitle().contains('Rasa Kapacinskaite');
-        loginPage.getMainNavigationBar().find('li').should('have.length', 2);
-        loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
+        common.getMainNavigationBar().find('li').should('have.length', 2);
+        common.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
 
     it('Should be able to login with role Manager', function () {
@@ -56,13 +56,13 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Manager").click();
         loginPage.getSubmitButton().click();
-        loginPage.geturl().should('include', '/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
+        common.geturl().should('include', '/time-logging');
+        common.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
         common.getUserInfoTitle().contains('Rasa Kapacinskaite');
-        loginPage.getMainNavigationBar().find('li').should('have.length', 5);
-        loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
+        common.getMainNavigationBar().find('li').should('have.length', 5);
+        common.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
 
     it('Should be able to login with role Accountant', function () {
@@ -72,13 +72,13 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Accountant").click();
         loginPage.getSubmitButton().click();
-        loginPage.geturl().should('include', '/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
+        common.geturl().should('include', '/time-logging');
+        common.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
         common.getUserInfoTitle().contains('Rasa Kapacinskaite');
-        loginPage.getMainNavigationBar().find('li').should('have.length', 5);
-        loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
+        common.getMainNavigationBar().find('li').should('have.length', 5);
+        common.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
     
     it('Should be able to login with role Admin', function () {
@@ -88,12 +88,12 @@ describe('Sourcebooks login', function() {
         loginPage.getUserRoleForm().click({force:true});
         loginPage.getUserRoleFromDropDown("Admin").click();
         loginPage.getSubmitButton().click();
-        loginPage.geturl().should('include', '/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
+        common.geturl().should('include', '/time-logging');
+        common.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
         common.getUserInfoTitle().contains('Rasa Kapacinskaite');
-        loginPage.getMainNavigationBar().find('li').should('have.length', 6);
-        loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
+        common.getMainNavigationBar().find('li').should('have.length', 6);
+        common.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
  })

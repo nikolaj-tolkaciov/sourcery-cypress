@@ -6,6 +6,7 @@ class LoginPage {
     getUserValidationIndicator() {
         return cy.get('.Select.not-valid');
     }
+    
     getSubmitButton() {
         return cy.get('[type="submit"]');
     }
@@ -24,15 +25,7 @@ class LoginPage {
 
     getUserRoleFromDropDown(userRole) {
         return cy.get(`[aria-label="${userRole}"]`)
-    }
-
-    geturl() {
-        return cy.url()
-    }
-
-    getPageTitle() {
-        return cy.get('.page__title')
-    }
+    }    
 
     getItemCalendar() {
         return cy.get('.calendar')
@@ -41,15 +34,7 @@ class LoginPage {
     getFormTitle() {
         return cy.get('.tile.form')
     }
-
-        getMainNavigationBar() {
-        return cy.get('.main-nav')
-    }
-
-    getActiveTabLink() {
-        return cy.get('.main-nav__link--active')
-    }
-
+       
     getCalendarDayToday() {
         return cy.get('.calendar--today')
     }
