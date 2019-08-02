@@ -1,29 +1,32 @@
+import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
+import PageComponents from '../objects/pageComponents';
+
+const loginPage = new LoginPage();
+const timeLoggingPage = new TimeLoggingPage();
+const pageComponents = new PageComponents();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.clickSubmit()
     })
 
     it('Should be able to login with role Team Lead and check today\'s date', function () {
 
-        var todayDate = new Date();
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Jelena Černyšova"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();        
+        loginPage.loginWithUserAndRole("Jelena Černyšova", "Team Lead")
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Jelena Cernyšova');
-        cy.get('.main-nav').find('li').should('have.length', 2)
-        cy.get('.calendar--today').find('.calendar__date').contains(todayDate.getDate());
+        pageComponents.getUrl().should('include', '/time-logging');
+        pageComponents.getPageTitle().contains('Timesheets')
+        pageComponents.getCalendar().should('be.visible')
+        timeLoggingPage.getTileForm().should('be.visible')
+        pageComponents.getLoggedInUser().contains('Jelena Cernyšova');
+        pageComponents.getNavigationTabsList().should('have.length', 2)
+        timeLoggingPage.assertDisplayedTodaysDay()
     })
 })
