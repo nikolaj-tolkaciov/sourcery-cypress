@@ -4,6 +4,7 @@ class LoginPage
     {
         cy.visit('/');
     }
+
     getUserValidationIndicator()
     {
         return cy.get('.Select.not-valid');
