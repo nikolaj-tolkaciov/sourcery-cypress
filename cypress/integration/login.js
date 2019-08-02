@@ -12,7 +12,6 @@ describe('Sourcebooks login', function() {
         
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible')
-        loginPage.getUserValidationIndicator().should('not.visible')
         loginPage.clickSubmit()
     })
 
@@ -23,7 +22,7 @@ describe('Sourcebooks login', function() {
 
         pageComponents.getUrl().should('include', '/time-logging');
         pageComponents.getPageTitle().contains('Timesheets')
-        pageComponents.getCalendar().should('be.visible')
+        timeLoggingPage.getCalendar().should('be.visible')
         timeLoggingPage.getTileForm().should('be.visible')
         pageComponents.getLoggedInUser().contains('Jelena Cernyšova');
         pageComponents.getNavigationTabsList().should('have.length', 2)

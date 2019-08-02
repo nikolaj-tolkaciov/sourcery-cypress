@@ -27,4 +27,5 @@ class LoginPage {
         this.clickSubmit()
     }
 }
+
 export default LoginPage

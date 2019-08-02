@@ -31,7 +31,6 @@ describe('Sourcebooks login with my user and different roles', function() {
             tabs: '6'
         }
     ];
-       
     
     Roles.forEach((role) => {
         it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
@@ -40,7 +39,7 @@ describe('Sourcebooks login with my user and different roles', function() {
             pageComponents.getUrl().should('include', '/time-logging');
             
             pageComponents.getPageTitle().contains('Timesheets')
-            pageComponents.getCalendar().should('be.visible')
+            timeLoggingPage.getCalendar().should('be.visible')
             timeLoggingPage.getTileForm().should('be.visible')
             pageComponents.getLoggedInUser().contains('Jelena Cernyšova');
             pageComponents.getNavigationTabsList().should('have.length', role.tabs)
