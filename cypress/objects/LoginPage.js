@@ -26,7 +26,7 @@ class LoginPage {
         return cy.get(`[aria-label="${userRole}"]`)
     }
 
-    url() {
+    geturl() {
         return cy.url()
     }
 
@@ -42,11 +42,7 @@ class LoginPage {
         return cy.get('.tile.form')
     }
 
-    getUserInfoTitle(userName) {
-        return cy.get('.user-info__title')
-    }
-
-    getMainNavigationBar() {
+        getMainNavigationBar() {
         return cy.get('.main-nav')
     }
 

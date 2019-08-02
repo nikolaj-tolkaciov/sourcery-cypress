@@ -1,6 +1,8 @@
 import LoginPage from '../objects/LoginPage';
+import Common from '../objects/common';
 
 const loginPage = new LoginPage();
+const common = new Common();
 
 describe('Sourcebooks login', function() {
 
@@ -26,7 +28,7 @@ describe('Sourcebooks login', function() {
         let today = new Date();
         loginPage.getCalendarDayToday().find('.calendar__date').contains(today.getDate());
         loginPage.getFormTitle().should('be.visible');
-        loginPage.getUserInfoTitle().contains('Rasa Kapacinskaite');
+        common.getUserInfoTitle().contains('Rasa Kapacinskaite');
         loginPage.getMainNavigationBar().find('li').should('have.length', 1);        
         loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');
     })
@@ -42,7 +44,7 @@ describe('Sourcebooks login', function() {
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
-        loginPage.getUserInfoTitle().contains('Rasa Kapacinskaite');
+        common.getUserInfoTitle().contains('Rasa Kapacinskaite');
         loginPage.getMainNavigationBar().find('li').should('have.length', 2);
         loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
@@ -58,7 +60,7 @@ describe('Sourcebooks login', function() {
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
-        loginPage.getUserInfoTitle().contains('Rasa Kapacinskaite');
+        common.getUserInfoTitle().contains('Rasa Kapacinskaite');
         loginPage.getMainNavigationBar().find('li').should('have.length', 5);
         loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
@@ -74,7 +76,7 @@ describe('Sourcebooks login', function() {
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
-        loginPage.getUserInfoTitle().contains('Rasa Kapacinskaite');
+        common.getUserInfoTitle().contains('Rasa Kapacinskaite');
         loginPage.getMainNavigationBar().find('li').should('have.length', 5);
         loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
@@ -90,7 +92,7 @@ describe('Sourcebooks login', function() {
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getItemCalendar().should('be.visible');
         loginPage.getFormTitle().should('be.visible');
-        loginPage.getUserInfoTitle().contains('Rasa Kapacinskaite');
+        common.getUserInfoTitle().contains('Rasa Kapacinskaite');
         loginPage.getMainNavigationBar().find('li').should('have.length', 6);
         loginPage.getActiveTabLink().should('have.css','color', 'rgb(64, 76, 237)');       
     })
