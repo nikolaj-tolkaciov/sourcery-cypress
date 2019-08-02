@@ -11,10 +11,10 @@ class LoginPage {
     getSpecificUserFromDropDown(userName){
         return cy.get(`[aria-label="${userName}"]`)
     }
-    getUserIDLogin(){
+    getUserDropdown(){
         return cy.get('[id="loginForm.userId"]')
     }
-    getLoginFormRole(){
+    getRoleDropdown(){
         return cy.get('[id="loginForm.role"]')
     }
     getSpecificUserRoleFromDropDown(userRole){

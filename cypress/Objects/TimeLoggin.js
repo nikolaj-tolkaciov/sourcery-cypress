@@ -11,9 +11,6 @@ class TimeLoggin{
     getTimeTile(){
         return cy.get('.tile.form')
     }
-    getUserInfoFromTitle(){
-        return cy.get('.user-info__title')
-    }
     getMainNavWithSpecificLength(){
         return cy.get('.main-nav').find('li')
     }

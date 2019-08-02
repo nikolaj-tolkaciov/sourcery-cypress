@@ -1,5 +1,7 @@
 import LoginPage from '../objects/LoginPage';
 import TimeLoggin from '../objects/TimeLoggin';
+import Common from '../objects/Common';
+const common = new Common();
 const timeLoggin = new TimeLoggin();
 const loginPage = new LoginPage();
 
@@ -15,9 +17,9 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with user Jaunius_Mykolaitis to role Admin', function () {
 
         loginPage.visit();
-        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getUserDropdown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Jaunius Mykolaitis").click();
-        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getRoleDropdown().click({force:true});
         loginPage.getSpecificUserRoleFromDropDown("Admin").click();
         loginPage.getSubmitButton().click();
 
@@ -25,7 +27,7 @@ describe('Sourcebooks login', function() {
         timeLoggin.getPageTitle().contains('Timesheets')
         timeLoggin.getCalendar().should('be.visible')
         timeLoggin.getTimeTile().should('be.visible')
-        timeLoggin.getUserInfoFromTitle().contains('Jaunius Mykolaitis');
+        common.getUserName().contains('Jaunius Mykolaitis');
         timeLoggin.getMainNavWithSpecificLength().should('have.length', 6);
 
         timeLoggin.getMainNavActiveLinkColor();
@@ -36,9 +38,9 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with user Jaunius_Mykolaitis to role User', function () {
 
         loginPage.visit();
-        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getUserDropdown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Jaunius Mykolaitis").click();
-        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getRoleDropdown().click({force:true});
         loginPage.getSpecificUserRoleFromDropDown("User").click();
         loginPage.getSubmitButton().click();
 
@@ -46,7 +48,7 @@ describe('Sourcebooks login', function() {
         timeLoggin.getPageTitle().contains('Timesheets')
         timeLoggin.getCalendar().should('be.visible')
         timeLoggin.getTimeTile().should('be.visible')
-        timeLoggin.getUserInfoFromTitle().contains('Jaunius Mykolaitis');
+        common.getUserName().contains('Jaunius Mykolaitis');
         timeLoggin.getMainNavWithSpecificLength().should('have.length', 1);
 
         timeLoggin.getMainNavActiveLinkColor();
@@ -56,9 +58,9 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with user Jaunius_Mykolaitis to role Team Lead', function () {
 
         loginPage.visit();
-        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getUserDropdown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Jaunius Mykolaitis").click();
-        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getRoleDropdown().click({force:true});
         loginPage.getSpecificUserRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
@@ -66,7 +68,7 @@ describe('Sourcebooks login', function() {
         timeLoggin.getPageTitle().contains('Timesheets')
         timeLoggin.getCalendar().should('be.visible')
         timeLoggin.getTimeTile().should('be.visible')
-        timeLoggin.getUserInfoFromTitle().contains('Jaunius Mykolaitis');
+        common.getUserName().contains('Jaunius Mykolaitis');
         timeLoggin.getMainNavWithSpecificLength().should('have.length', 2);
 
         timeLoggin.getMainNavActiveLinkColor();
@@ -76,9 +78,9 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with user Jaunius_Mykolaitis to role Manager', function () {
 
         loginPage.visit();
-        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getUserDropdown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Jaunius Mykolaitis").click();
-        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getRoleDropdown().click({force:true});
         loginPage.getSpecificUserRoleFromDropDown("Manager").click();
         loginPage.getSubmitButton().click();
 
@@ -86,7 +88,7 @@ describe('Sourcebooks login', function() {
         timeLoggin.getPageTitle().contains('Timesheets')
         timeLoggin.getCalendar().should('be.visible')
         timeLoggin.getTimeTile().should('be.visible')
-        timeLoggin.getUserInfoFromTitle().contains('Jaunius Mykolaitis');
+        common.getUserName().contains('Jaunius Mykolaitis');
         timeLoggin.getMainNavWithSpecificLength().should('have.length', 5);
 
         timeLoggin.getMainNavActiveLinkColor();
@@ -96,9 +98,9 @@ describe('Sourcebooks login', function() {
     it('Should be able to login with user Jaunius_Mykolaitis to role Accountant', function () {
 
         loginPage.visit();
-        loginPage.getUserIDLogin().click({force:true});
+        loginPage.getUserDropdown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Jaunius Mykolaitis").click();
-        loginPage.getLoginFormRole().click({force:true});
+        loginPage.getRoleDropdown().click({force:true});
         loginPage.getSpecificUserRoleFromDropDown("Accountant").click();
         loginPage.getSubmitButton().click();
 
@@ -106,7 +108,7 @@ describe('Sourcebooks login', function() {
         timeLoggin.getPageTitle().contains('Timesheets')
         timeLoggin.getCalendar().should('be.visible')
         timeLoggin.getTimeTile().should('be.visible')
-        timeLoggin.getUserInfoFromTitle().contains('Jaunius Mykolaitis');
+        common.getUserName().contains('Jaunius Mykolaitis');
         timeLoggin.getMainNavWithSpecificLength().should('have.length', 5);
 
         timeLoggin.getMainNavActiveLinkColor();
