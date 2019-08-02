@@ -1,15 +1,16 @@
 import LoginPage from "../objects/loginPage";
 import TimeLoggingPage from "../objects/timeLoggingPage";
+import TaskPage from "../objects//taskPage";
 
 const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
+const taskPage = new TaskPage();
 
 describe('Sourcebooks login', function () {
 
     var today = new Date();
     const userName = 'Modestas Kmieliauskas';
     const urlTimeLogging = '/time-logging';
-    const pageTitle = 'Timesheets';
     const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
     const Tabs = ['1', '2', '5', '5', '6'];
     const activeTabColor = 'rgb(64, 76, 237)';
@@ -22,7 +23,7 @@ describe('Sourcebooks login', function () {
         loginPage.getUserValidationIndicator().should('be.visible')
     })
 
-    for (let i = 0; i < roles.length; i++) {
+    for (let i = 4; i < roles.length; i++) {
         it('Should be able to login with role ' + roles[i] +
             ', check current day and active tab color', function () {
 
@@ -44,4 +45,10 @@ describe('Sourcebooks login', function () {
                 timeLoggingPage.getActiveMainNav().should('have.css', 'color', activeTabColor);
             })
     }
+    it ('Login as Admin', function (){
+        cy.loginAs('Admin');
+        taskPage.visit();
+        
+
+    })
 })
