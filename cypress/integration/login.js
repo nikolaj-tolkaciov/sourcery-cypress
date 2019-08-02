@@ -1,48 +1,41 @@
 import LoginPage from '../objects/loginPage';
 import General from '../objects/general';
 import TimeLogging from '../objects/timeLogging';
+import CreateTasks from '../objects/createTasks';
+import Tasks from '../objects/tasks';
 
 const loginPage = new LoginPage();
 const general = new General();
 const timeLogging = new TimeLogging();
+const createTasks = new CreateTasks();
+const tasks = new Tasks();
 
 describe('Sourcebooks login', function() {
-
+    
     it('Should display validation for empty user after attempted loggin', function () {
-        
+
         loginPage.visit();
-        loginPage.getUserValidationIndicator().should('not.visible')
-        loginPage.getSubmitButton().click();
-        loginPage.getUserValidationIndicator().should('be.visible')
+        loginPage.getUserValidationIndicator().should('not.visible');
+        general.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible');
     })
 
     it('Should be able to login with role User', function () {
 
         loginPage.visit();
         loginPage.openUserDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("Demo User").click();
+        loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
         loginPage.openRoleDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("Team Lead").click();
-        loginPage.getSubmitButton().click();
+        loginPage.getSpecificValueFromDropDown("User").click();
+        general.getSubmitButton().click();
 
-        general.urlShouldInclude('/time-logging');
+        general.getUrl().should('include', '/time-logging');
         general.getPageTitle().contains('Timesheets');
         timeLogging.getCalendar().should('be.visible');
         timeLogging.getTileForm().should('be.visible');
-        general.getLoggedUserName().contains('Demo User');
-        general.getMainMenuItems().should('have.length', 2);
-    })
-    
-    it('Validate today\'s date', function () {
-
-        loginPage.visit();
-        loginPage.openUserDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
-        loginPage.openRoleDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("Team Lead").click();
-        loginPage.getSubmitButton().click();
-        timeLogging.getTodaysDate().contains(new Date().getDate());
-    })
+        general.getLoggedUserName().contains('Kamile Stugyte');
+        general.getMainMenuItems().should('have.length', 1);
+    })     
 
     it('Verify all user roles can log in and should see appropriate tabs', function () {
         
@@ -55,7 +48,7 @@ describe('Sourcebooks login', function() {
             loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
             loginPage.openRoleDropDown().click({force:true});
             loginPage.getSpecificValueFromDropDown(currentRole).click();
-            loginPage.getSubmitButton().click();
+            general.getSubmitButton().click();
 
             //checks if correct user name is displayed
             general.getLoggedUserName().contains('Kamile Stugyte');
@@ -88,5 +81,37 @@ describe('Sourcebooks login', function() {
         }
 
         rolesArray.forEach(testFunction);        
+    })    
+})
+
+describe('Sourcebook admin tasks', function() {
+
+    beforeEach(function() {
+        cy.loginAs('Admin');
+        loginPage.visit();
+    })
+
+    it('Validate today\'s date', function () {
+
+        timeLogging.getTodaysDate().contains(new Date().getDate());
+    })
+
+    it('Admin creates new task', function() {
+
+        general.getTasksFromMenu().click();
+        general.getRegularButton().click();
+
+        let taskName = 'TestTask' + new Date().getTime();
+
+        createTasks.getField('name').type(taskName);
+        createTasks.getField('description').type('Description');
+        createTasks.getBillableField().click();
+        general.getSpecificValueFromDropDown('Yes').click();
+        createTasks.getField('rate').clear().type(2);
+        general.getSubmitButton().click();
+        general.getUrl().should('not.include', 'create');
+        general.getTasksFromMenu().click();
+        tasks.getFilterFields().first().type(taskName);
+        tasks.getDisplayedTasks().contains(taskName);
     })
 })
