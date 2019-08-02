@@ -1,6 +1,8 @@
 import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage';
 
 const loginPage = new LoginPage();
+const timeLoggingPage = new TimeLoggingPage();
 
 describe('Sourcebooks login', function() {
   it('Should display validation for empty user after attempted loggin', function() {
@@ -11,35 +13,34 @@ describe('Sourcebooks login', function() {
   });
 
   it('Should be able to login with role User', function() {
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({ force: true });
+    loginPage.visit();
+    loginPage.getUserId().click({ force: true });
     loginPage.getSpecificUserFromDropDown('Demo User').click();
-    cy.get('[id="loginForm.role"]').click({ force: true });
-    cy.get('[aria-label="User"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.getUserRole().click({ force: true });
+    loginPage.getSpecificRoleFromDropDown('User').click();
+    loginPage.getSubmitButton().click();
 
-    cy.url().should('include', '/time-logging');
-    cy.get('.page__title').contains('Timesheets');
-    cy.get('.calendar').should('be.visible');
-    cy.get('.tile.form').should('be.visible');
-    cy.get('.user-info__title').contains('Demo User');
-    cy.get('.main-nav')
+    timeLoggingPage.getUrl().should('include', '/time-logging');
+    timeLoggingPage.getPageTitle().contains('Timesheets');
+    timeLoggingPage.getCalendar().should('be.visible');
+    timeLoggingPage.getTileForm().should('be.visible');
+    timeLoggingPage.getUserInfoTitle().contains('Demo User');
+    timeLoggingPage
+      .getMainNav()
       .find('li')
       .should('have.length', 1);
   });
 
   it('Should validate what date is selected as “Today” on Time Logging page', function() {
-    cy.visit('/');
-    cy.get('[id="loginForm.userId"]').click({ force: true });
-    cy.get('[aria-label="Demo User"]').click();
-    cy.get('[id="loginForm.role"]').click({ force: true });
-    cy.get('[aria-label="Team Lead"]').click();
-    cy.get('[type="submit"]').click();
+    loginPage.visit();
+    loginPage.getUserId().click({ force: true });
+    loginPage.getSpecificUserFromDropDown('Demo User').click();
+    loginPage.getUserRole().click({ force: true });
+    loginPage.getSpecificRoleFromDropDown('User').click();
+    loginPage.getSubmitButton().click();
 
-    cy.visit('/time-logging');
-    cy.get('.calendar--today.calendar--selected').contains(
-      new Date().getDate()
-    );
+    timeLoggingPage.visit();
+    timeLoggingPage.getSelectedDateToday().contains(new Date().getDate());
   });
 
   const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
@@ -47,21 +48,23 @@ describe('Sourcebooks login', function() {
 
   roles.forEach(function(item, i) {
     it(`Verify role ${item}, if it can log in and see appropriate tabs`, function() {
-      cy.visit('/');
-      cy.get('[id="loginForm.userId"]').click({ force: true });
-      cy.get('[aria-label="Mindaugas Maceika"]').click();
-      cy.get('[id="loginForm.role"]').click({ force: true });
-      cy.get(`[aria-label="${item}"]`).click();
-      cy.get('[type="submit"]').click();
+      loginPage.visit();
+      loginPage.getUserId().click({ force: true });
+      loginPage.getSpecificUserFromDropDown('Mindaugas Maceika').click();
+      loginPage.getUserRole().click({ force: true });
+      loginPage.getSpecificRoleFromDropDown(item).click();
+      loginPage.getSubmitButton().click();
 
-      cy.url().should('include', '/time-logging');
-      cy.get('.page__title').contains('Timesheets');
-      cy.get('.calendar').should('be.visible');
-      cy.get('.user-info__title').contains('Mindaugas Maceika');
-      cy.get('.main-nav')
+      timeLoggingPage.getUrl().should('include', '/time-logging');
+      timeLoggingPage.getPageTitle().contains('Timesheets');
+      timeLoggingPage.getCalendar().should('be.visible');
+      timeLoggingPage.getUserInfoTitle().contains('Mindaugas Maceika');
+      timeLoggingPage
+        .getMainNav()
         .find('li')
         .should('have.length', tabs[i]);
-      cy.get('.main-nav__link--active')
+      timeLoggingPage
+        .getMainNavActiveLink()
         .should('have.css', 'color')
         .and('eq', 'rgb(64, 76, 237)');
     });
