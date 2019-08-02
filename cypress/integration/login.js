@@ -49,7 +49,7 @@ describe('Sourcebook test Clients', function() {
         clientCreatePage.getFormFirstName().type(makeId());
         clientCreatePage.getFormLastName().type(makeId());
         clientCreatePage.getFormEmail().type(email);
-        clientCreatePage.getFormSubmit().click();
+        clientCreatePage.getSubmitButton().click();
         
         clientsPage.visit();
         clientsPage.getOrganizationFilter().type(organization);

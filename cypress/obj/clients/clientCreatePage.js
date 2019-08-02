@@ -15,7 +15,7 @@ class ClientCreatePage {
         return cy.get('[id="clientDetailsForm.contacts_email_0"]');
     }
 
-    getFormSubmit() {
+    getSubmitButton() {
         return cy.get('[type="submit"]');
     }
 }
