@@ -39,8 +39,6 @@ class Tasks {
     getTaskNamebyTaskId() {
         return cy.get(`[title=' + "${taskName}" + ']`)
     }
-
-
 }
 
 export default Tasks;

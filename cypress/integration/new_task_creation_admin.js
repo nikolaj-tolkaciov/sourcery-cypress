@@ -18,7 +18,8 @@ describe('Sourcebooks task creation', function() {
 
     it('Admin should create a new task', function () {
 
-        const taskName = Math.ceil((Math.random())*10000);       
+        const taskName = "Task name " + Math.ceil((Math.random())*10000); 
+        const descriptionName = "Description name " + Math.ceil((Math.random())*10000);       
 
         common.getMainNavigationBar().find('[href="/tasks"]').click(); 
         common.geturl().should('include', '/tasks');
@@ -37,5 +38,6 @@ describe('Sourcebooks task creation', function() {
         tasks.visit();
         tasks.getSearchFieldInputField().first().click().type(taskName);
         cy.get('[title=' + taskName + ']').should('exist');
+        cy.get('[title=' + descriptionName + ']').should('exist');        
     })
 })    
