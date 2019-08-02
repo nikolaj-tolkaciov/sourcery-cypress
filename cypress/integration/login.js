@@ -32,7 +32,6 @@ describe('Sourcebooks login', function() {
         }
     ];
        
-    
     Roles.forEach((role) => {
         it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
             cy.visit('/');
