@@ -1,72 +1,78 @@
+import LoginPage from '../objects/loginPage';
+
+const loginPage = new LoginPage();
+
 describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
+    it('Should display validation for empty user after attempted login', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible');
+        loginPage.clickSubmitButton();
+        loginPage.getUserValidationIndicator().should('be.visible');
     })
 
     it('Should be able to login with role Team Lead', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Dominykas Poškus"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.clickUserDropDown();
+        loginPage.clickSpecificUserFromDropDown("Dominykas Poškus");
+        loginPage.clickRoleDropDown();
+        loginPage.clickSpecificRoleFromDropDown("Team Lead");
+        loginPage.clickSubmitButton();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets');
-        cy.get('.calendar').should('be.visible');
-        cy.get('.tile.form').should('be.visible');
-        cy.get('.user-info__title').contains('Dominykas Poškus');
-        cy.get('.main-nav').find('li').should('have.length', 2);
+        loginPage.checkIfUrlIncludes('/time-logging');
+        loginPage.getPageTitle().contains("Timesheets");
+        loginPage.getCalendar().should('be.visible');
+        loginPage.getTileForm().should('be.visible');
+        loginPage.checkIfUserTitleContains("Dominykas Poškus");
+        loginPage.checkMainNavigationTabsCount(2);
     })
 
     it('Calendar should show todays date', function(){
-        cy.get('.calendar--today').find('.calendar__date').contains((new Date()).getDate());
+        loginPage.getTodayInCalendar().contains((new Date()).getDate());
     })
 
     let Roles = [
         {
-            "name":"User",
+            "name": "User",
             "tabs": 1
         },
         {
             "name": "Team Lead",
-            "tabs":2
+            "tabs": 2
         },
         {
-            "name":"Manager",
-            "tabs":5
+            "name": "Manager",
+            "tabs": 5
         },
         {
-            "name":"Accountant",
-            "tabs":5
+            "name": "Accountant",
+            "tabs": 5
         }, 
         {
-            "name":"Admin",
-            "tabs":6
+            "name": "Admin",
+            "tabs": 6
         }];
 
     for(let i = 0; i < Roles.length; i++){
-        it('Verify that ' + Roles[i].name + ' can log in and should see '+ Roles[i].tabs +' tabs', function(){
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});
-            cy.get('[aria-label="Dominykas Poškus"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get('[aria-label="'+ Roles[i].name +'"]').click();
-            cy.get('[type="submit"]').click();
-
-            cy.get('.user-info__title').contains('Dominykas Poškus');
-            cy.get('.main-nav').find('li').should('have.length', Roles[i].tabs);
-            cy.get('.main-nav__link--active').contains("Time Logging");
-            cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', 'rgb(64, 76, 237)');
+        it('Verify that ' + Roles[i].name + ' can log in and should see ' + Roles[i].tabs + ' tabs', function(){
             
-            cy.get('.user-info__title').click();
-            cy.get('[id="logout-button"]').click();
+        loginPage.visit();
+        loginPage.clickUserDropDown();
+        loginPage.clickSpecificUserFromDropDown('Dominykas Poškus');
+        loginPage.clickRoleDropDown();
+        loginPage.clickSpecificRoleFromDropDown(Roles[i].name);
+        loginPage.clickSubmitButton();
+
+        loginPage.checkIfUserTitleContains('Dominykas Poškus');
+        loginPage.checkMainNavigationTabsCount(Roles[i].tabs);
+
+        loginPage.getActiveNavigationTab().contains("Time Logging");
+        loginPage.checkIfActiveTabIsThisColor('rgb(64, 76, 237)');
+
+        loginPage.getUserInfoTitle().click();
+        loginPage.clickLogoutButton();
         })
     }
 })
