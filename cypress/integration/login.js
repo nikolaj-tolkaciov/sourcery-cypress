@@ -41,7 +41,7 @@ function testLogIn(role) {
 
 describe('Sourcebook test Clients', function() {
     it('Should be available for Admin to create new client', function () {
-        testLogIn('Admin');
+        cy.loginAs("Admin");
 
         const organization = makeId();
         const email = makeId() + '@mail.com';
@@ -61,7 +61,7 @@ describe('Sourcebook test Clients', function() {
 
 describe('Sourcebook test Tasks', function() {
     it('Should be able to create new task as Admin', function () {
-        testLogIn('Admin');
+        cy.loginAs("Admin");
 
         let taskName = makeId();
 
@@ -84,7 +84,6 @@ describe('Sourcebook test Tasks', function() {
 
 describe('Sourcebooks testLogIn', function() {
     it('Should display validation for empty user after attempted loggin', function () {
-        
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible')
         loginPage.getSubmitButton().click();
@@ -110,6 +109,7 @@ describe('Sourcebooks testLogIn', function() {
 
 describe('Sourcebooks test Time Logging', function() {
     it('Should be displaying todays date in Time Logging page', function () {
+        cy.loginAs("Admin");
         const today = new Date();
         const date = today.getDate();
 
