@@ -4,7 +4,6 @@ import PageComponents from '../objects/pageComponents';
 import Common from '../objects/common';
 
 const loginPage = new LoginPage();
-
 const timePage = new TimeLoggingPage();
 const pageComp = new PageComponents();
 const common = new Common();
