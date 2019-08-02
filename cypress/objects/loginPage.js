@@ -1,6 +1,6 @@
 class LoginPage {
     visit() {
-        cy.visit('/');
+        cy.visit('/'); 
     }
 
     getUserValidationIndicator() {
@@ -26,18 +26,6 @@ class LoginPage {
     getSpecificRoleFromDropDown(role) {
         return cy.get(`[aria-label="${role}"]`)
     }
-
-    getSpecificUrl(url) {
-        return cy.url().should('include', url)
-    }
-
-    getPageTitle() {
-        return cy.get('.page__title')
-    }
-
-    getCalendar() {
-        return cy.get('.calendar')
-    }
     
     getUserTitle() {
         return cy.get('.user-info__title')
@@ -46,9 +34,8 @@ class LoginPage {
     getElementCountOfNavigationBar(length) {
         return cy.get('.main-nav').find('li').should('have.length', length);
     }
-
-    getCalendarTodaysDate() {
-        return cy.get('.calendar--selected').find('span').contains(new Date().getDate())
+    getElementColor() {
+        return cy.get('.main-nav__link--active')
     }
 }
 

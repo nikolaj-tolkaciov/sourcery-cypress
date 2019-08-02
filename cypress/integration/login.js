@@ -1,15 +1,17 @@
 import LoginPage from '../objects/loginPage';
+import TimeLoggingPage from '../objects/timeLoggingPage'
 
 const loginPage = new LoginPage();
+const timeLoggingPage = new TimeLoggingPage();
 
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        loginPage.visit()
-        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible');
         loginPage.getSubmitButton().click();
-        loginPage.getUserValidationIndicator().should('be.visible')
+        loginPage.getUserValidationIndicator().should('be.visible');
     })
 
     it('Should be able to login with role Team Lead', function () {
@@ -21,17 +23,18 @@ describe('Sourcebooks login', function() {
         loginPage.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
-        loginPage.getSpecificUrl('/time-logging');
-        loginPage.getPageTitle().contains('Timesheets');
-        loginPage.getCalendar().should('be.visible');
-        loginPage.getPageTitle().should('be.visible');
-        loginPage.getUserTitle().contains('Ieva Stonkaite');
+        cy.wait(2000); // for reason js sometimes doesn't load my client
+        timeLoggingPage.visit();
+        // loginPage.getSpecificUrl('/time-logging');
+        timeLoggingPage.getPageTitle().contains('Timesheets');
+        timeLoggingPage.getCalendar().should('be.visible');
+        timeLoggingPage.getPageTitle().should('be.visible');
+        timeLoggingPage.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);
-
     })
 
     it('Should validate what date is selected as “Today” on Time Logging page', function () {
-        loginPage.getCalendarTodaysDate();
+        timeLoggingPage.getCalendarTodaysDate();
     })
-
+    
 })
