@@ -2,7 +2,7 @@ describe('Sourcebooks login', function() {
 
     it('Admin should create a new client', function () {
 
-        const organizationName = Math.ceil(Math.random()*100000);
+        const organizationName = 'task ' + Date.now();
 
         cy.visit('/');
         cy.get('[id="loginForm.userId"]').click({force:true});
@@ -15,9 +15,9 @@ describe('Sourcebooks login', function() {
         cy.get('.btn').click();
 
         cy.get('[id="clientDetailsForm.organization"]').type(organizationName);
-        cy.get('[id="clientDetailsForm.contacts_firstName_0"]').type(organizationName+1);
-        cy.get('[id="clientDetailsForm.contacts_lastName_0"]').type(organizationName+2);
-        cy.get('[id="clientDetailsForm.contacts_email_0"]').type(organizationName+'@email.com');
+        cy.get('[id="clientDetailsForm.contacts_firstName_0"]').type(organizationName + '1');
+        cy.get('[id="clientDetailsForm.contacts_lastName_0"]').type(organizationName + '2');
+        cy.get('[id="clientDetailsForm.contacts_email_0"]').type(organizationName + '@email.com');
         cy.get('[type="submit"]').click();
         cy.wait(1000);
         cy.url().should('to.not.equal',('/clients/create'));
