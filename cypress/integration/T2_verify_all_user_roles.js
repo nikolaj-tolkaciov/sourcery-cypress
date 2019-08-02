@@ -1,92 +1,55 @@
+import LoginPage from '../objects/loginPage';
+const loginPage = new LoginPage()
+
+import TimeLogging from '../objects/timeLogging';
+const timeLogging = new TimeLogging();
+
+import PageComponents from '../objects/pageComponents';
+const pageComponents = new PageComponents();
+
 describe('Sourcebooks login', function() {
 
-    it('Should be able to log in with a role admin and check if "Time Logging" color is blue', function() {
+    let roles = [
+        {
+            name: "User",
+            tabs: '1'
+        },
+        {
+            name: "Team Lead",
+            tabs: '2'
+        },
+        {
+            name: "Manager",
+            tabs: '5'
+        },
+        {
+            name: "Accountant",
+            tabs: '5'
+        },
+        {
+            name: "Admin",
+            tabs: '6'
+        }
+    ];
+
+    roles.forEach(function(element) {
+    it(`Verify if the ${element.name} role can log in and check if "Time Logging" color is blue`, function() {
         
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        loginPage.getLoginFieldUser().click({force:true});
+        loginPage.getSpecificUserFromDropDown("Aistė Laugalytė").click();
+        loginPage.getLoginFieldRole().click({force:true});
+        loginPage.getSpecificrRoleFromDropDown(`${element.name}`).click();
+        pageComponents.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 6);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to log in with a role accoutant and check if "Time Logging" color is blue', function() {
-        
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Accountant"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to log in with a role manager and check if "Time Logging" color is blue', function() {
-        
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Manager"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 5);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to log in with a role team lead and check if "Time Logging" color is blue', function() {
-        
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 2);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
-    })
-
-    it('Should be able to log in with a role user and check if "Time Logging" color is blue', function() {
-        
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Aistė Laugalytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Aiste Laugalyte');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)');
+        pageComponents.getUrl().should('include', '/time-logging');
+        timeLogging.getPageTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTileForm().should('be.visible')
+        pageComponents.getUserName().contains('Aiste Laugalyte');
+        pageComponents.getTabsCount().should('have.length', element.tabs);
+        timeLogging.assertTodayDate()
+        pageComponents.getActiveTabColor()
+        })
     })
 })
