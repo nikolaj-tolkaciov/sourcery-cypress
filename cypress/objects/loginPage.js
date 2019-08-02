@@ -6,11 +6,7 @@ class LoginPage {
     getUserTitle() {
         return cy.get('.user-info__title');
     }
-
-    getURL() {
-        return cy.url();
-    }
-
+    
     getMenuList() {
         return cy.get('.main-nav').find('li');
     }
@@ -54,7 +50,6 @@ class LoginPage {
     getTileForm() {
         return cy.get('.tile.form');
     }
-
 }
 
 export default LoginPage;
