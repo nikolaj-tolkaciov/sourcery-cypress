@@ -19,12 +19,12 @@ class LoginPage
         return cy.get('[aria-label="' + userName + '"]');
     }
 
-    openUpUserDropDown()
+    getUserDropDown()
     {
         return cy.get('[id="loginForm.userId"]');
     }
 
-    openUpRoleDropDown()
+    getpRoleDropDown()
     {
         return cy.get('[id="loginForm.role"]');
     }
@@ -49,12 +49,12 @@ class LoginPage
         return cy.get('.calendar');
     }
 
-    getTitleForm()
+    getTileForm()
     {
         return cy.get('.tile.form');
     }
 
-    checkIfInfoTitleIsSpecific(nameSurname)
+    checkLoginName(nameSurname)
     {
         return cy.get('.user-info__title').contains(nameSurname);
     }

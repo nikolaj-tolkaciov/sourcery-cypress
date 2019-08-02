@@ -14,17 +14,17 @@ describe('Sourcebooks login', function() {
 
     it('Should be able to login with role Team Lead', function () {
         loginPage.visit();
-        loginPage.openUpUserDropDown().click({force:true});
+        loginPage.getUserDropDown().click({force:true});
         loginPage.getSpecificUserFromDropDown("Valentinas Kasteckis").click();
-        loginPage.openUpRoleDropDown().click({force:true});
+        loginPage.getpRoleDropDown().click({force:true});
         loginPage.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets');
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(2);
     })
 
@@ -39,8 +39,8 @@ describe('Sourcebooks login', function() {
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets')
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(1);
         loginPage.checkSelectedButtonColor();
     })   
@@ -51,8 +51,8 @@ describe('Sourcebooks login', function() {
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets')
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(2);
         loginPage.checkSelectedButtonColor();
     })
@@ -63,8 +63,8 @@ describe('Sourcebooks login', function() {
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets')
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(5);
         loginPage.checkSelectedButtonColor();
     })
@@ -75,8 +75,8 @@ describe('Sourcebooks login', function() {
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets')
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(5);
         loginPage.checkSelectedButtonColor();
     })
@@ -87,8 +87,8 @@ describe('Sourcebooks login', function() {
         loginPage.checkIfWeAreInSpecificURL('/time-logging');
         loginPage.getPageTitle().contains('Timesheets')
         loginPage.getCalendar().should('be.visible')
-        loginPage.getTitleForm().should('be.visible')
-        loginPage.checkIfInfoTitleIsSpecific("Valentinas Kasteckis");
+        loginPage.getTileForm().should('be.visible')
+        loginPage.checkLoginName("Valentinas Kasteckis");
         loginPage.checkNavigationMenuLength(6);
         loginPage.checkSelectedButtonColor();
     })
