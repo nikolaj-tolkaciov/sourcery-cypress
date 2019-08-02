@@ -26,7 +26,9 @@ describe('Sourcebooks login', function() {
     })
 
     it('Should show calendar date', function () {
-        cy.get('.calendar--today').find('span').contains(1);
+        var d = new Date();
+        cy.get('.calendar--today').find('span').contains(d.getDate());
+
     })
 
 })
