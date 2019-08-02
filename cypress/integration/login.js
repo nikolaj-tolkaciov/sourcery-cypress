@@ -3,7 +3,6 @@ import ClientsPage from '../obj/clients/clientsPage';
 import ClientCreatePage from '../obj/clients/clientCreatePage';
 import TasksPage from '../obj/tasks/tasksPage';
 import TaskCreatePage from '../obj/tasks/taskCreatePage';
-import TasksEditPage from '../obj/tasks/taskEditPage';
 import TaskEditPage from '../obj/tasks/taskEditPage';
 import TimeLoggingPage from '../obj/timeLogging/timeLoggingPage';
 import Common from '../obj/common';
