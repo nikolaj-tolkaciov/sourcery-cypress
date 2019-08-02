@@ -22,5 +22,9 @@ class PageComponents {
     clickSubmit(){
         cy.get('[type="submit"]').click();
     }
+    
+    clickInputField(inputId){
+        cy.get(`[id="${inputId}"]`).click({force:true});
+    }
 }
 export default PageComponents
