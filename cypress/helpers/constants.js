@@ -34,3 +34,5 @@ export const current_user = {
     lastName: 'Gujis',
     id: 30,
 }
+
+export const getRandomName = () => Math.random().toString().substring(11)

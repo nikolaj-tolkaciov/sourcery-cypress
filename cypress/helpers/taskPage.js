@@ -9,7 +9,7 @@ export default {
 
     getBillToClient: () => cy.get('.Select-value'),
 
-    getBillToClientOption: (option) => cy.get('[aria-label="' + option + '"]'), // 'Yes' or 'No'
+    getBillToClientOption: (option) => cy.get('[aria-label="' + option + '"]'),
 
     getHourlyRate: () => cy.get('[id="taskDetailsForm.rate"]'),
 

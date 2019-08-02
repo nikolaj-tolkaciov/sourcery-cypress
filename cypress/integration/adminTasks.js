@@ -1,6 +1,5 @@
-import TaskPage from '../helpers/TaskPage'
+import TaskPage from '../helpers/taskPage'
 
-// T-3
 describe('Task creation', () => {
 
     it('admin should be able to add new tasks', () => {
@@ -9,7 +8,7 @@ describe('Task creation', () => {
         TaskPage.getCreateButton().click()
 
         cy.url().should('include', '/tasks/create');
-        
+
         const randomName = Math.random().toString(36).substring(9);
         TaskPage.getTaskNameInput().type(randomName)
         TaskPage.getDescriptionInput().type(randomName)
@@ -22,13 +21,13 @@ describe('Task creation', () => {
         TaskPage.getHourlyRate().type(Math.random() * 15)
 
         TaskPage.getSubmitButton().click()
-        
+
         cy.url().should('include', '/tasks')
         cy.url().should('not.include', '/create')
 
         TaskPage.visit()
-		TaskPage.getNameFilter().type(randomName)
-		TaskPage.getTaskList().should('have.length', 1)
+        TaskPage.getNameFilter().type(randomName)
+        TaskPage.getTaskList().should('have.length', 1)
     })
 
 })

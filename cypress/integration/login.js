@@ -1,8 +1,7 @@
-import LoginPage from '../helpers/LoginPage'
-import TimeLoggingPage from '../helpers/TimeLoggingPage'
+import LoginPage from '../helpers/loginPage'
+import TimeLoggingPage from '../helpers/timeLoggingPage'
 import { ROLES, current_user } from '../helpers/constants'
 
-// T-2
 describe('Sourcebooks login', function () {
 
     it('Should display validation for empty user after attempted loggin', () => {
@@ -28,15 +27,13 @@ describe('Sourcebooks login', function () {
             TimeLoggingPage.getCalendar().should('be.visible')
             TimeLoggingPage.getTileForm().should('be.visible')
 
-            const activeTab = TimeLoggingPage.getActiveTab()
-            
-            activeTab.should('have.length', 1)
-            activeTab.should('contain', 'Time Logging')
+            TimeLoggingPage.getActiveTab().should('have.length', 1)
+                .and('contain', 'Time Logging')
+                .and('have.css', 'color', 'rgb(64, 76, 237)')
 
             TimeLoggingPage.getUserName().should('contain', fullUserName)
             TimeLoggingPage.getTabs().should('have.length', role.tabs)
 
-            TimeLoggingPage.getActiveTab().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     })
 })

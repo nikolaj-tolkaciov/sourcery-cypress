@@ -12,4 +12,15 @@ export default {
     getEmailField: () => cy.get('[id="clientDetailsForm.contacts_email_0"]'),
 
     getSaveButton: () => cy.get('[type="submit"]'),
+
+    clientShouldExist: (orgName, firstName, lastName) => {
+
+        const contact = firstName + ' ' + lastName
+
+        cy.get('.field__text.field__text--small').eq(0).type(orgName)
+        cy.get('.field__text.field__text--small').eq(1).type(contact)
+
+        cy.get('[row-index="0"]').contains(orgName)
+        cy.get('.ag-body.ag-row-no-animation').should('have.length', 1)
+    }
 }
