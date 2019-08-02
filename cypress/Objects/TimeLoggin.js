@@ -1,7 +1,7 @@
 class TimeLoggin{
-    urlIncludeTimeLogging(){
-        return cy.url()
-    }
+    validateUrl() {
+        cy.url().should('include', '/time-logging')
+        }
     getPageTitle(){
         return cy.get('.page__title')
     }
@@ -15,10 +15,10 @@ class TimeLoggin{
         return cy.get('.main-nav').find('li')
     }
     getMainNavActiveLinkColor(){
-        return cy.get('.main-nav__link--active').should('have.css', 'color').and('equal', 'rgb(64, 76, 237)')
+        return cy.get('.main-nav__link--active')
     }
     getTodaysDay(){
-        return cy.get('.calendar--today').find('span').contains(new Date().getDate())
+        return cy.get('.calendar--today')
     }
 }
 
