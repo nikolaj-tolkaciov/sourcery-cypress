@@ -26,6 +26,15 @@ class LoginPage {
     getRoleFromDropdown(role) {
         return cy.get(`[aria-label="${role}"]`);
     }
+    
+    testLogIn(role) {
+        this.visit();
+        this.getUserDropdown().click({force:true});
+        this.getUserFromDropdown('Marius Lastauskas').click();
+        this.getRoleDropdown().click({force:true});
+        this.getRoleFromDropdown(role).click();
+        this.getSubmitButton().click();
+    }
 }
 
 export default LoginPage;
