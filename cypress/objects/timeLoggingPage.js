@@ -7,8 +7,8 @@ class TimeLoggingPage{
         return cy.get('.tile.form')
     }
 
-    getTodaysDay(){
-        return cy.get('.calendar__date').contains(new Date().getDate())
+    validateTodaysDay(){
+        cy.get('.calendar__date').contains(new Date().getDate())
     }
 
 }

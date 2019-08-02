@@ -23,11 +23,11 @@ class Common{
         return cy.get('.main-nav').find('li')
     }
 
-    getActiveNavLinkColor(rgbCode){
+    validateActiveNavLinkColor(rgbCode){
         return cy.get('.main-nav__link--active').should('have.css', 'color').and('eq', `${rgbCode}`)
     }
 
-    getActiveNavLink(link){
+    validateActiveNavLink(link){
         return cy.get('.main-nav__link--active').should('have.attr', 'href', `${link}`)
     }
 

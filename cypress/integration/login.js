@@ -36,7 +36,7 @@ describe('Sourcebooks login', function() {
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 6);
 
-        timeLoggingPage.getTodaysDay();
+        timeLoggingPage.validateTodaysDay();
     })
 
     it('Verify "User" can log in and should see appropriate tabs', function() {
@@ -48,8 +48,8 @@ describe('Sourcebooks login', function() {
         common.getSubmitButton().click();
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 1);
-        common.getActiveNavLinkColor("rgb(64, 76, 237)");
-        common.getActiveNavLink("/time-logging");
+        common.validateActiveNavLinkColor("rgb(64, 76, 237)");
+        common.validateActiveNavLink("/time-logging");
     })
 
     it('Verify "Team Lead" can log in and should see appropriate tabs', function() {
@@ -61,8 +61,8 @@ describe('Sourcebooks login', function() {
         common.getSubmitButton().click();
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 2);
-        common.getActiveNavLinkColor("rgb(64, 76, 237)");
-        common.getActiveNavLink("/time-logging");
+        common.validateActiveNavLinkColor("rgb(64, 76, 237)");
+        common.validateActiveNavLink("/time-logging");
     })
 
     it('Verify "Manager" can log in and should see appropriate tabs', function() {
@@ -74,8 +74,8 @@ describe('Sourcebooks login', function() {
         common.getSubmitButton().click();
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 5);
-        common.getActiveNavLinkColor("rgb(64, 76, 237)");
-        common.getActiveNavLink("/time-logging");
+        common.validateActiveNavLinkColor("rgb(64, 76, 237)");
+        common.validateActiveNavLink("/time-logging");
     })
 
     it('Verify "Accountant" can log in and should see appropriate tabs', function() {
@@ -87,8 +87,8 @@ describe('Sourcebooks login', function() {
         common.getSubmitButton().click();
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 5);
-        common.getActiveNavLinkColor("rgb(64, 76, 237)");
-        common.getActiveNavLink("/time-logging");
+        common.validateActiveNavLinkColor("rgb(64, 76, 237)");
+        common.validateActiveNavLink("/time-logging");
     })
 
     it('Verify "Admin" can log in and should see appropriate tabs', function() {
@@ -100,8 +100,8 @@ describe('Sourcebooks login', function() {
         common.getSubmitButton().click();
         common.getUserInfoTitle("Edvinas Kveselys");
         common.getNavigationLength().should('have.length', 6);
-        common.getActiveNavLinkColor("rgb(64, 76, 237)");
-        common.getActiveNavLink("/time-logging");
+        common.validateActiveNavLinkColor("rgb(64, 76, 237)");
+        common.validateActiveNavLink("/time-logging");
     })
 
 })
