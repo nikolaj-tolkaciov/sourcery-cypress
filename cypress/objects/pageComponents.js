@@ -25,6 +25,11 @@ class PageComponents {
 
     getFirstSearchField(){
         return cy.get('[class="field__text field__text--small"]').eq(0)
+
+    }
+    
+    clickInputField(inputId){
+        cy.get(`[id="${inputId}"]`).click({force:true});
     }
 }
 export default PageComponents
