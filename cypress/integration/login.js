@@ -24,8 +24,7 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
 
         cy.wait(2000); // for reason js sometimes doesn't load my client
-        common.visit();
-        // loginPage.getSpecificUrl('/time-logging');
+        common.getSpecificUrl('/time-logging');
         common.getPageTitle().contains('Timesheets');
         common.getCalendar().should('be.visible');
         common.getPageTitle().should('be.visible');

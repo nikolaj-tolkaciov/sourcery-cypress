@@ -1,7 +1,7 @@
 class Common {
     
-    visit() {
-        cy.visit('/time-logging'); 
+    getSpecificUrl(url) {
+        cy.visit(url); 
     }
 
     getCalendar() {
