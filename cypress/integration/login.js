@@ -4,33 +4,32 @@ const loginPage = new LoginPage();
 
 describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
+    beforeEach(function() {
+
+        cy.loginAs('User');
+        loginPage.visit();
+    })
+
+    /*it('Should display validation for empty user after attempted loggin', function () {
         
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible')
         loginPage.getSubmitButton().click();
         loginPage.getUserValidationIndicator().should('be.visible')
-    })
+    })*/
 
     it('Should be able to login with role User', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        loginPage.getSpecificUserFromDropdown("Demo User").click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-
         cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        loginPage.getPageTitle().contains('Timesheets')
+        loginPage.getCalendar().should('be.visible')
+        loginPage.getTitleForm().should('be.visible')
+        loginPage.getUserInfoTitle().contains('Saulė Raudytė');
+        loginPage.getMainNav().find('li').should('have.length', 1);
     })
 
     it('Should validate todays date', function () {
 
-        cy.get('.calendar--today').find('span').contains(new Date().getDate());
+        loginPage.getCalendarToday().find('span').contains(new Date().getDate());
     })
 })

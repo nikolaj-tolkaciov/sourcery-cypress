@@ -1,29 +1,33 @@
+import LoginPage from '../objects/loginPage';
+import CreatePage from '../objects/createPage';
+
+const loginPage = new LoginPage();
+const createPage = new CreatePage();
+
 describe('Sourcebooks login', function() {
+
+    beforeEach(function() {
+
+        cy.loginAs('Admin');
+    })
 
     it('Admin should create a new task', function () {
 
         const taskName = 'task ' + Date.now();
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Saulė Raudytė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit("/tasks");
+        createPage.getButton().click();
+        createPage.getElementById("taskDetailsForm.name").type(taskName);
+        createPage.getElementById("taskDetailsForm.description").type("Writing first automated test on thursday.");
+        createPage.getSelectedLabel().click({ force: true }).get('[aria-label="Yes"]').click({ force: true });
+        createPage.getElementById("taskDetailsForm.rate").clear().type("5.000");
+        loginPage.getSubmitButton().click();
 
-        cy.get('[href="/tasks"]').click();
-        cy.get('.btn').click();
-        cy.get('[id="taskDetailsForm.name"]').type(taskName);
-        cy.get('[id="taskDetailsForm.description"]').type("Writing first automated test on thursday.");
-        cy.get('[aria-selected="true"]').click({ force: true }).get('[aria-label="Yes"]').click({ force: true });
-        cy.get('[id="taskDetailsForm.rate"]').clear().type("5.000");
-        cy.get('[type="submit"]').click({force:true});
-
-        cy.wait(1000);
-        cy.url().should('to.not.equal',('/tasks/create'));
         
-        cy.visit('/tasks');
-        cy.get('.field__text').first().click().type(taskName);
-        cy.get('[title=' + taskName + ']').should('exist');
+        createPage.checkUrl().should('to.not.equal',('/tasks/create'));
+        
+        loginPage.visit("/tasks");
+        createPage.getFieldText().first().click().type(taskName);
+        createPage.getTaskName(taskName).should('exist');
     })
 })

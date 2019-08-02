@@ -1,6 +1,6 @@
 class LoginPage {
-    visit() {
-        cy.visit('/');
+    visit(url) {
+        cy.visit(url);
     }
 
     getUserValidationIndicator() {
@@ -13,6 +13,30 @@ class LoginPage {
 
     getSpecificUserFromDropdown(userName) {
         return cy.get(`[aria-label="${userName}"]`);
+    }
+
+    getPageTitle() {
+        return cy.get('.page__title');
+    }
+
+    getCalendar() {
+        return cy.get('.calendar');
+    }
+
+    getTitleForm() {
+        return cy.get('.tile.form');
+    }
+
+    getUserInfoTitle() {
+        return cy.get('.user-info__title');
+    }
+
+    getMainNav() {
+        return cy.get('.main-nav');
+    }
+
+    getCalendarToday() {
+        return cy.get('.calendar--today');
     }
 }
 
