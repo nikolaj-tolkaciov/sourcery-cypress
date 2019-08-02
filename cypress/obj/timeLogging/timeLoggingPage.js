@@ -11,7 +11,7 @@ class TimeLoggingPage {
         return cy.get('.calendar');
     }
 
-    getFormTitle() {
+    getFormTile() {
         return cy.get('.tile.form');
     }
 

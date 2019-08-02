@@ -96,7 +96,7 @@ describe('Sourcebooks testLogIn', function() {
             timeLoggingPage.checkUrl();
             timeLoggingPage.getPageTitle().contains('Timesheets')
             timeLoggingPage.getCalendar().should('be.visible')
-            timeLoggingPage.getFormTitle().should('be.visible')
+            timeLoggingPage.getFormTile().should('be.visible')
             timeLoggingPage.getUserNameTitle().contains('Marius Lastauskas');
             timeLoggingPage.getNavTabs().should('have.length', roles[i].tabCount);
             

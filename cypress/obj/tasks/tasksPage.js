@@ -1,4 +1,4 @@
-class TaskSPage {
+class TasksPage {
     visit() {
         cy.visit('/tasks');
     }
@@ -16,4 +16,4 @@ class TaskSPage {
     }
 }
 
-export default TaskSPage;
+export default TasksPage;
