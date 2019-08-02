@@ -46,5 +46,4 @@ describe('Sourcebooks login', function() {
             cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
         })
     })  
- 
-})
+})  
