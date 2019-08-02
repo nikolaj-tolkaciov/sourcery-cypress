@@ -3,7 +3,7 @@ import { current_user as curr_user, getRandomName } from '../helpers/constants'
 // T-5
 describe('Project creation', () => {
 
-    it('admin should be able to add new tasks', () => {
+    it('admin should be able to add new project', () => {
         cy.loginAs('Admin')
         ProjectPage.visit()
 
