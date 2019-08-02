@@ -46,6 +46,7 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(1);
+        cy.url().should('include', '/time-logging');
         loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');      
     })
     
@@ -59,6 +60,7 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);
+        cy.url().should('include', '/time-logging');
         loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');          
     })
     
@@ -72,6 +74,7 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(5);
+        cy.url().should('include', '/time-logging');
         loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');    
     })
     
@@ -85,7 +88,9 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(5);
+        cy.url().should('include', '/time-logging');
         loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
+
     })
     
     it('Should verify all user roles can log in and should see appropriate tabs - ADMIN', function () {
@@ -98,6 +103,7 @@ describe('Sourcebooks login', function() {
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(6);
+        cy.url().should('include', '/time-logging');
         loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
     })
     
