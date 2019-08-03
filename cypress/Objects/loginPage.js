@@ -2,10 +2,10 @@ class LoginPage {
     visit(){
         cy.visit('/');
     }
-    getvalidationerror() {
+    getValidationError() {
         return cy.get('.Select.not-valid');
     }
-    submitlogin(){
+    submitLogin(){
        return cy.get('[type="submit"]');
     }
     openUsersDropDown(){

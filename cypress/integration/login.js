@@ -9,9 +9,9 @@ describe('Sourcebooks login', function() {
     it('Should display validation for empty user after attempted loggin', function () {
                
         loginPage.visit();
-        loginPage.getvalidationerror().should('not.visible');
-        loginPage.submitlogin().click();
-        loginPage.getvalidationerror().should('be.visible')
+        loginPage.getValidationError().should('not.visible');
+        loginPage.submitLogin().click();
+        loginPage.getValidationError().should('be.visible');
     })
 
     it('Should be able to login with role User', function () {
@@ -21,13 +21,13 @@ describe('Sourcebooks login', function() {
         loginPage.chooseSelectedUser(userName).click();
         loginPage.openRoleList().click({force:true});
         loginPage.getUserRole('User').click();
-        loginPage.submitlogin().click();
+        loginPage.submitLogin().click();
 
         timeLogging.visitURL();
-        timeLogging.getPageTitle().contains('Timesheets')
-        timeLogging.getCalendar().should('be.visible')
-        timeLogging.getCalendarTody().should('be.visible')
-        timeLogging.getUserTitle().contains(userName)
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getCalendarTody().should('be.visible');
+        timeLogging.getUserTitle().contains(userName);
         timeLogging.countTabs().should('have.length', 1);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
@@ -40,13 +40,13 @@ describe('Sourcebooks login', function() {
         loginPage.chooseSelectedUser(userName).click();
         loginPage.openRoleList().click({force:true});
         loginPage.getUserRole('Team Lead').click();
-        loginPage.submitlogin().click();
+        loginPage.submitLogin().click();
 
         timeLogging.visitURL();
-        timeLogging.getPageTitle().contains('Timesheets')
-        timeLogging.getCalendar().should('be.visible')
-        timeLogging.getCalendarTody().should('be.visible')
-        timeLogging.getUserTitle().contains(userName)
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getCalendarTody().should('be.visible');
+        timeLogging.getUserTitle().contains(userName);
         timeLogging.countTabs().should('have.length', 2);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
@@ -59,13 +59,13 @@ describe('Sourcebooks login', function() {
         loginPage.chooseSelectedUser(userName).click();
         loginPage.openRoleList().click({force:true});
         loginPage.getUserRole('Manager').click();
-        loginPage.submitlogin().click();
+        loginPage.submitLogin().click();
 
         timeLogging.visitURL();
-        timeLogging.getPageTitle().contains('Timesheets')
-        timeLogging.getCalendar().should('be.visible')
-        timeLogging.getCalendarTody().should('be.visible')
-        timeLogging.getUserTitle().contains(userName)
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getCalendarTody().should('be.visible');
+        timeLogging.getUserTitle().contains(userName);
         timeLogging.countTabs().should('have.length', 5);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
@@ -78,13 +78,13 @@ describe('Sourcebooks login', function() {
         loginPage.chooseSelectedUser(userName).click();
         loginPage.openRoleList().click({force:true});
         loginPage.getUserRole('Accountant').click();
-        loginPage.submitlogin().click();
+        loginPage.submitLogin().click();
 
         timeLogging.visitURL();
-        timeLogging.getPageTitle().contains('Timesheets')
-        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
         timeLogging.getCalendarTody().should('be.visible')
-        timeLogging.getUserTitle().contains(userName)
+        timeLogging.getUserTitle().contains(userName);
         timeLogging.countTabs().should('have.length', 5);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
@@ -97,7 +97,7 @@ describe('Sourcebooks login', function() {
         loginPage.chooseSelectedUser(userName).click();
         loginPage.openRoleList().click({force:true});
         loginPage.getUserRole('Admin').click();
-        loginPage.submitlogin().click();
+        loginPage.submitLogin().click();
 
         timeLogging.visitURL();
         timeLogging.getPageTitle().contains('Timesheets')
@@ -108,4 +108,5 @@ describe('Sourcebooks login', function() {
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
     })
+    
 })

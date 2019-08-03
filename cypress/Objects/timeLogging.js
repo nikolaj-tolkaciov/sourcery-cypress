@@ -1,6 +1,6 @@
 class TimeLogging {
     visitURL(){
-    cy.url().should('include', '/time-logging');
+        cy.url().should('include', '/time-logging');
     }
     getPageTitle(){
         return cy.get('.page__title');
