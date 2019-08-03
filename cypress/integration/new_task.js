@@ -7,8 +7,8 @@ describe('Sourcebooks login', function() {
     const tasks = new Tasks();  
 
     beforeEach(() => {
-            cy.loginAs("Admin")
-            loginPage.visit()
+        cy.loginAs("Admin")
+        loginPage.visit()
     })
 
     it('Should create new task', function () {
@@ -19,7 +19,7 @@ describe('Sourcebooks login', function() {
         tasks.createTasks().click();
         tasks.taskName().type(fieldText[0])
         tasks.taskDescription().type(fieldText[1])
-        tasks.selectBill().trigger('mousemove').click()
+        tasks.selectBill().click()
         tasks.selectYes().click()
         tasks.hourlyRate().clear()
         tasks.hourlyRate().type(`${Math.random()}`)
@@ -27,7 +27,5 @@ describe('Sourcebooks login', function() {
         tasks.tasksButton().click();
         tasks.searchByName().type(fieldText[0])
         tasks.checkIfDisplayed(fieldText[0]).should('be.visible')
-
-
     })
 })
