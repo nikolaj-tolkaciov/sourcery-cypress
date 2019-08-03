@@ -1,8 +1,8 @@
 import TasksPage from '../objects/tasksPage';
-import CreateTaskPage from '../objects/createTaskPage';
+import TaskDetailsPage from '../objects/taskDetailsPage';
 
 const tasksPage = new TasksPage();
-const createTaskPage = new CreateTaskPage();
+const taskDetailsPage = new TaskDetailsPage();
 
 describe('Create task', function() {
 
@@ -14,7 +14,7 @@ describe('Create task', function() {
         tasksPage.visit();
         tasksPage.pressCreateNewButton();
 
-        var newTask = createTaskPage.createNewTask();
+        var newTask = taskDetailsPage.createNewTask();
 
         cy.url().should('not.include', 'create');
         tasksPage.visit();

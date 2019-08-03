@@ -1,8 +1,8 @@
 import ClientsPage from '../objects/clientsPage'
-import NewClientPage from '../objects/newClientPage';
+import ClientDetailsPage from '../objects/clientDetailsPage';
 
 const clientsPage = new ClientsPage();
-const newClientPage = new NewClientPage();
+const clientDetailsPage = new ClientDetailsPage();
 
 describe('Create client', function() {
 
@@ -15,7 +15,7 @@ describe('Create client', function() {
         clientsPage.visit();
         clientsPage.pressCreateNewButton();
 
-        var organization = newClientPage.createNewClient();
+        var organization = clientDetailsPage.createNewClient();
         cy.url().should('not.include', 'create');
 
         clientsPage.visit();

@@ -11,7 +11,7 @@ class TasksPage extends PageComponents{
 
     assertTaskExists(task){
         this.getFirstSearchField().type(task.name + '{enter}')
-        cy.get(`[title="${task.description}"]`)
+        cy.get(`[title="${task.description}"]`).should('be.visible')
     }
 }
 export default TasksPage

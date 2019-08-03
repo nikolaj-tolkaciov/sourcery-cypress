@@ -22,11 +22,11 @@ class TimeLoggingPage extends PageComponents{
         var description = Date.now();
         cy.get('.calendar--today').click();
         this.clickInputField("react-select-2--value")
-        cy.get('[aria-label="Some unique project name"]').click();
+        cy.get(`[aria-label="${this.projectName}"]`).click();
         this.clickInputField("react-select-3--value")
-        cy.get('[aria-label="My billable task"]').click();
+        cy.get(`[aria-label="${this.taskName}"]`).click();
         this.getElementById("timeLoggingForm.notes").click().type(description);
-        this.getElementById("timeLoggingForm.hours").click().type("0.1");
+        this.getElementById("timeLoggingForm.hours").click().type(this.taskDuration);
         this.clickSubmit();
 
         return description

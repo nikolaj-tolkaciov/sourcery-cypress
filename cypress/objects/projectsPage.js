@@ -11,7 +11,7 @@ class ProjectsPage extends PageComponents{
 
     assertProjectExists(project){
         cy.get('[class="field__text field__text--small"]').eq(0).type(project + '{enter}')
-        cy.get('[title="Internal"]')
+        cy.get(`[title="${this.projectClient}"]`).should('be.visible')
     }
 }
 export default ProjectsPage

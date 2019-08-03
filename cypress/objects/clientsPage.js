@@ -11,7 +11,7 @@ class ClientsPage extends PageComponents{
 
     assertClientCreated(organization){
         this.getFirstSearchField().type(organization + '{enter}')
-        cy.get('[title="LastName, FirstName"]')
+        cy.get(`[title="${this.clientSurname}, ${this.clientName}"]`).should('be.visible')
     }
 }
 

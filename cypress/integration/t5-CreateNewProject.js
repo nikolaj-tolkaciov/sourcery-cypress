@@ -1,8 +1,8 @@
 import ProjectsPage from '../objects/projectsPage';
-import NewProjectPage from '../objects/newProjectPage';
+import ProjectDetailsPage from '../objects/projectDetailsPage';
 
 const projectsPage = new ProjectsPage();
-const newProjectPage = new NewProjectPage();
+const projectDetailsPage = new ProjectDetailsPage();
 
 describe('Create project', function() {
 
@@ -15,7 +15,7 @@ describe('Create project', function() {
         projectsPage.visit();
         projectsPage.pressCreateNewButton();
 
-        var project = newProjectPage.createNewProject();
+        var project = projectDetailsPage.createNewProject();
         cy.url().should('not.include', 'create');
 
         projectsPage.visit();
