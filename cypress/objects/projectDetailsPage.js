@@ -7,12 +7,12 @@ class NewProjectPage extends PageComponents{
         var project = 'Project_' + date
         this.getElementById("projectDetailsForm.name").type(project)
         this.getElementById("react-select-2--value").contains('Select...').click();
-        cy.get('[aria-label="Internal"]').click()
+        cy.get(`[aria-label="${this.projectClient}"]`).click()
         this.getElementById("react-select-3--value").contains('Select...').click();
-        cy.get('[aria-label="Cernyšova, Jelena (jelena.cernysova@sourcebooks.com)"]').click();
+        cy.get(`[aria-label="${this.employeeName} (${this.employeeEmail})"]`).click();
 
-        this.addElementFromModal("Tasks", "My billable task")
-        this.addElementFromModal("Members", "Jelena")
+        this.addElementFromModal("Tasks", this.taskName)
+        this.addElementFromModal("Members", this.employeeName)
 
         this.clickSubmit()
         return project

@@ -1,4 +1,19 @@
 class PageComponents {
+    
+    constructor(){
+        this.employeeName = "Cernyšova, Jelena"
+        this.employeeEmail = "jelena.cernysova@sourcebooks.com"
+        this.projectName = "Some unique project name"
+        this.taskName = "My billable task"
+        this.taskBillable = "Yes"
+        this.taskRate = "5"
+        this.taskDuration = "0.1"
+        this.clientName = "FirstName"
+        this.clientSurname = "LastName"
+        this.clientEmail = "email@email.email"
+        this.projectClient = "Internal"
+    }
+
     getPageTitle(){
         return cy.get('.page__title')
     }
