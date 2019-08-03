@@ -25,7 +25,8 @@ describe('Sourcebooks creating task by admin', function() {
         creatingNewTaskPage.getClickSave().contains("Save").click()
         creatingNewTaskPage.getTasksForChecking().contains("Tasks").click()
         creatingNewTaskPage.getFilter().type("Reading")
+        creatingNewTaskPage.getCheckingIfDisplayed("Reading").contains("Reading")
         
-  
+        
     })
 })

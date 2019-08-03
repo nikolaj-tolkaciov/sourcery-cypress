@@ -1,4 +1,4 @@
-import LoginPage from '../objects/loginPage'
+import LoginPage from "../objects/LoginPage.1";
 import TimeLoginPage from '../objects/timeLoginPage'
 
 const loginPage = new LoginPage()
