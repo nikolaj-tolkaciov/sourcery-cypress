@@ -8,31 +8,31 @@ describe('Task creation', function() {
 
     beforeEach(function () {
         cy.loginAs('Admin');
-        common.visit('/Tasks');
+        taskPage.visit();
     })
 
     it('Admin creates a new task', function () {
         
-        common.clickCertainButton('button','Create Task');
-        const taskName = Date.now().toString(); 
-        taskPage.inputIntoASpecificField('taskDetailsForm.name', taskName);
-        taskPage.inputIntoASpecificField('taskDetailsForm.description', Date.now());
+        common.clickCertainButtonWithText('button','Create Task');
+        const timeStamp = common.getCurrentTimeStamp();
+        taskPage.inputTaskName(timeStamp);
+        taskPage.inputTaskDescription(timeStamp);
         taskPage.clickBillToClientDropDown();
-        const selection = taskPage.generateRandomBillToClientSelection();
-        taskPage.selectRandomBillToClientOption(selection);
 
-        if (selection === 'Yes') {
-            common.clearField('taskDetailsForm.rate');
-            taskPage.inputIntoASpecificField('taskDetailsForm.rate', Math.floor(Math.random()*50));
-        }
+        taskPage.selectSpecificBillToClientOption('Yes');
+        common.clearField('taskDetailsForm.rate');
+        taskPage.inputTaskRate(Math.floor(Math.random()*50));
 
-        common.clickCertainButton('Submit','Save');
+        taskPage.clickBillToClientDropDown();
+        taskPage.selectSpecificBillToClientOption(taskPage.generateRandomBillToClientSelection());
 
-        common.wait(200);
+        common.clickCertainButtonWithText('Submit','Save');
+
         common.checkIfUrlDoesNotInclude('/create');
         common.visit('/tasks');
-        taskPage.filterTasksByName(taskName);
-        taskPage.checkIfTaskListContains(taskName);
+        common.filterNamesList(timeStamp);
+        common.filterDescriptionList(timeStamp);
+        common.checkIfListContains(timeStamp);
     })
 
 })

@@ -1,13 +1,14 @@
 class Common {
+
     checkIfUrlDoesNotInclude(text) {
         cy.url().should('not.include', text);
     }
 
-    clickCertainButton(buttonType, text) {
+    clickCertainButtonWithText(buttonType, text) {
         cy.get(`[type="${buttonType}"]`).contains(text).click();
     }
 
-    generateAUniqueString() {
+    getCurrentTimeStamp() {
         return Date.now().toString();
     }
 
@@ -23,12 +24,12 @@ class Common {
         cy.get(`[id="${fieldId}"]`).clear();
     }
     
-    inputIntoASpecificField(fieldId, input) {
-        cy.get(`[id="${fieldId}"]`).type(input);
+    filterNamesList(name) {
+        cy.get('[class="field__text field__text--small"]').get('[type="text"]').first().type(name);
     }
 
-    filterListItemsByName(name) {
-        cy.get('[class="field__text field__text--small"]').get('[type="text"]').first().type(name);
+    filterDescriptionList(decription) {
+        cy.get('[class="field__text field__text--small"]').get('[type="text"]').last().type(decription);
     }
 
     checkIfListContains(name) {
