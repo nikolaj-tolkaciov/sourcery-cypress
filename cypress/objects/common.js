@@ -4,6 +4,10 @@ class Common {
         cy.url().should('not.include', text);
     }
 
+    checkIfUrlIncludes(text) {
+        cy.url().should('include', text);
+    }
+
     clickCertainButtonWithText(buttonType, text) {
         cy.get(`[type="${buttonType}"]`).contains(text).click();
     }

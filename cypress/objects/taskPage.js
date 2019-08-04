@@ -31,6 +31,10 @@ class TaskPage {
     inputTaskRate(rate) {
         cy.get(`[name="taskDetailsForm.rate"]`).type(rate);
     }
+
+    filterBillableTasksByText(text) {
+        cy.get('[class="field__select field__select--small"]').first().select(text);
+    }
 }
 
 export default TaskPage;
