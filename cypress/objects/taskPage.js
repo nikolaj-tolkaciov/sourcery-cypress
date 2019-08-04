@@ -1,9 +1,5 @@
 class TaskPage {
 
-    inputIntoASpecificField(fieldId, input) {
-        cy.get(`[id="${fieldId}"]`).type(input);
-    }
-
     generateRandomBillToClientSelection() {
         let num = Math.floor(Math.random()*2);
         if (num === 1)
@@ -16,20 +12,28 @@ class TaskPage {
         cy.get('[class = Select-value]').click();
     }
 
-    selectRandomBillToClientOption(selection) {
+    selectSpecificBillToClientOption(selection) {
         cy.get(`[aria-label= "${selection}"]`).click();
     }
 
-    checkIfBillToClientIsYes() {
-        return cy.get('[class="Select has-value is-searchable Select--single"]').get('[taskDetailsForm.billable]').contains(true);
+    visit() {
+        cy.visit('/Tasks');
     }
 
-    filterTasksByName(taskName) {
-        cy.get('[class="field__text field__text--small"]').get('[type="text"]').first().type(taskName);
+    inputTaskName(name) {
+        cy.get(`[name ="taskDetailsForm.name"]`).type(name);
     }
 
-    checkIfTaskListContains(taskName) {
-        return cy.get('[class="ellipsis"]').get(`[title="${taskName}"]`);
+    inputTaskDescription(description) {
+        cy.get(`[name = "taskDetailsForm.description"]`).type(description);
+    }
+
+    inputTaskRate(rate) {
+        cy.get(`[name="taskDetailsForm.rate"]`).type(rate);
+    }
+
+    filterBillableTasksByText(text) {
+        cy.get('[class="field__select field__select--small"]').first().select(text);
     }
 }
 
