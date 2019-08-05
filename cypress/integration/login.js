@@ -1,103 +1,110 @@
+import LoginPage from '../objects/loginPage';
+import Common from '../objects/common';
+
+const loginPage = new LoginPage();
+const common = new Common();
+
 describe('Sourcebooks login', function() {
 
     it('Should display validation for empty user after attempted loggin', function () {
         
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible');
+        loginPage.getSubmitButton().click();
+        loginPage.getUserValidationIndicator().should('be.visible');
     })
 
     it('Should be able to login with role Team Lead', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 2);
+        cy.wait(2000); // for reason js sometimes doesn't load my client
+        common.getSpecificUrl('/time-logging');
+        common.getPageTitle().contains('Timesheets');
+        common.getCalendar().should('be.visible');
+        common.getPageTitle().should('be.visible');
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(2);
     })
 
-    it('Should show calendar date', function () {
-        cy.get('.calendar--selected').find('span').contains(new Date().getDate());
+    it('Should validate what date is selected as “Today” on Time Logging page', function () {
+        common.getCalendarTodaysDate();
     })
 
     it('Should verify all user roles can log in and should see appropriate tabs - USER', function () {
     
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 1); 
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("User").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(1);
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');      
     })
-
+    
     it('Should verify all user roles can log in and should see appropriate tabs - TEAM LEAD', function () {
     
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Team Lead"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 2); 
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Team Lead").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(2);
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');          
     })
-
+    
     it('Should verify all user roles can log in and should see appropriate tabs - MANAGER', function () {
     
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Manager"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 5); 
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Manager").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(5);
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');    
     })
-
+    
     it('Should verify all user roles can log in and should see appropriate tabs - ACCOUNTANT', function () {
     
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Accountant"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 5); 
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Accountant").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(5);
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');        
-    })
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
 
+    })
+    
     it('Should verify all user roles can log in and should see appropriate tabs - ADMIN', function () {
     
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Ieva Stonkaitė"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="Admin"]').click();
-        cy.get('[type="submit"]').click();
-        cy.get('.user-info__title').contains('Ieva Stonkaite');
-        cy.get('.main-nav').find('li').should('have.length', 6); 
+        loginPage.visit();
+        common.getUserDropDown().click({force:true});
+        common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
+        common.getRoleDropDown().click({force:true});
+        common.getSpecificRoleFromDropDown("Admin").click();
+        loginPage.getSubmitButton().click();
+        common.getUserTitle().contains('Ieva Stonkaite');
+        loginPage.getElementCountOfNavigationBar(6);
         cy.url().should('include', '/time-logging');
-        cy.get('.main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)');               
-
-    })   
-
+        loginPage.getElementColor().should('have.css', 'color', 'rgb(64, 76, 237)');       
+    })
+    
 })
