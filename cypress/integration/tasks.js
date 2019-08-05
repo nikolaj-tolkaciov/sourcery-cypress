@@ -12,12 +12,13 @@ describe('Sourcebook testTasks', function() {
     it('Should be able to create new task as Admin', function () {
         cy.loginAs("Admin");
 
-        let taskName = common.makeId();
+        const taskName = common.makeId();
+        const description = 'desc_' + common.makeId();
 
         tasksPage.visit();
         tasksPage.getCreateTaskButton().click();
         taskCreatePage.getFormName().type(taskName);
-        taskCreatePage.getFormDescription().type('Automated test created task');
+        taskCreatePage.getFormDescription().type(description);
         taskCreatePage.getBillableDropdown().click();
         taskCreatePage.getBillableFromDropdown('Yes').click();
         taskCreatePage.getFormRate().clear();
@@ -28,5 +29,6 @@ describe('Sourcebook testTasks', function() {
         tasksPage.visit();
         tasksPage.getNameFilter().type(taskName);
         tasksPage.getFilteredList().should('have.length', 1);
+        tasksPage.checkFirsFilteredElementDescription(description);
     })
 })

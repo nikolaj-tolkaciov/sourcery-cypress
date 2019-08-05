@@ -14,6 +14,10 @@ class TasksPage {
     getFilteredList() {
         return cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport');
     }
+
+    checkFirsFilteredElementDescription(desc) {
+        return cy.get(`[title="${desc}"]`).parent().contains('col-id="description"');
+    }
 }
 
 export default TasksPage;
