@@ -1,12 +1,12 @@
 class TimeLog {
 
-    includer() {
+    includeTimeLog() {
         cy.url().should('include', '/time-logging');
     }
-    pageTitle() {
+    getPageTitle() {
         return cy.get('.page__title')
     }
-    calendarv() {
+    getCalendar() {
         return cy.get('.calendar')
     }
     getTimeEntryForm() {

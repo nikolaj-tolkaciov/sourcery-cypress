@@ -32,25 +32,9 @@ class LoginPage {
     return cy.get('[id="loginForm.role"]');
   }
 
-  roleLabelUser() {
-    return cy.get('[aria-label="User"]');
-  }
-
-  roleLabelTeam() {
-    return cy.get('[aria-label="Team Lead"]');
-  }
-
-  roleLabelManager() {
-    return cy.get('[aria-label="Manager"]');
-  }
-
-  roleLabelAccountant() {
-    return cy.get('[aria-label="Accountant"]');
-  }
-  
-  roleLabelAdmin() {
-    return cy.get('[aria-label="Admin"]');
-  }
+  roleLabelUser(roleName){
+    return cy.get(`[aria-label="${roleName}"]`);
+    }
 
   submitOption() {
     return cy.get('[type="submit"]');
