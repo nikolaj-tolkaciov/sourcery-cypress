@@ -1,30 +1,39 @@
 import Common from "../objects/common";
+import ClientPage from "../objects/clientPage";
 
 const common = new Common();
+const clientPage = new ClientPage();
 
 describe('New client creation by Admin', function() {
 
     beforeEach(function () {
         cy.loginAs('Admin');
+        clientPage.visit();
     })
 
+    const email = 'testingemail@testing.com';
+    const uniqueString = common.getCurrentTimeStamp();
+
     it('Admin creates new client', function () {
-        common.visit('/clients');
-        common.clickCertainButton('button','Create Client');
+        common.clickCertainButtonWithText('button','Create Client');
 
-        const uniqueString = common.generateAUniqueString();
-        common.inputIntoASpecificField('clientDetailsForm.organization', uniqueString);
-        common.inputIntoASpecificField('clientDetailsForm.contacts_firstName_0', uniqueString);
-        common.inputIntoASpecificField('clientDetailsForm.contacts_lastName_0', uniqueString);
-        common.inputIntoASpecificField('clientDetailsForm.contacts_homePhone_0', uniqueString);
-        common.inputIntoASpecificField('clientDetailsForm.contacts_mobilePhone_0', uniqueString);
-        common.inputIntoASpecificField('clientDetailsForm.contacts_email_0', 'testingemail@testing.com')
-        common.clickCertainButton('Submit','Save');
-        common.checkIfUrlDoesNotInclude('/clients/create');
+        clientPage.inputOrganization(uniqueString);
+        clientPage.inputFirstName(uniqueString);
+        clientPage.inputLastName(uniqueString);
+        clientPage.inputHomePhone(uniqueString);
+        clientPage.inputMobilePhone(uniqueString);
+        clientPage.inputEmail(email);
+        common.clickCertainButtonWithText('Submit','Save');
+        common.checkIfUrlDoesNotInclude('/create');
+    })
 
-        common.visit('/clients');
-        common.filterListItemsByName(uniqueString);
+    it('Checking if a certain client was created', function() {
+        common.filterNamesList(uniqueString);
+        //clientPage.filterListByClients(uniqueString, uniqueString);
+        clientPage.filterListByEmail(email);
         common.checkIfListContains(uniqueString);
+        common.checkIfListContains(`${uniqueString}, ${uniqueString}`);
+        common.checkIfListContains(email);
     })
 })
         
