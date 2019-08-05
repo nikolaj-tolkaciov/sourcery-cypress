@@ -23,8 +23,8 @@ class TaskPage {
     getSubmitButton() {
         return cy.get('[type="submit"]');
     }
-    assertUrl() {
-        cy.url().should('not.contain','/create');
+    assertNotContainCreateUrl() {
+        cy.url().should('not.contain', '/create');
     }
     getFilterField() {
         return cy.get(".field__text.field__text--small").eq(0);
