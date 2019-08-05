@@ -1,7 +1,7 @@
 class Common {
     makeId() {
         let timeStamp = new Date().getTime();
-        return 'Random_Name_' + timeStamp;
+        return `Random_Name_${timeStamp}`;
     }
     
     getPageTitle() {

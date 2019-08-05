@@ -5,7 +5,7 @@ const timeLoggingPage = new TimeLoggingPage();
 const loginPage = new LoginPage();
 
 describe('Sourcebooks testTimeLogging', function() {
-    it('Should be displaying todays date in Time Logging page', function () {
+    it('Should be displaying todays date in Time Logging page', function() {
         cy.loginAs("Admin");
         loginPage.visit();
         const today = new Date();
