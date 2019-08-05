@@ -6,14 +6,15 @@ const clientsPage = new ClientsPage();
 const clientCreatePage = new ClientCreatePage();
 const common = new Common();
 
-describe('Sourcebook testClients', function() {
+const organization = common.makeId();
+const email = `${common.makeId()}@mail.com`;
+const lastName = common.makeId();
+const name = common.makeId();
+
+describe('[T4] Sourcebook testClients', function() {
     it('Should be available for Admin to create new client', function() {
         cy.loginAs("Admin");
 
-        const organization = common.makeId();
-        const email = `${common.makeId()}@mail.com`;
-        const lastName = common.makeId();
-        const name = common.makeId();
         clientsPage.visit();
         clientsPage.getCreateClientButton().click();
         clientCreatePage.getFormOrganization().type(organization);

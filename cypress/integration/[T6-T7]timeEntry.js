@@ -26,8 +26,8 @@ if (day < 10) {
 }
 const dateFormated = `${mont}/${day}/${date.getFullYear()}`;
 
-describe('Sourcebooks testTimeEntries', function() {
-    it('Should be available for Admin to log time', function () {
+describe('[T6-T7] Sourcebooks testTimeEntries', function() {
+    it('[T6] Should be available for Admin to log time', function () {
         cy.loginAs("Admin");
         loginPage.visit();
 
@@ -62,7 +62,7 @@ describe('Sourcebooks testTimeEntries', function() {
         timeLoggingPage.getLoggedTimes().should('have.length', 2);
     })
 
-    it('Should be available for Admin to check Time Entry', function() {
+    it('[T7] Should be available for Admin to check Time Entry', function() {
         cy.loginAs("Admin");
         timeEntriesPage.visit();
 
