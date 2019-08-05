@@ -1,9 +1,9 @@
-import T3Page from '../obj/t3Page';
+import TasksPage from '../obj/tasksPage';
 import LoginPage from '../obj/loginPage';
 import Common from '../obj/common';
 
 
-const t3page = new T3Page();
+const tasksPage = new TasksPage();
 const loginPage = new LoginPage();
 const common = new Common();
 
@@ -18,21 +18,21 @@ describe('Sourcebooks login', function() {
         loginPage.loginAsSpecificUserAndRole("Valentinas Kasteckis", "Admin");
         common.visitSpecificURL('/tasks');
 
-        t3page.typeInTaskName(taskName);
+        tasksPage.typeInTaskName(taskName);
         cy.wait(3000); // for some reason JS does not have enough time to load in, so this helps
-        t3page.checkIfBodyContainerIsEmpty();
-        t3page.getCreateTaskButton().click();
-        t3page.typeInNewTaskName(taskName);
+        tasksPage.checkIfBodyContainerIsEmpty();
+        tasksPage.getCreateTaskButton().click();
+        tasksPage.typeInNewTaskName(taskName);
         
-        t3page.typeInNewTaskDescription(taskDescription);
-        t3page.getBillToClientDropDown().click();
-        t3page.getSpecificOptionFromBillToClientDropDown('Yes').click();
-        t3page.clearRateInput();
-        t3page.typeInRateInputField(rateValue);
-        t3page.getSaveButton().click();
+        tasksPage.typeInNewTaskDescription(taskDescription);
+        tasksPage.getBillToClientDropDown().click();
+        tasksPage.getSpecificOptionFromBillToClientDropDown('Yes').click();
+        tasksPage.clearRateInput();
+        tasksPage.typeInRateInputField(rateValue);
+        tasksPage.getSaveButton().click();
         common.visitSpecificURL('/tasks');
-        t3page.typeInTaskName(taskName);
-        t3page.checkIfTaskExistInTheList(taskDescription);
+        tasksPage.typeInTaskName(taskName);
+        tasksPage.checkIfTaskExistInTheList(taskDescription);
 
     })
 })
