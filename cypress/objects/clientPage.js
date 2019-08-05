@@ -20,8 +20,8 @@ class ClientPage {
     getSubmitClientButton() {
         return cy.get('[type="submit"]').contains('Save');
     }
-    assertNotCreateUrl() {
-        cy.url().should('not.contain','/create');
+    assertNotContainCreateUrl() {
+        cy.url().should('not.contain', '/create');
     }
     getFilterField() {
         return cy.get(".field__text.field__text--small").eq(0);
@@ -29,7 +29,6 @@ class ClientPage {
     getClientItem() {
         return cy.get(".ag-body-container");
     }
-
 }
 
 export default ClientPage;
