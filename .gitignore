@@ -1,2 +1,3 @@
 cypress/fixtures/
 node_modules/
+cypress/Objects/creatingTask.js

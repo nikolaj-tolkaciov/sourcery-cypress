@@ -1,7 +1,9 @@
 import LoginPage from '../Objects/loginPage'
 import TimeLogging from '../Objects/timeLogging'
+import CreatingTask from '../Objects/creatingTask'
 const loginPage = new LoginPage();
 const timeLogging = new TimeLogging();
+const creatingTask = new CreatingTask();
 const userName = 'Ieva Stakneviciute';
 
 describe('Sourcebooks login', function() {
@@ -88,7 +90,7 @@ describe('Sourcebooks login', function() {
         timeLogging.countTabs().should('have.length', 5);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
-    })
+    }) 
 
     it('Should be able to login with role Admin', function () {
 
@@ -100,10 +102,10 @@ describe('Sourcebooks login', function() {
         loginPage.submitLogin().click();
 
         timeLogging.visitURL();
-        timeLogging.getPageTitle().contains('Timesheets')
-        timeLogging.getCalendar().should('be.visible')
-        timeLogging.getCalendarTody().should('be.visible')
-        timeLogging.getUserTitle().contains(userName)
+        timeLogging.getPageTitle().contains('Timesheets');
+        timeLogging.getCalendar().should('be.visible');
+        timeLogging.getCalendarTody().should('be.visible');
+        timeLogging.getUserTitle().contains(userName);
         timeLogging.countTabs().should('have.length', 6);
         timeLogging.celendarToday().contains(new Date().getDate());
         timeLogging.selectedTimelogging().contains('Time Logging').should('have.css' , 'color' , 'rgb(64, 76, 237)');
