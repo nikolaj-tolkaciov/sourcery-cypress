@@ -6,12 +6,13 @@ const common = new Common();
 const projectsPage = new ProjectsPage();
 const projectCreatePage = new ProjectCreatePage();
 
-describe('Sourcebooks test projects', function() {
+const projectName = common.makeId();
+const clientName = 'Internal';
+
+describe('[T5] Sourcebooks test projects', function() {
     it('Should be available for Admin to create new project', function() {
         cy.loginAs('Admin');
 
-        let projectName = common.makeId();
-        let clientName = 'Internal';
         projectsPage.visit();
         projectsPage.getCreateProjectButton().click();
         projectCreatePage.getFormName().type(projectName);

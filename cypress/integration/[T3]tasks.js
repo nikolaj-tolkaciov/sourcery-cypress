@@ -8,12 +8,12 @@ const taskCreatePage = new TaskCreatePage();
 const taskEditPage = new TaskEditPage();
 const common = new Common();
 
-describe('Sourcebook testTasks', function() {
+const taskName = common.makeId();
+const description = 'desc_' + common.makeId();
+
+describe('[T3] Sourcebook testTasks', function() {
     it('Should be able to create new task as Admin', function() {
         cy.loginAs("Admin");
-
-        const taskName = common.makeId();
-        const description = 'desc_' + common.makeId();
 
         tasksPage.visit();
         tasksPage.getCreateTaskButton().click();
