@@ -15,7 +15,7 @@ const roles = [
 ];
 
 describe('Sourcebooks testLogIn', function() {
-    it('Should display validation for empty user after attempted loggin', function () {
+    it('Should display validation for empty user after attempted loggin', function() {
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible');
         loginPage.getSubmitButton().click();
@@ -23,7 +23,7 @@ describe('Sourcebooks testLogIn', function() {
     })
 
     for (let i = 0; i < roles.length; i++) {
-        it('Should display ' + roles[i].tabCount + ' tabs when logged in as ' + roles[i].name + '.', function () {
+        it(`Should display ${roles[i].tabCount} tabs when logged in as ${roles[i].name}.`, function() {
             loginPage.testLogIn(roles[i].name);
 
             timeLoggingPage.checkUrl();

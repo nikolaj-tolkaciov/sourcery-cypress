@@ -7,11 +7,11 @@ const clientCreatePage = new ClientCreatePage();
 const common = new Common();
 
 describe('Sourcebook testClients', function() {
-    it('Should be available for Admin to create new client', function () {
+    it('Should be available for Admin to create new client', function() {
         cy.loginAs("Admin");
 
         const organization = common.makeId();
-        const email = common.makeId() + '@mail.com';
+        const email = `${common.makeId()}@mail.com`;
         const lastName = common.makeId();
         const name = common.makeId();
         clientsPage.visit();

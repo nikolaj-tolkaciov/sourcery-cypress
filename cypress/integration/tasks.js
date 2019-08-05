@@ -9,7 +9,7 @@ const taskEditPage = new TaskEditPage();
 const common = new Common();
 
 describe('Sourcebook testTasks', function() {
-    it('Should be able to create new task as Admin', function () {
+    it('Should be able to create new task as Admin', function() {
         cy.loginAs("Admin");
 
         const taskName = common.makeId();
