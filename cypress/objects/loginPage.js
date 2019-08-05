@@ -36,6 +36,7 @@ class LoginPage {
     return cy.get(`[aria-label="${roleName}"]`);
     }
 
+
   submitOption() {
     return cy.get('[type="submit"]');
   }
