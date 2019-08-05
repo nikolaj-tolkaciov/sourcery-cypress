@@ -29,6 +29,7 @@ describe('Sourcebook testTasks', function() {
         tasksPage.visit();
         tasksPage.getNameFilter().type(taskName);
         tasksPage.getFilteredList().should('have.length', 1);
-        tasksPage.checkFirsFilteredElementDescription(description);
+        tasksPage.checkFilteredElementName(taskName);
+        tasksPage.checkFilteredElementDescription(description);
     })
 })

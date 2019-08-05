@@ -15,8 +15,12 @@ class TasksPage {
         return cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport');
     }
 
-    checkFirsFilteredElementDescription(desc) {
-        return cy.get(`[title="${desc}"]`).parent().contains('col-id="description"');
+    checkFilteredElementName(name) {
+        return cy.get(`[title="${name}"]`).parent().should('have.attr', 'col-id', 'name');
+    }
+
+    checkFilteredElementDescription(desc) {
+        return cy.get(`[title="${desc}"]`).parent().should('have.attr', 'col-id', 'description');
     }
 }
 

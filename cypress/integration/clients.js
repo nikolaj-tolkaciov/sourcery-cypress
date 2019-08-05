@@ -12,16 +12,21 @@ describe('Sourcebook testClients', function() {
 
         const organization = common.makeId();
         const email = common.makeId() + '@mail.com';
+        const lastName = common.makeId();
+        const name = common.makeId();
         clientsPage.visit();
         clientsPage.getCreateClientButton().click();
         clientCreatePage.getFormOrganization().type(organization);
-        clientCreatePage.getFormFirstName().type(common.makeId());
-        clientCreatePage.getFormLastName().type(common.makeId());
+        clientCreatePage.getFormFirstName().type(name);
+        clientCreatePage.getFormLastName().type(lastName);
         clientCreatePage.getFormEmail().type(email);
         clientCreatePage.getSubmitButton().click();
         
         clientsPage.visit();
         clientsPage.getOrganizationFilter().type(organization);
         clientsPage.getFilteredList().should('have.length', 1);
+        clientsPage.checkFilteredElementOrganization(organization);
+        clientsPage.checkFilteredElementContact(`${lastName}, ${name}`);
+        clientsPage.checkFilteredElementEmail(email);
     })
 })
