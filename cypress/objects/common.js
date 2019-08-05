@@ -39,6 +39,10 @@ class Common {
     checkIfListContains(name) {
         return cy.get('[class="ellipsis"]').get(`[title="${name}"]`);
     }
+
+    selectAFirstCheckBoxFromList() {
+        cy.get('[class = "field__checkbox-fake"]').first().click({force:true});
+    }
 }
 
 export default Common;
