@@ -1,9 +1,9 @@
-class Timelog {
+class TimeLog {
 
-    includer() {
+    includeTimeLog() {
         cy.url().should('include', '/time-logging');
     }
-    pagetitle() {
+    getPageTitle() {
         return cy.get('.page__title')
     }
     getCalendar() {
@@ -25,4 +25,4 @@ class Timelog {
         return cy.get('.main-nav__link--active');
     }
 }
-export default Timelog
+export default TimeLog
