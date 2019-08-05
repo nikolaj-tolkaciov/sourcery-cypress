@@ -12,7 +12,7 @@ class TasksPage {
     }
 
     getFilteredList() {
-        return cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport');
+        return cy.get('[class="ag-body-viewport-wrapper"').find('.ag-body-viewport').find('.ag-body-container').children();
     }
 
     checkFilteredElementName(name) {
