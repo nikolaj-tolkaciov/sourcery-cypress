@@ -5,7 +5,7 @@ const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 
 describe('Sourcebooks login', function () {
-
+    
     var today = new Date();
     const userName = 'Modestas Kmieliauskas';
     const roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin'];
@@ -13,7 +13,6 @@ describe('Sourcebooks login', function () {
     const activeTabColor = 'rgb(64, 76, 237)';
 
     it('Should display validation for empty user after attempted loggin', function () {
-
         loginPage.visit();
         loginPage.getUserValidationIndicator().should('not.visible')
         loginPage.getSubmitButton().click();
