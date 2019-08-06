@@ -1,12 +1,11 @@
 import LoginPage from '../Objects/loginPage'
 import TimeLoginPage from '../Objects/ObjectTimeLogin/timeLoginPage'
-import TaskPageObj from '../Objects/ObTaskPage/TaskPageObj'
+import TaskPage from '../Objects/TaskPage/TaskPage'
 
 const loginPage = new LoginPage()
 const timeLoginPage = new TimeLoginPage()
-const taskPageObj = new TaskPageObj()
+const taskPage = new TaskPage()
 const testUser = 'Algirdas Viltrakis'
-const taskName = 'Kaip iškepti blynus 2'
 const rolesArray = [
     {'role' : 'User', 'tabCount' : 1},
     {'role' : 'Team Lead', 'tabCount' : 2},
@@ -14,6 +13,16 @@ const rolesArray = [
     {'role' : 'Accountant', 'tabCount' : 5}, 
     {'role' : 'Admin', 'tabCount' : 6}
 ]
+
+function random_alpha_numeric() {
+    var random = ""
+    var possible = "ĄČĘĖĮŠŲŪŽąčęėįšųūžABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    var a = Math.random() * 256
+    for (var i = 0; i < a; i++) 
+      random += possible.charAt(Math.floor(Math.random() * possible.length));
+    return random;
+  }
+var random = random_alpha_numeric()
 
 describe('Sourcebooks login', function() {
 
@@ -54,17 +63,17 @@ it('User login with role Admin, goes to Tasks and create New Task', function () 
     loginPage.loginAdmin().click()
     loginPage.submitLogin().click()
 // Creating task
-    taskPageObj.clickTask().click()
-    taskPageObj.createTask().click()
-    taskPageObj.taskName().type(taskName)
-    taskPageObj.typeDetails().type('Jami blynus ir kepi')
-    taskPageObj.billToClients().click()
-    taskPageObj.billYes().click()
-    taskPageObj.hourlyRate().clear().type('66.88')
-    taskPageObj.save().click()
+    taskPage.clickTask().click()
+    taskPage.createTask().click()
+    taskPage.taskName().type(random)
+    taskPage.typeDetails().type('Jami blynus ir kepi')
+    taskPage.billToClients().click()
+    taskPage.billYes().click()
+    taskPage.hourlyRate().clear().type('66.88')
+    taskPage.save().click()
 //Going to Tasks page to check if task is saved
-    taskPageObj.clickTask().click() 
-    taskPageObj.typeTaskName().type(taskName)
-    taskPageObj.checkTask().contains(taskName)
+    taskPage.clickTask().click() 
+    taskPage.typeTaskName().type(random)
+    taskPage.checkTask().contains(random)
 })
 })
