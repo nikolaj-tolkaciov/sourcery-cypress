@@ -4,7 +4,7 @@ import TimeLog from '../objects/timelog';
 
 
 const loginPage = new LoginPage();
-const timeLog = new Timelog();
+const timeLog = new TimeLog();
 const tasksPage = new TasksPage();
 
 describe('Sourcebooks login', function() {
