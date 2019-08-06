@@ -1,43 +1,27 @@
+import LoginPage from '../objects/loginPage'
+const loginPage = new LoginPage()
+
 describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
-    })
-
-    it('Should be able to login with role User', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Benediktas Gilis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Benediktas Gilis');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.calendar--today').contains(new Date().getDate());
-    })
-
-    it('Color check in user role', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Benediktas Gilis"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.user-info__title').contains('Benediktas Gilis');
-        cy.get('.main-nav').find('li').should('have.length', 1);
-        cy.get('.main-nav__link--active').should('have.css', 'color','rgb(64, 76, 237)');
+    it('Admin creates a new task', function () {
+        loginPage.visit()
+        loginPage.getLoginForm().click({force:true});
+        loginPage.getUser().click();
+        loginPage.getLoginRole().click({force:true});
+        loginPage.getUserRole().click();
+        loginPage.getSubmit().click();
+        loginPage.getTasks().click();
+        loginPage.getCreateTasks().click();
+        loginPage.getDetailsForm().click({force:true});
+        loginPage.getTypeTaskName();
+        loginPage.getDescriptionForm().click({force:true});
+        loginPage.getTypeDescription();
+        loginPage.getBill().click({force:true});
+        loginPage.getBillable().click();
+        loginPage.getTypeRate();
+        loginPage.getSubmit().click();
+        loginPage.getTasks().click();
+        loginPage.getSearch();
+        loginPage.getValidate("Testavimas").contains('Tesatvimas');
     })
 })
