@@ -10,7 +10,7 @@ class Common {
     getPageTitle() {
         return cy.get('.page__title')
     }
-    geturl() {
+    getUrl() {
         return cy.url()
     }  
 
