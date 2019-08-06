@@ -36,8 +36,12 @@ class Tasks {
         return cy.get('.field__text')
     }
 
-    getTaskNamebyTaskId() {
-        return cy.get(`[title=' + "${taskName}" + ']`)
+    getFindTaskNameOnContent() {
+        return cy.get(`[title="${taskName}"]`)
+    }
+
+    getFindTaskDescriptionOnContent() {
+        return cy.get(`[title="${descriptionText}"]`)
     }
 }
 

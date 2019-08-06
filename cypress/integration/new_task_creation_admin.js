@@ -19,14 +19,14 @@ describe('Sourcebooks task creation', function() {
     it('Admin should create a new task', function () {
 
         const taskName = "Task name " + Math.ceil((Math.random())*10000); 
-        const descriptionName = "Description name " + Math.ceil((Math.random())*10000);       
+        const descriptionText = "Description name " + Math.ceil((Math.random())*10000);       
 
         common.getMainNavigationBar().find('[href="/tasks"]').click(); 
-        common.geturl().should('include', '/tasks');
+        cy.url().should('include', '/tasks');
         common.getPageTitle().contains('Tasks');
         tasks.getCreateTaskButton().click();
         tasks.getNameFromTaskDetailsForm().type(taskName);
-        tasks.getDescriptionFromTaskDetailsForm().type("Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.");
+        tasks.getDescriptionFromTaskDetailsForm().type(descriptionText);
         tasks.getBillToClientSelector().click({ force: true })
         tasks.getSelectionValueYes().click({ force: true });
         tasks.getRateFromTaskDetailsForm().clear().type("0.250");
@@ -37,7 +37,7 @@ describe('Sourcebooks task creation', function() {
 
         tasks.visit();
         tasks.getSearchFieldInputField().first().click().type(taskName);
-        cy.get('[title=' + taskName + ']').should('exist');
-        cy.get('[title=' + descriptionName + ']').should('exist');        
+        cy.get(`[title="${taskName}"]`).should('exist');
+        cy.get(`[title="${descriptionText}"]`).should('exist');        
     })
-})    
+})

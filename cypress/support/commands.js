@@ -8,6 +8,6 @@ const USER_ROLES_MAP = {
 
 Cypress.Commands.add('loginAs', (role) => {
     window.localStorage.setItem('USER_INFO', '{"id":43,"firstName":"Rasa","lastName":"Kapačinskaitė"}')
-    window.localStorage.setItem('ACCESS_TOKEN', `userId=43&${USER_ROLES_MAP[role]}`)
+    window.localStorage.setItem('ACCESS_TOKEN', `userId=43&"${USER_ROLES_MAP[role]}"`)
 })
 
