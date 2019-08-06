@@ -1,5 +1,9 @@
 class TimeLog {
 
+    urlIncludesCheck(textIncludes) {
+        return cy.url().should('include', `${textIncludes}`);
+    }
+
     includeTimeLog() {
         cy.url().should('include', '/time-logging');
     }
@@ -23,6 +27,13 @@ class TimeLog {
     }
     getSelectedTab() {
         return cy.get('.main-nav__link--active');
+    }
+    getLogOutButton() {
+        return cy.get('[id="logout-button"]');
+    }
+
+    getNavigationPanelTasks() {
+        return cy.get('.main-nav__link' + '[href="/tasks"]');
     }
 }
 export default TimeLog

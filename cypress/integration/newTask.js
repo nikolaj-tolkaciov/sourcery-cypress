@@ -19,8 +19,8 @@ describe('Sourcebooks login', function() {
         let taskName = Math.random().toString(36).substring(2, 15)
         let taskDescription = Math.random().toString(36).substring(2, 15)
 
-        timeLog.getNavigationPanelTasks().should('be.visible');
-        timeLog.getNavigationPanelTasks().click({force:true});
+        timeLog.getNavigationTabs().should('be.visible');
+        timeLog.getNavigationTabs().click({force:true});
         tasksPage.getCreateTaskButton().should('be.visible');
         tasksPage.getCreateTaskButton().click({force:true});
         tasksPage.getCreateTaskNameInputField().type(`${taskName}`);
