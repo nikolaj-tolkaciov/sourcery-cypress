@@ -45,6 +45,8 @@ describe('Tests related to Admin role', function() {
     taskPage
       .getDescriptionFilter()
       .type('Description of admin task ' + randomTask);
-    taskPage.getTaskList().should('have.length', 1);
+    taskPage
+      .getTaskName()
+      .should('have.attr', 'title', 'Admin task ' + randomTask);
   });
 });

@@ -24,19 +24,13 @@ class TaskPage {
     return cy.get('[type="submit"]');
   }
   getNameFilter() {
-    return cy
-      .get('.field--filter')
-      .get('input')
-      .first();
+    return cy.get('.field--filter input').first();
   }
   getDescriptionFilter() {
-    return cy
-      .get('.field--filter')
-      .get('input')
-      .last();
+    return cy.get('.field--filter input').last();
   }
-  getTaskList() {
-    return cy.get('.ag-body-container > div');
+  getTaskName() {
+    return cy.get('.ag-body-container .ellipsis').first();
   }
 }
 
