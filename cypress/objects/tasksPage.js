@@ -1,6 +1,6 @@
 class TasksPage {
 
- 
+
     getTaskNameInputField() {
         return cy.get('[type="text"]').eq(0);
     }
@@ -13,7 +13,6 @@ class TasksPage {
         return cy.get('.ellipsis' + `[title=${taskName}]`);
     }
 
- 
     getCreateTaskButton() {
         return cy.get('[type="button"]').contains('Create Task');
     }
@@ -37,7 +36,7 @@ class TasksPage {
     getBillableInputField() {
         return cy.get('[id="taskDetailsForm.rate"]');
     }
-
+    
     getSaveButton() {
         return cy.get('[type=submit]').contains('Save');
     }

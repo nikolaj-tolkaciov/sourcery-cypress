@@ -1,6 +1,7 @@
 import LoginPage from '../objects/loginPage';
-import TimeLog from '../objects/timelog';
 import TasksPage from '../objects/tasksPage';
+import TimeLog from '../objects/timelog';
+
 
 const loginPage = new LoginPage();
 const timeLog = new Timelog();
@@ -30,8 +31,8 @@ describe('Sourcebooks login', function() {
         tasksPage.getBillableInputField().clear();
         tasksPage.getBillableInputField().type(`${Math.random()*10}`);
         tasksPage.getSaveButton().click({force:true});
-        TimeLog.urlIncludesCheck('tasks/create');
-        TimeLog.getNavigationPanelTasks().click({force:true});
+        timeLog.urlIncludesCheck('tasks/create');
+        timeLog.getNavigationPanelTasks().click({force:true});
         tasksPage.getTaskNameInputField().type(taskName);
         tasksPage.getTaskDescriptionInputField().type(taskDescription);
         tasksPage.checkIfFilteredTaskIsVisible(taskName).should('be.visible')
