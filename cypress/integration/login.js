@@ -5,12 +5,16 @@ const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 
 describe('Sourcebooks login', function() {
-  beforeEach(function() {
-    cy.loginAs('Admin');
+  it('Should display validation for empty user after attempted loggin', function() {
     loginPage.visit();
+    loginPage.getUserValidationIndicator().should('not.visible');
+    loginPage.getSubmitButton().click();
+    loginPage.getUserValidationIndicator().should('be.visible');
   });
 
   it('Should be able to login with role User', function() {
+    cy.loginAs('Admin');
+    loginPage.visit();
     timeLoggingPage.getUrl().should('include', '/time-logging');
     timeLoggingPage.getPageTitle().contains('Timesheets');
     timeLoggingPage.getCalendar().should('be.visible');
@@ -23,6 +27,8 @@ describe('Sourcebooks login', function() {
   });
 
   it('Should validate what date is selected as “Today” on Time Logging page', function() {
+    cy.loginAs('Admin');
+    loginPage.visit();
     timeLoggingPage.getUrl().should('include', '/time-logging');
     timeLoggingPage.getSelectedDateToday().contains(new Date().getDate());
   });
