@@ -1,5 +1,9 @@
 class TimeLog {
 
+    urlIncludesCheck() {
+        return cy.url().should('not.contain','create' );
+    }
+
     includeTimeLog() {
         cy.url().should('include', '/time-logging');
     }
@@ -15,14 +19,18 @@ class TimeLog {
     getUserTitle() {
         return cy.get('.user-info__title');
     }
-    getNavigationTabs() {
-        return cy.get('.main-nav').find('li');
-    }
     calendarToday() {
         return cy.get('.calendar--today');
     }
     getSelectedTab() {
         return cy.get('.main-nav__link--active');
+    }
+    getLogOutButton() {
+        return cy.get('[id="logout-button"]');
+    }
+
+    getNavigationPanelTasks() {
+        return cy.get('.main-nav__link' + '[href="/tasks"]');
     }
 }
 export default TimeLog
