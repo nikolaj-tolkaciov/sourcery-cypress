@@ -32,6 +32,7 @@ describe('Sourcebooks login', function() {
         tasksPage.getSaveButton().click();
         common.visitSpecificURL('/tasks');
         tasksPage.typeInTaskName(taskName);
+        cy.wait(3000);
         tasksPage.checkIfTaskExistInTheList(taskDescription);
 
     })
