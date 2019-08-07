@@ -37,8 +37,8 @@ class CreatingNewTaskPage {
     getFilter() {
         return cy.get('.field__text--small').first()
     }
-    getCheckingIfDisplayed() {
-        return cy.get('[title = "Reading"]')
+    getCheckingIfTaskDisplayed() {
+        return cy.get('[col-id="name"]')
     }
    
 }
