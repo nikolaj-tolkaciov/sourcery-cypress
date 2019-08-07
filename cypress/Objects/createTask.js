@@ -1,4 +1,4 @@
-class CreatingTask {
+class CreateTask {
     
     visitTasks(){
         return cy.get('.main-nav').contains('Tasks'); //Navigates to Task Page
@@ -33,7 +33,5 @@ class CreatingTask {
     checkTaskName(){
         return cy.get('.ellipsis');
     }
-    }
-    
-    
-    export default CreatingTask;
+}
+export default CreateTask;

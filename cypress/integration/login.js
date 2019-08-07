@@ -1,9 +1,9 @@
 import LoginPage from '../Objects/loginPage'
 import TimeLogging from '../Objects/timeLogging'
-import CreatingTask from '../Objects/creatingTask'
+import CreateTask from '../Objects/createTask'
 const loginPage = new LoginPage();
 const timeLogging = new TimeLogging();
-const creatingTask = new CreatingTask();
+const creatingTask = new CreateTask();
 const userName = 'Ieva Stakneviciute';
 let taskName= Math.random().toString(36).substring(2, 15);
 let randomName = 'I&S'+ taskName;
