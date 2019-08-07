@@ -1,7 +1,7 @@
 class TimeLog {
 
-    urlIncludesCheck(textIncludes) {
-        return cy.url().should('include', `${textIncludes}`);
+    urlIncludesCheck() {
+        return cy.url().should('not.contain','create' );
     }
 
     includeTimeLog() {
@@ -18,9 +18,6 @@ class TimeLog {
     }
     getUserTitle() {
         return cy.get('.user-info__title');
-    }
-    getNavigationTabs() {
-        return cy.get('.main-nav').find('li');
     }
     calendarToday() {
         return cy.get('.calendar--today');

@@ -19,19 +19,17 @@ describe('Sourcebooks login', function() {
         let taskName = Math.random().toString(36).substring(2, 15)
         let taskDescription = Math.random().toString(36).substring(2, 15)
 
-        timeLog.getNavigationTabs().should('be.visible');
-        timeLog.getNavigationTabs().click({force:true});
-        tasksPage.getCreateTaskButton().should('be.visible');
+        timeLog.getNavigationPanelTasks().click({force:true});
         tasksPage.getCreateTaskButton().click({force:true});
         tasksPage.getCreateTaskNameInputField().type(`${taskName}`);
         tasksPage.getCreateTaskDescriptionInputField().type(`${taskDescription}`);
         tasksPage.getBillableDropdown().click({force:true});
         tasksPage.getYesFromBillableDropdown().click({force:true});
-        tasksPage.getBillableInputField().should('not.be.disabled');
-        tasksPage.getBillableInputField().clear();
-        tasksPage.getBillableInputField().type(`${Math.random()*10}`);
+        tasksPage.getHourlyRateInputField().should('not.be.disabled');
+        tasksPage.getHourlyRateInputField().clear();
+        tasksPage.getHourlyRateInputField().type(`${Math.random()*10}`);
         tasksPage.getSaveButton().click({force:true});
-        timeLog.urlIncludesCheck('tasks/create');
+        timeLog.urlIncludesCheck();
         timeLog.getNavigationPanelTasks().click({force:true});
         tasksPage.getTaskNameInputField().type(taskName);
         tasksPage.getTaskDescriptionInputField().type(taskDescription);

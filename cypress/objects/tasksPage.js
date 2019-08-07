@@ -33,7 +33,7 @@ class TasksPage {
         return cy.get('[role="option"]').contains("Yes");
     }
 
-    getBillableInputField() {
+    getHourlyRateInputField() {
         return cy.get('[id="taskDetailsForm.rate"]');
     }
     
