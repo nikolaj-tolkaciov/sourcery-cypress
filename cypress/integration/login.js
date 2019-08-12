@@ -15,14 +15,14 @@ const rolesArray = [
 ]
 
 function random_alpha_numeric() {
-    var random = ""
-    var possible = "ĄČĘĖĮŠŲŪŽąčęėįšųūžABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    var a = Math.random() * 256
-    for (var i = 0; i < a; i++) 
+    let random = ""
+    let possible = "ĄČĘĖĮŠŲŪŽąčęėįšųūžABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    let a = Math.random() * 256
+    for (let i = 0; i < a; i++) 
       random += possible.charAt(Math.floor(Math.random() * possible.length));
     return random;
   }
-var random = random_alpha_numeric()
+let random = random_alpha_numeric()
 
 describe('Sourcebooks login', function() {
 
