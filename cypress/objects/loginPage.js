@@ -5,11 +5,7 @@ class LoginPage {
 
     getUserValidationIndicator() {
         return cy.get('.Select.not-valid');
-    }
-
-    getSpecificValueFromDropDown(userName) {
-        return cy.get(`[aria-label="${userName}"]`);
-    }
+    }    
 
     openUserDropDown() {
         return cy.get('[id="loginForm.userId"]');
