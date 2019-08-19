@@ -1,7 +1,15 @@
 class CreateTasks {
 
-    getField(fieldName) {
-        return cy.get(`[id="taskDetailsForm.${fieldName}"]`)
+    getNameField() {
+        return cy.get(`[id="taskDetailsForm.name"]`)
+    }
+
+    getDescriptionField() {
+        return cy.get(`[id="taskDetailsForm.description"]`)
+    }
+
+    getRateField() {
+        return cy.get(`[id="taskDetailsForm.rate"]`)
     }
 
     getBillableField() {

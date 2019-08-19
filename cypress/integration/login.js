@@ -20,9 +20,9 @@ describe('Sourcebooks login', function() {
 
         loginPage.visit();
         loginPage.openUserDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
+        general.getSpecificValueFromDropDown("Kamilė Stugytė").click();
         loginPage.openRoleDropDown().click({force:true});
-        loginPage.getSpecificValueFromDropDown("User").click();
+        general.getSpecificValueFromDropDown("User").click();
         general.getSubmitButton().click();
 
         general.getUrl().should('include', '/time-logging');
@@ -41,9 +41,9 @@ describe('Sourcebooks login', function() {
             
             loginPage.visit();
             loginPage.openUserDropDown().click({force:true});
-            loginPage.getSpecificValueFromDropDown("Kamilė Stugytė").click();
+            general.getSpecificValueFromDropDown("Kamilė Stugytė").click();
             loginPage.openRoleDropDown().click({force:true});
-            loginPage.getSpecificValueFromDropDown(currentRole).click();
+            general.getSpecificValueFromDropDown(currentRole).click();
             general.getSubmitButton().click();
 
             //checks if correct user name is displayed

@@ -31,7 +31,7 @@ class General {
     getLogoutButton() {
         return cy.get('[id="logout-button"]');
     }
-    getRegularButton() {
+    getButton() {
         return cy.get('[class="btn"]');
     }
 
