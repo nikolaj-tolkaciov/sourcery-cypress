@@ -41,7 +41,7 @@ describe('Sourcebook admin actions', function() {
     })
     
 
-    /*t('Validate today\'s date', function () {
+    it('Validate today\'s date', function () {
 
         timeLogging.getTodaysDate().contains(new Date().getDate());
     })
@@ -191,7 +191,7 @@ describe('Sourcebook admin actions', function() {
         timeEntries.getTaskNames().contains(taskName);
         timeEntries.getHours().contains(loggedHours);
         timeEntries.getDescriptions().contains(description);
-    })*/
+    })
 
     it('Admin creates new invoice', function() {
 
