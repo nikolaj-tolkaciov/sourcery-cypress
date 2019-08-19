@@ -35,12 +35,20 @@ class General {
         return cy.get('[class="btn"]');
     }
 
-    getTasksFromMenu() {
-        return cy.get('[href="/tasks"]');
+    getItemFromMenu(itemName) {
+        return cy.get(`[href="/${itemName}"]`);
     }
 
     getSpecificValueFromDropDown(itemName) {
         return cy.get(`[aria-label="${itemName}"]`);
+    }
+
+    getFilterFields() {
+        return cy.get('input[class="field__text field__text--small"]');
+    }
+
+    getDisplayedItems() {
+        return cy.get('[class="ag-body-container"]');
     }
 }
 
