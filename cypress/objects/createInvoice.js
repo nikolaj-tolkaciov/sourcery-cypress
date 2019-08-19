@@ -7,9 +7,7 @@ class CreateInvoice {
     getClientNameField() {
         return cy.get('[for="invoiceDetailsForm.client"]').next();
     }
-
-
-
+    
 }
 
 export default CreateInvoice

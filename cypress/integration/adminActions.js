@@ -1,7 +1,6 @@
 import LoginPage from '../objects/loginPage';
 import General from '../objects/general';
 import TimeLogging from '../objects/timeLogging';
-import CreateTasks from '../objects/createTasks';
 import CreateClient from '../objects/createClient';
 import CreateProject from '../objects/createProject';
 import TimeEntries from '../objects/timeEntries';
@@ -10,7 +9,6 @@ import CreateInvoice from '../objects/createInvoice';
 const loginPage = new LoginPage();
 const general = new General();
 const timeLogging = new TimeLogging();
-const createTasks = new CreateTasks();
 const createClient = new CreateClient();
 const createProject = new CreateProject();
 const timeEntries = new TimeEntries();
@@ -41,33 +39,9 @@ describe('Sourcebook admin actions', function() {
     })
     
 
-    /*t('Validate today\'s date', function () {
+    it('Validate today\'s date', function () {
 
         timeLogging.getTodaysDate().contains(new Date().getDate());
-    })
-
-    it('Admin creates new task', function() {
-
-        //Go to tasks page
-        general.getItemFromMenu('tasks').click();
-        general.getButton().contains('Create Task').click();
-
-        //Create unique task name
-        const taskName = '\"TestTask' + new Date().getTime();
-
-        //Fill form fields and submit
-        createTasks.getNameField().type(taskName);
-        createTasks.getDescriptionField().type('Description');
-        createTasks.getBillableField().click();
-        general.getSpecificValueFromDropDown('Yes').click();
-        createTasks.getRateField().clear().type(2);
-        general.getSubmitButton().click();
-
-        //Check if task was created
-        general.getUrl().should('not.include', 'create');
-        general.getItemFromMenu('tasks').click();
-        general.getFilterFields().first().type(taskName);
-        general.getDisplayedItems().contains(taskName);
     })
 
     it('Admin creates new client', function() {
@@ -191,7 +165,7 @@ describe('Sourcebook admin actions', function() {
         timeEntries.getTaskNames().contains(taskName);
         timeEntries.getHours().contains(loggedHours);
         timeEntries.getDescriptions().contains(description);
-    })*/
+    })
 
     it('Admin creates new invoice', function() {
 
