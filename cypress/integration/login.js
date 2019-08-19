@@ -1,27 +1,105 @@
-describe('Sourcebooks login', function() {
+import LoginPage from '../objects/loginpage'
+import TimeLoggingPage from '../objects/timeloggingpage'
+const loginPage = new LoginPage();
+const timeLogging = new TimeLoggingPage();
+const userName = 'Aistė Špukienė'
 
+describe('Sourcebooks login', function() {
     it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit();
+        loginPage.getValidationError().should('not.visible')
+        loginPage.submitLoginButton().click();
+        loginPage.getValidation().should('be.visible')
+    })
+    
+    it('Should be able to login with role User', function () {
+        loginPage.visit('/');
+        loginPage.clickUserField().click({force:true});
+        loginPage.findUserName(userName).click();
+        loginPage.clickRoleField().click({force:true});
+        loginPage.findUserRole('User').click();
+        loginPage.submitLoginButton().click();
+
+        timeLogging.check()
+        timeLogging.getTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTimeFillingForm().should('be.visible')
+        timeLogging.getUserTitle().contains('Aiste Špukiene');
+        timeLogging.mainNav().should('have.length', 1)
+        timeLogging.calendarToday().contains(new Date().getDate())
+        timeLogging.activeLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
 
-    it('Should be able to login with role User', function () {
+    it('Should be able to login with role Team Lead', function () {
 
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
+        loginPage.visit('/');
+        loginPage.clickUserField().click({force:true});        
+        loginPage.findUserName('Aistė Špukienė').click();
+        loginPage.clickRoleField().click({force:true});
+        loginPage.findUserRole('Team Lead').click();
+        loginPage.submitLoginButton().click();
 
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+        timeLogging.check()
+        timeLogging.getTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTimeFillingForm().should('be.visible')
+        timeLogging.getUserTitle().contains('Aiste Špukiene');
+        timeLogging.mainNav().should('have.length', 2)
+        timeLogging.calendarToday().contains(new Date().getDate())
+        timeLogging.activeLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+    })
+
+    it('Should be able to login with role Manager', function () {
+        loginPage.visit('/');
+        loginPage.clickUserField().click({force:true});
+        loginPage.findUserName(userName).click();
+        loginPage.clickRoleField().click({force:true});
+        loginPage.findUserRole('Manager').click();
+        loginPage.submitLoginButton().click();
+        
+        timeLogging.check()
+        timeLogging.getTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTimeFillingForm().should('be.visible')
+        timeLogging.getUserTitle().contains('Aiste Špukiene');
+        timeLogging.mainNav().should('have.length', 5)
+        timeLogging.calendarToday().contains(new Date().getDate())
+        timeLogging.activeLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+    })
+
+    it('Should be able to login with role Accountant', function () {
+        loginPage.visit('/');
+        loginPage.clickUserField().click({force:true});
+        loginPage.findUserName(userName).click();
+        loginPage.clickRoleField().click({force:true});
+        loginPage.findUserRole('Accountant').click();
+        loginPage.submitLoginButton().click();
+        
+        timeLogging.check()
+        timeLogging.getTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTimeFillingForm().should('be.visible')
+        timeLogging.getUserTitle().contains('Aiste Špukiene');
+        timeLogging.mainNav().should('have.length', 5)
+        timeLogging.calendarToday().contains(new Date().getDate())
+        timeLogging.activeLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+    })
+
+    it('Should be able to login with role Admin', function () {
+        loginPage.visit('/');
+        loginPage.clickUserField().click({force:true});
+        loginPage.findUserName(userName).click();
+        loginPage.clickRoleField().click({force:true});
+        loginPage.findUserRole('Admin').click();
+        loginPage.submitLoginButton().click();
+
+        timeLogging.check()
+        timeLogging.getTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTimeFillingForm().should('be.visible')
+        timeLogging.getUserTitle().contains('Aiste Špukiene');
+        timeLogging.mainNav().should('have.length', 6)
+        timeLogging.calendarToday().contains(new Date().getDate())
+        timeLogging.activeLink().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
 })
