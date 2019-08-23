@@ -23,8 +23,8 @@ describe('Sourcebooks login', function() {
         common.getSpecificRoleFromDropDown("Team Lead").click();
         loginPage.getSubmitButton().click();
 
-        cy.wait(2000); // for reason js sometimes doesn't load my client
-        common.getSpecificUrl('/time-logging');
+        cy.wait(2000); // is used because otherwise, every once in a while js won't load my client
+        cy.visit('/time-logging');
         common.getPageTitle().contains('Timesheets');
         common.getCalendar().should('be.visible');
         common.getPageTitle().should('be.visible');
@@ -32,7 +32,7 @@ describe('Sourcebooks login', function() {
         loginPage.getElementCountOfNavigationBar(2);
     })
 
-    it('Should validate what date is selected as “Today” on Time Logging page', function () {
+    it('Should assert and validate what date is selected as “Today” on Time Logging page', function () {
         common.getCalendarTodaysDate();
     })
 
@@ -56,7 +56,7 @@ describe('Sourcebooks login', function() {
         common.getUserDropDown().click({force:true});
         common.getSpecificUserFromDropDown("Ieva Stonkaitė").click();
         common.getRoleDropDown().click({force:true});
-        common.getSpecificRoleFromDropDown("Team Lead").click();
+        common.getSpecificRoleFromDropDown("Team Lead").click({force:true});
         loginPage.getSubmitButton().click();
         common.getUserTitle().contains('Ieva Stonkaite');
         loginPage.getElementCountOfNavigationBar(2);

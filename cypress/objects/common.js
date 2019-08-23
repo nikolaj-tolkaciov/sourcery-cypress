@@ -1,8 +1,4 @@
 class Common {
-    
-    getSpecificUrl(url) {
-        cy.visit(url); 
-    }
 
     getCalendar() {
         return cy.get('.calendar')
@@ -34,7 +30,6 @@ class Common {
     getUserTitle() {
         return cy.get('.user-info__title')
     }
-
 }
 
 export default Common
