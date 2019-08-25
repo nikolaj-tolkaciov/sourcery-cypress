@@ -1,5 +1,13 @@
 class Common {
 
+    getCalendarTodaysDate() {
+        return cy.get('.calendar--selected').find('span').contains(new Date().getDate())
+    }
+
+    getPageTitle() {
+        return cy.get('.page__title')
+    }
+
     getSpecificUserFromDropDown(userName) {
         return cy.get(`[aria-label="${userName}"]`)
     }
