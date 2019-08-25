@@ -4,6 +4,10 @@ class Common {
         return cy.get('.calendar--selected').find('span').contains(new Date().getDate())
     }
 
+    getCalendar() {
+        return cy.get('.calendar')
+    }
+
     getPageTitle() {
         return cy.get('.page__title')
     }
