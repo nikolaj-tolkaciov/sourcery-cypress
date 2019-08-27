@@ -12,6 +12,9 @@ class MainPage {
     getSelectedItemsList() {
         return cy.get('.d-flex > .layout > .flex');
     }
+    getOrderButton() {
+        return cy.get('.orders-list-button');
+    }
 }
 
 export default MainPage;

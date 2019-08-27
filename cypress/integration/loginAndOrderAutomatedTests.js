@@ -6,7 +6,7 @@ const loginPage = new LoginPage();
 const mainPage = new MainPage();
 
 describe('devbstaging automated testing', function () {
-    
+
     const credentials = require("../helpers/credentials")
     const email = credentials.email;
     const passwd = credentials.password;
@@ -29,5 +29,6 @@ describe('devbstaging automated testing', function () {
         mainPage.getSelectedItemsList().contains(mainDishName);
         mainPage.getSoup().contains(soupName).click();
         mainPage.getSelectedItemsList().contains(soupName);
+        mainPage.getOrderButton().click();
     })
 })
