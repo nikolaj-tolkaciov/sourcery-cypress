@@ -1,27 +1,31 @@
-describe('Sourcebooks login', function() {
+import {login, actions, supplier} from './classes'
 
-    it('Should display validation for empty user after attempted loggin', function () {
-        
-        cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+const lg = new login();
+const act = new actions();
+const sup = new supplier();
+
+const supplierName = Math.random().toString(36).substring(2, 12);
+const randString = Math.random().toString(36).substring(2, 10);
+const price = (Math.random() * (100 - 0.1) + 0.1).toFixed(2);
+const count = Math.floor(Math.random() * 101);
+
+describe('Lunch app', function() {
+
+    it('Should be able to login', function () {
+
+        lg.login('admin@green.vln', 'Apple000', '.v-btn')
     })
 
-    it('Should be able to login with role User', function () {
-
-        cy.visit('/');
-        cy.get('[id="loginForm.userId"]').click({force:true});
-        cy.get('[aria-label="Demo User"]').click();
-        cy.get('[id="loginForm.role"]').click({force:true});
-        cy.get('[aria-label="User"]').click();
-        cy.get('[type="submit"]').click();
-
-        cy.url().should('include', '/time-logging');
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User');
-        cy.get('.main-nav').find('li').should('have.length', 1);
+    it('Should be able to create a supplier', function() {
+        act.objContainsClick('.v-list__tile__title', 'Patiekalų Redagavimas');
+        act.click('.v-speed-dial');
+        act.objContainsClick('.v-icon', 'add');
+        act.typeIn('[name="Provider Name"]', supplierName);
+        act.click('[name="Provider Color"]');
+        act.objContainsShouldClick('.v-list__tile__content', 'Red', 'be.visible');
+        sup.mealInfoFill(price, count, randString, 0);
+        act.clickOn('.v-list__group__header__append-icon',1);
+        sup.mealInfoFill(price, count, randString, 1);
+        act.objContainsClick('.v-btn__content', 'Save');
     })
 })
