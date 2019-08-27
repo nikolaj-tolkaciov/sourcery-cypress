@@ -1,0 +1,1 @@
+Cypress.config('baseUrl', `https://lunch.devbstaging.com/login-password`)

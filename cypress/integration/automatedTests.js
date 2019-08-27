@@ -1,3 +1,4 @@
+
 import LoginPage from "../objects/loginPage";
 import MainPage from "../objects/mainPage";
 
@@ -5,8 +6,10 @@ const loginPage = new LoginPage();
 const mainPage = new MainPage();
 
 describe('devbstaging automated testing', function () {
-    const email = 'modestas@yellow.kns';
-    const passwd = 'Submarine124';
+    
+    const credentials = require("../helpers/credentials")
+    const email = credentials.email;
+    const passwd = credentials.password;
     const mainDishName = 'Lazanija';
     const soupName = 'Sriuba';
 

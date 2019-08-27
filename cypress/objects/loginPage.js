@@ -1,4 +1,5 @@
 class LoginPage {
+
     getEmailField() {
         return cy.get('[aria-label="Email"]');
     }

@@ -1,5 +1,5 @@
-class LoginPage {
-    
+class MainPage {
+
     getWeekday(weekday) {
         return cy.get(`:nth-child(${weekday}) > .v-list__group__header > .v-list__group__header__append-icon > .v-icon`);
     }
@@ -14,4 +14,4 @@ class LoginPage {
     }
 }
 
-export default LoginPage;
+export default MainPage;
