@@ -1,49 +1,35 @@
-describe('Sourcebooks login', function() {
 
-    it('Should display validation for empty user after attempted loggin', function () {
- 
+
+import LoginPage from "../objects/loginPage";
+import MainPage from "../objects/mainPage";
+
+const loginPage = new LoginPage();
+const mainPage = new MainPage();
+
+describe('devbstaging automated testing', function () {
+
+    const credentials = require("../helpers/credentials")
+    const email = credentials.email;
+    const passwd = credentials.password;
+    const mainDishName = 'Lazanija';
+    const soupName = 'Sriuba';
+
+    it('Should be able to login and select dish', function () {
+
+        // Login
         cy.visit('/');
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click();
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.getEmailField().click().type(email);
+        loginPage.getPasswordField().click().type(passwd);
+        loginPage.getLoginButton().click();
+
+        // Select weekday (1 equals Monday, 2 - Tuesday...)
+        mainPage.getWeekday(5).click();
+
+        // Select dish and verify selection
+        mainPage.getMainDish().contains(mainDishName).click();
+        mainPage.getSelectedItemsList().contains(mainDishName);
+        mainPage.getSoup().contains(soupName).click();
+        mainPage.getSelectedItemsList().contains(soupName);
+        mainPage.getOrderButton().click();
     })
- 
-    const Roles =
-    [
-        {
-            name: "User",
-            tabs: '1'
-        },
-        {
-            name: "Team Lead",
-            tabs: '2'
-        },
-        {
-            name: "Manager",
-            tabs: '5'
-        },
-        {
-            name: "Accountant",
-            tabs: '5'
-        },
-        {
-            name: "Admin",
-            tabs: '6'
-        }
-    ];
-       
-    
-    Roles.forEach((role) => {
-        it(`Verify ${role.name} role can log in and should see appropriate tabs`, function() {
-            cy.visit('/');
-            cy.get('[id="loginForm.userId"]').click({force:true});
-            cy.get('[aria-label="Dainius Gaidamavičius"]').click();
-            cy.get('[id="loginForm.role"]').click({force:true});
-            cy.get(`[aria-label='${role.name}']`).click();
-            cy.get('[type="submit"]').click();
-            cy.get('.user-info__title').contains('Dainius Gaidamavicius'); 
-            cy.get('.main-nav').find('li').should('have.length', role.tabs);                      
-            cy.get('.main-nav__link--active').should('have.css','color', 'rgb(64, 76, 237)');
-        })
-    })  
 })
