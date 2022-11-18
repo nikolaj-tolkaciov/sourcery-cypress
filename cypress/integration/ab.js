@@ -1,8 +1,6 @@
-import LoginPage from '../objects/loginPage';
-import TimeLoggingPage from '../objects/timeLoggingPage';
-import TasksPage from '../objects/tasksPage';
+import TimeLoggingPage from "../objects/timeLoggingPage";
+import TasksPage from "../objects/tasksPage";
 
-const loginPage = new LoginPage();
 const timeLoggingPage = new TimeLoggingPage();
 const tasksPage = new TasksPage();
 
@@ -13,10 +11,10 @@ describe('Sourcebooks AdminNewTask', function() {
         loginPage.visit();
     })
 
-    it('Admin should create new task', function () {
+    it('Admin should create new task ---dasd sad as', function () {
 
-        let taskName = Math.random().toString(0).substring(2, 15)
-        let taskDescription = Math.random().toString(0).substring(2, 15)
+        let taskName = Math.random().toString(12314).substring(2, 15)
+        let taskDescription = Math.random().toString(4554).substring(2, 15)
 
         timeLoggingPage.getNavigationPanelTasks().should('be.visible');
         timeLoggingPage.getNavigationPanelTasks().click({force:true});

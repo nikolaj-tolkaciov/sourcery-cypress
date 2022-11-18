@@ -16,6 +16,9 @@ describe('Sourcebooks AdminNewClient', function() {
     let OrganisationName = Math.random().toString(36).substring(2, 15);
     let ClientEmail = Math.random().toString(36).substring(2, 15) + '@Dungeon.yolo';
 
+    let OrganisationName12 = Math.random().toString(36).substring(2, 15);
+    let ClientEmail23 = Math.random().toString(36).substring(2, 15) + '@Dungeon.yolo';
+
     it('Admin should create new client', function() {
 
         //Client Page pasirinkimas
@@ -35,14 +38,6 @@ describe('Sourcebooks AdminNewClient', function() {
         clientPage.getCreateClientEmailInputField().type(ClientEmail);
         clientPage.getSaveButton().should('be.visible');
         clientPage.getSaveButton().click({force:true});
-
-        //Patikrinimas su filtravimu ar egzistuoja naujai sukurtas klientas
-        timeLoggingPage.getNavigationPanelClients().click({force:true});
-        clientPage.getOrganisationNameInputField().should('be.empty');
-        clientPage.getOrganisationNameInputField().type(OrganisationName);
-        clientPage.getClientEmailInputField().should('be.empty');
-        clientPage.getClientEmailInputField().type(ClientEmail);
-        clientPage.checkIfFilteredClientIsVisible(OrganisationName, ClientEmail);
         
     })
 })
