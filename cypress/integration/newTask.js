@@ -13,6 +13,36 @@ describe('Sourcebooks AdminNewTask', function() {
         loginPage.visit();
     })
 
+    it('Admin should create new task ---dasd sad as', function () {
+
+        let taskName = Math.random().toString(12314).substring(2, 15)
+        let taskDescription = Math.random().toString(4554).substring(2, 15)
+
+        timeLoggingPage.getNavigationPanelTasks().should('be.visible');
+        timeLoggingPage.getNavigationPanelTasks().click({force:true});
+        tasksPage.getCreateTaskButton().should('be.visible');
+        tasksPage.getCreateTaskButton().click({force:true});
+        tasksPage.getCreateTaskNameInputField().type(taskName);
+
+        //console.log(taskName) // to check for filtering later
+        //console.log(taskDescription) // to check for filtering
+
+        tasksPage.getCreateTaskDescriptionInputField().type(taskDescription);
+        tasksPage.getBillableDropdown().click({force:true});
+        tasksPage.getYesFromBillableDropdown().click({force:true});
+        tasksPage.getBillableInputField().should('not.be.disabled');
+        tasksPage.getBillableInputField().clear();
+        tasksPage.getBillableInputField().type(`${Math.random()*10}`);
+        tasksPage.getSaveButton().click({force:true});
+        timeLoggingPage.urlIncludesCheck('tasks/create');
+        timeLoggingPage.getNavigationPanelTasks().click({force:true});
+        tasksPage.getTaskNameInputField().type(taskName);
+        tasksPage.getTaskDescriptionInputField().type(taskDescription);
+        tasksPage.checkIfFilteredTaskIsVisible(taskName).should('be.visible')
+
+
+    })
+
     it('Admin should create new task', function () {
 
         let taskName = Math.random().toString(36).substring(2, 15)
@@ -41,5 +71,6 @@ describe('Sourcebooks AdminNewTask', function() {
         tasksPage.checkIfFilteredTaskIsVisible(taskName).should('be.visible')
 
     })
+
 
 })

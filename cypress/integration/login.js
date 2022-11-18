@@ -15,6 +15,15 @@ describe('Sourcebooks login', function() {
 
     })
 
+    it('Should display validation for empty user after attempted loggin', function () {
+
+        loginPage.visit();
+        loginPage.getValidationError().should('not.visible')
+        loginPage.getLoginbutton().click();
+        loginPage.getValidationError().should('be.visible')
+
+    })
+
     const rolesArr= [['User', 1], ["Team Lead", 2], ['Manager', 5], ['Accountant', 5], ['Admin', 6]]
 
     for (let i=0; i<rolesArr.length;i++) {
